@@ -6,12 +6,13 @@ namespace DefaultNamespace.Player
     public class PlayerView : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody2D;
+        [SerializeField] private SpriteRenderer _playerSpriteRenderer;
         [SerializeField] private float _moveSpeed = 400f;
         [SerializeField] private float _jumpForce = 180f;
-        
+
         public Vector2 Direction { get; set; } = Vector2.zero;
         public int MaxJumps { get; set; } = 2;
-        public int  JumpsCount { get; set; } = 0;
+        public int JumpsCount { get; set; } = 0;
         public bool IsGrounded { get; set; }
         public bool IsJumping { get; set; }
 
@@ -29,8 +30,7 @@ namespace DefaultNamespace.Player
         {
             Move();
         }
-        
-        
+
 
         public void Move()
         {
@@ -38,10 +38,14 @@ namespace DefaultNamespace.Player
             {
                 return;
             }
+
             Debug.Log("Move");
             _rigidbody2D.velocity += Direction * _moveSpeed * Time.deltaTime;
+            TurnPlayerView(Direction);
         }
-        
+
+        public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.gameObject.CompareTag("Ground"))
@@ -51,6 +55,7 @@ namespace DefaultNamespace.Player
                 JumpsCount = 0;
             }
         }
+
         private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Ground"))

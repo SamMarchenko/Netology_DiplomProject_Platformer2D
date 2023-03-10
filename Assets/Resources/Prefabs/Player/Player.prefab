@@ -238,5 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 1274785454479645590}
+  _playerSpriteRenderer: {fileID: 1274785453227010774}
   _moveSpeed: 600
   _jumpForce: 200
