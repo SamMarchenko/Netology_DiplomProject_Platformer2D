@@ -40,8 +40,6 @@ namespace DefaultNamespace.Player
             }
             Debug.Log("Move");
             _rigidbody2D.velocity += Direction * _moveSpeed * Time.deltaTime;
-            
-            Direction = Vector2.zero;
         }
         
         private void OnTriggerEnter2D(Collider2D col)

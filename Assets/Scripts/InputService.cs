@@ -13,22 +13,29 @@ public class InputService
     {
         _controls = new PlayerControls();
         _controls.Player.Enable();
-        _controls.Player.Move.performed += MoveOnperformed;
-        _controls.Player.Jump.performed +=  JumpOnperformed;
+        _controls.Player.Move.performed += OnMovePerformed;
+        _controls.Player.Move.canceled += OnMoveCanceled;
+        _controls.Player.Jump.performed += OnJumpPerformed;
         //todo: где отписываться не в монобехе?
     }
-    
-    private void JumpOnperformed(InputAction.CallbackContext obj)
+
+    private void OnMoveCanceled(InputAction.CallbackContext obj)
+    {
+        _direction = Vector2.zero;
+        OnMove?.Invoke(_direction);
+    }
+
+    private void OnJumpPerformed(InputAction.CallbackContext obj)
     {
         OnJump?.Invoke();
     }
-    
-    private void MoveOnperformed(InputAction.CallbackContext obj)
+
+    private void OnMovePerformed(InputAction.CallbackContext obj)
     {
         _direction = obj.ReadValue<Vector2>();
         OnMove?.Invoke(_direction);
     }
-    
+
     private void OnDisable()
     {
         _controls.Player.Disable();
@@ -36,12 +43,8 @@ public class InputService
 
     private void OnDestroy()
     {
-        _controls.Player.Move.performed -= MoveOnperformed;
-        _controls.Player.Jump.performed -= JumpOnperformed;
+        _controls.Player.Move.performed -= OnMovePerformed;
+        _controls.Player.Jump.performed -= OnJumpPerformed;
         _controls.Dispose();
     }
-
-   
-
-   
 }
