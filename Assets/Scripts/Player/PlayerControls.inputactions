@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Block",
+                    "name": "Drop",
                     "type": "Button",
                     "id": "dfea4da9-3c55-419d-8391-6ad4ace54fe0",
                     "expectedControlType": "Button",
@@ -82,10 +82,10 @@
                     "name": "",
                     "id": "75fa8e7f-ee5c-42ff-88da-f1e65751af81",
                     "path": "<Keyboard>/s",
-                    "interactions": "",
+                    "interactions": "MultiTap",
                     "processors": "",
                     "groups": "",
-                    "action": "Block",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

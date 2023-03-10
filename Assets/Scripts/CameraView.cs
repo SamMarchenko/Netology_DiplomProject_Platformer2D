@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using DefaultNamespace.Player;
 using UnityEngine;
 using Zenject;
 
@@ -8,9 +9,9 @@ namespace DefaultNamespace
     {
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         [Inject]
-        private void Construct(PlayerController playerController)
+        private void Construct(PlayerView playerView)
         {
-            _virtualCamera.Follow = playerController.transform;
+            _virtualCamera.Follow = playerView.transform;
         }
     }
 }

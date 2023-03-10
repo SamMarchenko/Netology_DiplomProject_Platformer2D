@@ -1,18 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+using DefaultNamespace.Player;
 using UnityEngine;
+using Zenject;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController
 {
-    // Start is called before the first frame update
-    void Start()
+    private PlayerView _playerView;
+
+    public PlayerController(PlayerView playerView)
     {
-        
+        _playerView = playerView;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayerMove(Vector2 direction)
     {
-        
+        _playerView.Direction = direction;
+        //_playerView.Move(direction);
     }
+
+    public void PlayerJump()
+    {
+        if (_playerView.IsGrounded)
+        {
+            _playerView.Jump();
+            return;
+        }
+
+        if (_playerView.IsJumping && _playerView.JumpsCount < _playerView.MaxJumps)
+        {
+            _playerView.Jump();
+        }
+    }
+
+    
+
+    
 }

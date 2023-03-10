@@ -1,4 +1,4 @@
-﻿using Cinemachine;
+﻿using DefaultNamespace.Player;
 using UnityEngine;
 using Zenject;
 
@@ -6,30 +6,22 @@ public class LocationInstaller : MonoInstaller
 {
     public Transform StartPoint;
     public GameObject HeroPrefab;
-    //[SerializeField] private CinemachineVirtualCamera _virtualCameraPrefab;
 
     public override void InstallBindings()
     {
-        BindHero();
-        //BindVirtualCamera();
+        BindPlayer();
     }
 
     
 
-    private void BindHero()
+    private void BindPlayer()
     {
-        var playerController = Container.InstantiatePrefabForComponent<PlayerController>(HeroPrefab,
+        var playerView = Container.InstantiatePrefabForComponent<PlayerView>(HeroPrefab,
             StartPoint.position, Quaternion.identity, null);
-
-        Container.Bind<PlayerController>().FromInstance(playerController).AsSingle();
+        
+        Container.Bind<PlayerView>().FromInstance(playerView).AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<Player>().AsSingle().NonLazy();
     }
     
-    
-    
-    // private void BindVirtualCamera()
-    // {
-    //     var virtualCamera =
-    //         Container.InstantiatePrefabForComponent<CinemachineVirtualCamera>(_virtualCameraPrefab);
-    //     Container.Bind<CinemachineVirtualCamera>().FromInstance(virtualCamera).AsSingle();
-    // }
 }
