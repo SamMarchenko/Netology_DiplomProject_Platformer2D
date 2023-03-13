@@ -10,6 +10,8 @@ namespace DefaultNamespace.Player
         [SerializeField] private float _moveSpeed = 400f;
         [SerializeField] private float _jumpForce = 180f;
 
+        public Action<Collider2D> OnUnderFeetYes;
+        public Action<Collider2D> OnUnderFeetNo;
         public Vector2 Direction { get; set; } = Vector2.zero;
         public int MaxJumps { get; set; } = 2;
         public int JumpsCount { get; set; } = 0;
@@ -17,22 +19,13 @@ namespace DefaultNamespace.Player
         public bool IsJumping { get; set; }
 
 
-        public void Jump()
-        {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-            IsJumping = true;
-            JumpsCount++;
-            Debug.Log($"Прыжок №{JumpsCount}");
-        }
-
         private void Update()
         {
             Move();
         }
 
 
-        public void Move()
+        private void Move()
         {
             if (Direction == Vector2.zero)
             {
@@ -44,24 +37,25 @@ namespace DefaultNamespace.Player
             TurnPlayerView(Direction);
         }
 
+        public void Jump()
+        {
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
+            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            IsJumping = true;
+            JumpsCount++;
+            Debug.Log($"Прыжок №{JumpsCount}");
+        }
+
         public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (col.gameObject.CompareTag("Ground"))
-            {
-                IsGrounded = true;
-                IsJumping = false;
-                JumpsCount = 0;
-            }
+            OnUnderFeetYes?.Invoke(collider);
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("Ground"))
-            {
-                IsGrounded = false;
-            }
+            OnUnderFeetNo?.Invoke(other);
         }
     }
 }

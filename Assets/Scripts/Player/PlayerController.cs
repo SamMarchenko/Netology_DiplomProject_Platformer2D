@@ -1,6 +1,5 @@
 using DefaultNamespace.Player;
 using UnityEngine;
-using Zenject;
 
 public class PlayerController
 {
@@ -9,12 +8,30 @@ public class PlayerController
     public PlayerController(PlayerView playerView)
     {
         _playerView = playerView;
+        _playerView.OnUnderFeetYes += OnUnderFeet;
+        _playerView.OnUnderFeetNo += OnUnderFeetNo;
+        //todo: где отписываться не в монобехе?
+    }
+
+    private void OnUnderFeetNo(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            _playerView.IsGrounded = false;
+        }
+    }
+
+    private void OnUnderFeet(Collider2D collider)
+    {
+        if (!collider.gameObject.CompareTag("Ground")) return;
+        _playerView.IsGrounded = true;
+        _playerView.IsJumping = false;
+        _playerView.JumpsCount = 0;
     }
 
     public void PlayerMove(Vector2 direction)
     {
         _playerView.Direction = direction;
-        //_playerView.Move(direction);
     }
 
     public void PlayerJump()

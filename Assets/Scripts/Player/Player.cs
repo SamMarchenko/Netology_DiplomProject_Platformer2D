@@ -16,6 +16,7 @@ namespace DefaultNamespace.Player
             
             _input.OnMove += OnMove;
             _input.OnJump += OnJump;
+            //todo: где отписываться не в монобехе?
         }
         
         private void OnMove(Vector2 direction)

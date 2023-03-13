@@ -11,9 +11,7 @@ public class LocationInstaller : MonoInstaller
     {
         BindPlayer();
     }
-
     
-
     private void BindPlayer()
     {
         var playerView = Container.InstantiatePrefabForComponent<PlayerView>(HeroPrefab,
