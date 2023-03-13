@@ -1,29 +1,47 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace.Factories;
+using UnityEngine;
 
 namespace DefaultNamespace.Player
 {
     public class Player
     {
-        private readonly PlayerView _playerView;
+        private PlayerView _playerView;
+        private readonly SpawnPositions _spawnPositions;
+        private readonly PlayerViewFactory _factory;
         private readonly InputService _input;
         private PlayerController _controller;
 
-        public Player(InputService input ,PlayerController controller, PlayerView playerView)
+        public Player(InputService input, PlayerView playerView,
+            SpawnPositions spawnPositions, PlayerViewFactory factory)
         {
             _input = input;
-            _controller = controller;
-            _playerView = playerView;
             
-            _input.OnMove += OnMove;
-            _input.OnJump += OnJump;
+            _playerView = playerView;
+            _spawnPositions = spawnPositions;
+            _factory = factory;
+
+            Subscribe();
+            CreatePlayerView(spawnPositions);
+            _controller = new PlayerController(_playerView);
             //todo: где отписываться не в монобехе?
         }
-        
+
+        private void CreatePlayerView(SpawnPositions spawnPositions)
+        {
+          _playerView = _factory.CreatePlayer(_playerView, spawnPositions.PlayerSpawnPos);
+        }
+
+        private void Subscribe()
+        {
+            _input.OnMove += OnMove;
+            _input.OnJump += OnJump;
+        }
+
         private void OnMove(Vector2 direction)
         {
             _controller.PlayerMove(direction);
         }
-        
+
         private void OnJump()
         {
             _controller.PlayerJump();

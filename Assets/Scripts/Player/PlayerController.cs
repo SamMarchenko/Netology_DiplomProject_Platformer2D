@@ -8,9 +8,14 @@ public class PlayerController
     public PlayerController(PlayerView playerView)
     {
         _playerView = playerView;
+        Subscribe();
+        //todo: где отписываться не в монобехе?
+    }
+
+    private void Subscribe()
+    {
         _playerView.OnUnderFeetYes += OnUnderFeet;
         _playerView.OnUnderFeetNo += OnUnderFeetNo;
-        //todo: где отписываться не в монобехе?
     }
 
     private void OnUnderFeetNo(Collider2D other)
