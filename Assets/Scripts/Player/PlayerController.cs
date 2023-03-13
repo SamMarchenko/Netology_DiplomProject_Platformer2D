@@ -36,13 +36,14 @@ public class PlayerController
         _playerView.IsGrounded = true;
         _playerView.IsJumping = false;
         _playerView.JumpsCount = 0;
-        
-        _animationController.PlayAnimation(EAnimStates.Idle);
+
+        _animationController.PlayAnimation(_playerView.Direction == Vector2.zero ? EAnimStates.Idle : EAnimStates.Run);
     }
 
     public void PlayerMove(Vector2 direction)
     {
         _playerView.Direction = direction;
+
         _animationController.PlayAnimation(direction == Vector2.zero ? EAnimStates.Idle : EAnimStates.Run);
     }
 
@@ -61,8 +62,4 @@ public class PlayerController
             _animationController.PlayAnimation(EAnimStates.Jump);
         }
     }
-
-    
-
-    
 }

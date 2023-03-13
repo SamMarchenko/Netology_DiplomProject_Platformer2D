@@ -1,21 +1,27 @@
-﻿using DefaultNamespace.Player;
+﻿using System.Collections.Generic;
+using DefaultNamespace;
+using DefaultNamespace.Player;
 using UnityEngine;
 using Zenject;
 
 public class LocationInstaller : MonoInstaller
 {
-    public Transform StartPoint;
-    public GameObject HeroPrefab;
+    public SpawnPositions SpawnPositions;
+    public PlayerView HeroPrefab;
+    public List<EnemyView> EnemiesPrefabs;
 
     public override void InstallBindings()
     {
+        Container.BindInstance(SpawnPositions);
+        Container.BindInstance(EnemiesPrefabs);
         BindPlayer();
+        Container.BindInterfacesAndSelfTo<EnemiesCreator>().AsSingle().NonLazy();
     }
-    
+
     private void BindPlayer()
     {
         var playerView = Container.InstantiatePrefabForComponent<PlayerView>(HeroPrefab,
-            StartPoint.position, Quaternion.identity, null);
+            SpawnPositions.PlayerSpawnPos.position, Quaternion.identity, null);
         
         Container.Bind<PlayerView>().FromInstance(playerView).AsSingle();
         Container.BindInterfacesAndSelfTo<AnimationController>().AsSingle().NonLazy();
