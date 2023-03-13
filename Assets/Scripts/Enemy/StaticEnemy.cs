@@ -6,13 +6,13 @@ namespace DefaultNamespace
 {
     public class StaticEnemy : IEnemy
     {
-        private EnemyType _enemyType;
+        private EEnemyType _eEnemyType;
         private Transform _spawnPosition;
         private EnemyView _enemyView;
         private EnemyController _controller;
         private StaticEnemyFactory _factory;
         
-        public EnemyType EnemyType => _enemyType;
+        public EEnemyType EEnemyType => _eEnemyType;
 
         public StaticEnemy(EnemyView enemyView)
         {

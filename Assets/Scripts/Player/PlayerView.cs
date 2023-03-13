@@ -5,6 +5,7 @@ namespace DefaultNamespace.Player
 {
     public class PlayerView : MonoBehaviour
     {
+        [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _playerSpriteRenderer;
         [SerializeField] private float _moveSpeed = 400f;
@@ -12,6 +13,7 @@ namespace DefaultNamespace.Player
 
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
+        public Animator Animator => _animator;
         public Vector2 Direction { get; set; } = Vector2.zero;
         public int MaxJumps { get; set; } = 2;
         public int JumpsCount { get; set; } = 0;

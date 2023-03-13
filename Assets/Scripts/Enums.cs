@@ -1,9 +1,16 @@
 namespace DefaultNamespace
 {
-    public enum EnemyType
+    public enum EEnemyType
     {
         StaticEnemy,
         MoveEnemy,
         PeekOutEnemy
+    }
+
+    public enum EAnimStates
+    {
+        Idle,
+        Run,
+        Jump
     }
 }

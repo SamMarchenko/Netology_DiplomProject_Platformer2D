@@ -2,6 +2,6 @@
 {
     public interface IEnemy
     {
-        EnemyType EnemyType { get; }
+        EEnemyType EEnemyType { get; }
     }
 }

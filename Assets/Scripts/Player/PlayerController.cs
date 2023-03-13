@@ -1,13 +1,17 @@
+using DefaultNamespace;
 using DefaultNamespace.Player;
 using UnityEngine;
 
 public class PlayerController
 {
     private PlayerView _playerView;
+    private AnimationController _animationController;
 
-    public PlayerController(PlayerView playerView)
+    public PlayerController(PlayerView playerView, AnimationController animationController)
     {
         _playerView = playerView;
+        _animationController = animationController;
+        _animationController.Init(_playerView.Animator);
         Subscribe();
         //todo: где отписываться не в монобехе?
     }
@@ -32,11 +36,14 @@ public class PlayerController
         _playerView.IsGrounded = true;
         _playerView.IsJumping = false;
         _playerView.JumpsCount = 0;
+        
+        _animationController.PlayAnimation(EAnimStates.Idle);
     }
 
     public void PlayerMove(Vector2 direction)
     {
         _playerView.Direction = direction;
+        _animationController.PlayAnimation(direction == Vector2.zero ? EAnimStates.Idle : EAnimStates.Run);
     }
 
     public void PlayerJump()
@@ -44,12 +51,14 @@ public class PlayerController
         if (_playerView.IsGrounded)
         {
             _playerView.Jump();
+            _animationController.PlayAnimation(EAnimStates.Jump);
             return;
         }
 
         if (_playerView.IsJumping && _playerView.JumpsCount < _playerView.MaxJumps)
         {
             _playerView.Jump();
+            _animationController.PlayAnimation(EAnimStates.Jump);
         }
     }
 

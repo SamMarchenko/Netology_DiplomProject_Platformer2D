@@ -15,8 +15,7 @@ namespace DefaultNamespace.Player
             _controller = controller;
             _playerView = playerView;
             Subscribe();
-          
-
+            
             //todo: где отписываться не в монобехе?
         }
         
@@ -29,11 +28,14 @@ namespace DefaultNamespace.Player
         private void OnMove(Vector2 direction)
         {
             _controller.PlayerMove(direction);
+            
+            
         }
 
         private void OnJump()
         {
             _controller.PlayerJump();
+            
         }
     }
 }

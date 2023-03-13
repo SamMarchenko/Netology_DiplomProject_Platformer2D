@@ -18,6 +18,7 @@ public class LocationInstaller : MonoInstaller
             StartPoint.position, Quaternion.identity, null);
         
         Container.Bind<PlayerView>().FromInstance(playerView).AsSingle();
+        Container.BindInterfacesAndSelfTo<AnimationController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<Player>().AsSingle().NonLazy();
     }

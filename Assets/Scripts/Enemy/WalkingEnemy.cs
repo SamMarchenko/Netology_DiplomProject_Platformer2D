@@ -5,7 +5,7 @@ namespace DefaultNamespace
     public class WalkingEnemy : IEnemy
     {
         private readonly EnemyView _enemyView;
-        public EnemyType EnemyType { get; }
+        public EEnemyType EEnemyType { get; }
         
         public WalkingEnemy(EnemyView enemyView)
         {
