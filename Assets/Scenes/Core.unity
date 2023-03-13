@@ -1713,11 +1713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e10ff45ad094c03ad36989dcf7559c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPositions: {fileID: 79869150}
-  _playerPrefab: {fileID: 4886938475469785069, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
-  _staticEnemyPrefab: {fileID: -6421861973408837458, guid: 0b01f2450827eda408b972fc2ebd114c, type: 3}
-  _walkingEnemyPrefab: {fileID: 6047984864464516675, guid: 3a9334a9e79f6a04183b34cf2c904cef, type: 3}
-  _peekOutEnemyPrefab: {fileID: 2125530904308729100, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
+  StartPoint: {fileID: 1272144100}
+  HeroPrefab: {fileID: 1274785454479645587, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
 --- !u!1 &2130686508
 GameObject:
   m_ObjectHideFlags: 0
