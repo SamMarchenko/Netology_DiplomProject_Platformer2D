@@ -4,6 +4,7 @@ using DefaultNamespace;
 using UnityEngine;
 using Random = System.Random;
 
+//todo: это временный создатель врагов на карте для тестирования вьюх. Переделать
 public class EnemiesCreator
 {
     private readonly SpawnPositions _spawnPositions;

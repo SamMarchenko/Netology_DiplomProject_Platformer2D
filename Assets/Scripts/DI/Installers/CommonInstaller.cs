@@ -10,6 +10,6 @@ public class CommonInstaller : MonoInstaller
 
    private void BindInputSystems()
    {
-      Container.BindInterfacesAndSelfTo<InputService>().AsSingle().NonLazy();
+      Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle().NonLazy();
    }
 }

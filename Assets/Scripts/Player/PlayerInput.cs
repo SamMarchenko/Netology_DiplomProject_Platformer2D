@@ -2,14 +2,14 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputService
+public class PlayerInput
 {
     private Vector2 _direction;
     private PlayerControls _controls;
     public Action<Vector2> OnMove;
     public Action OnJump;
 
-    public InputService()
+    public PlayerInput()
     {
         _controls = new PlayerControls();
         _controls.Player.Enable();

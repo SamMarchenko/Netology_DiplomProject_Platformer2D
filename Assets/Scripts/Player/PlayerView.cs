@@ -33,8 +33,7 @@ namespace DefaultNamespace.Player
             {
                 return;
             }
-
-            Debug.Log("Move");
+            
             _rigidbody2D.velocity += Direction * _moveSpeed * Time.deltaTime;
             TurnPlayerView(Direction);
         }

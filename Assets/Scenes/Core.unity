@@ -1714,7 +1714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPositions: {fileID: 79869150}
-  HeroPrefab: {fileID: 4886938475469785069, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
+  PlayerPrefab: {fileID: 1608128630680549057, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
   EnemiesPrefabs:
   - {fileID: 2125530904308729100, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
   - {fileID: -6421861973408837458, guid: 0b01f2450827eda408b972fc2ebd114c, type: 3}

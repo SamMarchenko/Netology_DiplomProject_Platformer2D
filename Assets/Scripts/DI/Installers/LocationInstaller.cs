@@ -7,7 +7,7 @@ using Zenject;
 public class LocationInstaller : MonoInstaller
 {
     public SpawnPositions SpawnPositions;
-    public PlayerView HeroPrefab;
+    public PlayerView PlayerPrefab;
     public List<EnemyView> EnemiesPrefabs;
 
     public override void InstallBindings()
@@ -20,7 +20,9 @@ public class LocationInstaller : MonoInstaller
 
     private void BindPlayer()
     {
-        var playerView = Container.InstantiatePrefabForComponent<PlayerView>(HeroPrefab,
+        
+        //todo: Убрать создание вьюхи из инсталлера
+        var playerView = Container.InstantiatePrefabForComponent<PlayerView>(PlayerPrefab,
             SpawnPositions.PlayerSpawnPos.position, Quaternion.identity, null);
         
         Container.Bind<PlayerView>().FromInstance(playerView).AsSingle();

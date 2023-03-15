@@ -1,17 +1,16 @@
-﻿using DefaultNamespace.Factories;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DefaultNamespace.Player
 {
     public class Player
     {
         private PlayerView _playerView;
-        private readonly InputService _input;
+        private readonly PlayerInput _playerInput;
         private PlayerController _controller;
 
-        public Player(InputService input, PlayerView playerView, PlayerController controller)
+        public Player(PlayerInput playerInput, PlayerView playerView, PlayerController controller)
         {
-            _input = input;
+            _playerInput = playerInput;
             _controller = controller;
             _playerView = playerView;
             Subscribe();
@@ -21,8 +20,8 @@ namespace DefaultNamespace.Player
         
         private void Subscribe()
         {
-            _input.OnMove += OnMove;
-            _input.OnJump += OnJump;
+            _playerInput.OnMove += OnMove;
+            _playerInput.OnJump += OnJump;
         }
 
         private void OnMove(Vector2 direction)
