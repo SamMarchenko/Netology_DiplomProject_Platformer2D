@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace DefaultNamespace.Players
 {
@@ -12,9 +13,9 @@ namespace DefaultNamespace.Players
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
         public Animator Animator => _animator;
-        public Vector2 MoveDirection { get; set; } = Vector2.zero;
+        public Vector2 MoveDirection = Vector2.zero;
         public int JumpsCount { get; set; } = 0;
-        public bool IsGrounded { get; set; }
+        public bool IsGrounded;
         public bool IsJumping { get; set; }
         
 

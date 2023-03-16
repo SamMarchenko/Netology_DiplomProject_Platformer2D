@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.Factories;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
 using UnityEngine;
@@ -9,14 +10,15 @@ public class LocationInstaller : MonoInstaller
 {
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
-    public List<EnemyView> EnemiesPrefabs;
+   
 
     public override void InstallBindings()
+    
     {
         Container.BindInstance(SpawnPositions);
-        Container.BindInstance(EnemiesPrefabs);
+        BindEnemies();
         BindPlayer();
-        Container.BindInterfacesAndSelfTo<EnemiesCreator>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
     }
 
     
@@ -31,6 +33,12 @@ public class LocationInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<AnimationController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerModel>().AsSingle().NonLazy();
+    }
+
+    private void BindEnemies()
+    {
+        Container.BindInterfacesAndSelfTo<EnemiesProvider>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle().NonLazy();
     }
     
 }

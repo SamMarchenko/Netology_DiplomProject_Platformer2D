@@ -72,8 +72,11 @@ namespace DefaultNamespace.Players.MVC
         private void OnMove(Vector2 direction)
         {
             _playerView.MoveDirection = direction;
+            if (_playerView.IsGrounded)
+            {
+                _animationController.PlayAnimation(_playerView.MoveDirection == Vector2.zero ? EAnimStates.Idle : EAnimStates.Run);
+            }
         }
-
         
     }
 }
