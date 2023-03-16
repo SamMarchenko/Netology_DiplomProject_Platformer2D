@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace.Player
+namespace DefaultNamespace.Players
 {
     public class AnimationController
     {

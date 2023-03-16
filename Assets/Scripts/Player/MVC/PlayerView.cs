@@ -1,47 +1,38 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DefaultNamespace.Player
+namespace DefaultNamespace.Players
 {
     public class PlayerView : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _playerSpriteRenderer;
-        [SerializeField] private float _moveSpeed = 400f;
-        [SerializeField] private float _jumpForce = 180f;
 
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
         public Animator Animator => _animator;
-        public Vector2 Direction { get; set; } = Vector2.zero;
-        public int MaxJumps { get; set; } = 2;
+        public Vector2 MoveDirection { get; set; } = Vector2.zero;
         public int JumpsCount { get; set; } = 0;
         public bool IsGrounded { get; set; }
         public bool IsJumping { get; set; }
+        
 
-
-        private void Update()
+        public void Move(float speed)
         {
-            Move();
-        }
-
-
-        private void Move()
-        {
-            if (Direction == Vector2.zero)
+            if (MoveDirection == Vector2.zero)
             {
                 return;
             }
             
-            _rigidbody2D.velocity += Direction * _moveSpeed * Time.deltaTime;
-            TurnPlayerView(Direction);
+            _rigidbody2D.velocity += MoveDirection * speed * Time.deltaTime;
+            TurnPlayerView(MoveDirection);
         }
 
-        public void Jump()
+        public void Jump(float jumpForce)
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, 0);
-            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             IsJumping = true;
             JumpsCount++;
             Debug.Log($"Прыжок №{JumpsCount}");

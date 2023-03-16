@@ -1,5 +1,5 @@
 ﻿using Cinemachine;
-using DefaultNamespace.Player;
+using DefaultNamespace.Players;
 using UnityEngine;
 using Zenject;
 

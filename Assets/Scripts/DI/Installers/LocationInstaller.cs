@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DefaultNamespace;
-using DefaultNamespace.Player;
+using DefaultNamespace.Players;
+using DefaultNamespace.Players.MVC;
 using UnityEngine;
 using Zenject;
 
@@ -18,6 +19,7 @@ public class LocationInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<EnemiesCreator>().AsSingle().NonLazy();
     }
 
+    
     private void BindPlayer()
     {
         
@@ -25,10 +27,10 @@ public class LocationInstaller : MonoInstaller
         var playerView = Container.InstantiatePrefabForComponent<PlayerView>(PlayerPrefab,
             SpawnPositions.PlayerSpawnPos.position, Quaternion.identity, null);
         
-        Container.Bind<PlayerView>().FromInstance(playerView).AsSingle();
+        Container.Bind<PlayerView>().FromInstance(playerView).AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<AnimationController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<Player>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerModel>().AsSingle().NonLazy();
     }
     
 }
