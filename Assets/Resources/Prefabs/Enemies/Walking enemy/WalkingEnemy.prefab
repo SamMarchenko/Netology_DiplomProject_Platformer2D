@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3822491564373967018}
   - component: {fileID: 6047984864464516675}
   - component: {fileID: 3132901800510413859}
+  - component: {fileID: 5990801508992462866}
   m_Layer: 0
   m_Name: WalkingEnemy
   m_TagString: Untagged
@@ -46,6 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27f19af38ae463f9ea6cdcb1ebad0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
+  _animator: {fileID: 0}
+  _rigidbody2D: {fileID: 0}
+  _playerSpriteRenderer: {fileID: 0}
 --- !u!70 &3132901800510413859
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -62,6 +67,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0106163025, y: 0.56}
   m_Size: {x: 0.86095464, y: 1.1189028}
   m_Direction: 0
+--- !u!95 &5990801508992462866
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5665302718526925432}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e20e4f867fa45c44283094c1185aec4d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8957169589639458387
 GameObject:
   m_ObjectHideFlags: 0

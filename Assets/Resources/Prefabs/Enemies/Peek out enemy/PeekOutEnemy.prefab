@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 974915346296475208}
   - component: {fileID: 2125530904308729100}
   - component: {fileID: 4092697867595184057}
+  - component: {fileID: 4030920765764626271}
   m_Layer: 0
   m_Name: PeekOutEnemy
   m_TagString: Untagged
@@ -130,6 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27f19af38ae463f9ea6cdcb1ebad0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
+  _animator: {fileID: 0}
+  _rigidbody2D: {fileID: 0}
+  _playerSpriteRenderer: {fileID: 0}
 --- !u!61 &4092697867595184057
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -156,3 +161,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6902422, y: 1.0123901}
   m_EdgeRadius: 0
+--- !u!95 &4030920765764626271
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649114122443682761}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93ee3be4f18da3849bcbfa0901f5fadb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
