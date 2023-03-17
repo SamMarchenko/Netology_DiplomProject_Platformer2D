@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelNumber: 1
   _enemiesData:
-  - Prefab: {fileID: -6421861973408837458, guid: 0b01f2450827eda408b972fc2ebd114c, type: 3}
+  - Prefab: {fileID: 2317906801200455791, guid: 0b01f2450827eda408b972fc2ebd114c, type: 3}
     Type: 0
     MaxHealth: 0
     MoveSpeed: 0
     Damage: 4
     AtackSpeed: 0
     SpawnPosition: {fileID: 4046107939797318297, guid: ca2ba8e45f8d6e048ba9f458ae84d295, type: 3}
-  - Prefab: {fileID: 6047984864464516675, guid: 3a9334a9e79f6a04183b34cf2c904cef, type: 3}
+  - Prefab: {fileID: 5808213678824523021, guid: 3a9334a9e79f6a04183b34cf2c904cef, type: 3}
     Type: 1
     MaxHealth: 4
     MoveSpeed: 2
     Damage: 2
     AtackSpeed: 2
     SpawnPosition: {fileID: 6352456809453208676, guid: d0bc4d7088acb0d478aa4857f8040378, type: 3}
-  - Prefab: {fileID: 2125530904308729100, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
+  - Prefab: {fileID: 1868910496888882001, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
     Type: 2
     MaxHealth: 5
     MoveSpeed: 3

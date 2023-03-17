@@ -6,11 +6,11 @@ namespace DefaultNamespace.Players
     {
         private Animator _animator;
 
-        public void Init(Animator animator)
+        public AnimationController(Animator animator)
         {
             _animator = animator;
         }
-        
+
         public void PlayAnimation(EAnimStates state)
         {
             _animator.SetInteger("State", (int)state);

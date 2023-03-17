@@ -11,14 +11,13 @@ namespace DefaultNamespace.Players.MVC
         private AnimationController _animationController;
 
         public PlayerController(PlayerModel playerModel, PlayerView playerView,
-            PlayerInput playerInput, AnimationController animationController)
+            PlayerInput playerInput)
         {
             _playerModel = playerModel;
             _playerView = playerView;
             _playerInput = playerInput;
-            _animationController = animationController;
-            _animationController.Init(_playerView.Animator);
-            
+            _animationController = new AnimationController(_playerView.Animator);
+
             Subscribe();
         }
         

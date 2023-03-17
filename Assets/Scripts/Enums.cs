@@ -2,8 +2,8 @@ namespace DefaultNamespace
 {
     public enum EEnemyType
     {
-        StaticEnemy,
-        MoveEnemy,
+        PassiveEnemy,
+        WalkingEnemy,
         PeekOutEnemy
     }
 

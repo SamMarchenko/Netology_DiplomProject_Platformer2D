@@ -20,7 +20,7 @@ namespace DefaultNamespace
         public LevelManager( EnemiesProvider enemiesProvider)
         {
             _enemiesProvider = enemiesProvider;
-            _enemies = _enemiesProvider.CreateEnemies(_currentLevelNumber);
+            _enemies = _enemiesProvider.GetEnemies(_currentLevelNumber);
         }
     }
 }
