@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7234462827375167367}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,8 +241,8 @@ MonoBehaviour:
   _animator: {fileID: 7234462827375167367}
   _rigidbody2D: {fileID: 1274785454479645590}
   _playerSpriteRenderer: {fileID: 1274785453227010774}
-  _moveSpeed: 500
-  _jumpForce: 180
+  MoveDirection: {x: 0, y: 0}
+  IsGrounded: 0
 --- !u!95 &7234462827375167367
 Animator:
   serializedVersion: 5

@@ -33,7 +33,7 @@ public class EnemiesProvider
 
        foreach (var enemyData in enemiesData)
        {
-         _createdEnemies.Add(_enemyFactory.GetEnemy(enemyData));  
+         _createdEnemies.Add(_enemyFactory.CreateEnemy(enemyData));  
        }
 
        return _createdEnemies;

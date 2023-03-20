@@ -36,7 +36,7 @@ namespace DefaultNamespace.Players
             _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             IsJumping = true;
             JumpsCount++;
-            Debug.Log($"Прыжок №{JumpsCount}");
+           // Debug.Log($"Прыжок №{JumpsCount}");
         }
 
         public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;

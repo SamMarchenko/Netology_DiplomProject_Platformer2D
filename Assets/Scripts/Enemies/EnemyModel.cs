@@ -1,20 +1,20 @@
 ﻿namespace DefaultNamespace
 {
-    public class WalkingEnemyModel
+    public class EnemyModel
     {
         private EEnemyType _type;
         private int _currentHealth;
         private float _currentMoveSpeed;
         private float _damage;
+        private float _attackSpeed;
 
         public EEnemyType Type => _type;
         public int Health => _currentHealth;
         public float MoveSpeed => _currentMoveSpeed;
         public float Damage => _damage;
-       
+        public float AttackSpeed => _attackSpeed;
 
-
-        public WalkingEnemyModel(EnemyData data)
+        public EnemyModel(EnemyData data)
         {
             SetData(data);
         }
@@ -25,6 +25,7 @@
             _currentHealth = data.MaxHealth;
             _currentMoveSpeed = data.MoveSpeed;
             _damage = data.Damage;
+            _attackSpeed = data.AtackSpeed;
         }
     }
 }

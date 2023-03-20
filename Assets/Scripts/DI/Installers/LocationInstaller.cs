@@ -24,10 +24,11 @@ public class LocationInstaller : MonoInstaller
 
     private void BindFactories()
     {
+        Container.BindInterfacesAndSelfTo<StrategiesFactory>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<PeekOutEnemyFactory>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<PassiveEnemyFactory>().AsSingle().NonLazy();
-        Container.BindInterfacesAndSelfTo<WalkingEnemyFactory>().AsSingle().NonLazy();
+        // Container.BindInterfacesAndSelfTo<PeekOutEnemyFactory>().AsSingle().NonLazy();
+        // Container.BindInterfacesAndSelfTo<PassiveEnemyFactory>().AsSingle().NonLazy();
+        // Container.BindInterfacesAndSelfTo<WalkingEnemyFactory>().AsSingle().NonLazy();
     }
 
     
