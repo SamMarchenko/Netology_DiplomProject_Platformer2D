@@ -21,6 +21,7 @@ namespace DefaultNamespace
             _currentStrategy.PassiveBehaviour(_view);
         }
         
+
         private void OnLoseTarget()
         {
             _currentStrategy.PassiveBehaviour(_view);

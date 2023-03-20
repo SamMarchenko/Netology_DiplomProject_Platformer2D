@@ -16,7 +16,7 @@ namespace DefaultNamespace.Strategy
                 return;
             }
 
-            _view.Animator.SetInteger("State", 0);
+            _view.Animator.SetInteger("State", 1);
             _view.MoveDirection = Vector2.left;
             Debug.Log("патрулирую платформу");
         }
@@ -48,6 +48,7 @@ namespace DefaultNamespace.Strategy
 
         private void OnTheEdgePlatform()
         {
+            Debug.Log("Разворот врага");
             _view.MoveDirection *= -1f;
         }
     }

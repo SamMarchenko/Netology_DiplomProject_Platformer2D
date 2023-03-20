@@ -179,4 +179,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 2
   _animator: {fileID: 4030920765764626271}
-  _playerSpriteRenderer: {fileID: 6211927299721121110}
+  _enemySpriteRenderer: {fileID: 6211927299721121110}

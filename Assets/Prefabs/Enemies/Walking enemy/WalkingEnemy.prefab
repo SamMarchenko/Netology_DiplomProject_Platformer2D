@@ -93,7 +93,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!114 &5808213678824523021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   _type: 1
   _animator: {fileID: 5990801508992462866}
   _rigidbody2D: {fileID: 3721806110475519531}
-  _playerSpriteRenderer: {fileID: 5687564761261601596}
+  _enemySpriteRenderer: {fileID: 5687564761261601596}
 --- !u!61 &4632541782353265416
 BoxCollider2D:
   m_ObjectHideFlags: 0
