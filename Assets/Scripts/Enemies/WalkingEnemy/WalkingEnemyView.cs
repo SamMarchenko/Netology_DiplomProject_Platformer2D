@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DefaultNamespace.Players;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -112,6 +113,8 @@ namespace DefaultNamespace
             if (col.gameObject.CompareTag("Player"))
             {
                 Debug.Log("Это игрок");
+               var player = col.gameObject.GetComponent<PlayerView>();
+               player.TakeDamageVisual();
                 OnConnectWithPlayer?.Invoke();
             }
         }

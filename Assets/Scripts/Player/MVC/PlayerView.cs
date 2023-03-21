@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -49,6 +50,13 @@ namespace DefaultNamespace.Players
         private void OnTriggerExit2D(Collider2D other)
         {
             OnUnderFeetNo?.Invoke(other);
+        }
+
+        public void TakeDamageVisual()
+        {
+            Vector3 offset;
+            offset = _playerSpriteRenderer.flipX ? new Vector3(15, 0, 0) : new Vector3(-15, 0, 0);
+            transform.DOJump(transform.position + offset, 8f, 1, 0.5f);
         }
     }
 }
