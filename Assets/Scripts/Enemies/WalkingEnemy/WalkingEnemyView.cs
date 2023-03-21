@@ -6,13 +6,15 @@ namespace DefaultNamespace
 {
     public class WalkingEnemyView : EnemyView
     {
-        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator _BehaviourAnimator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _enemySpriteRenderer;
+        [SerializeField] private GameObject _boomAnimation;
         [SerializeField] private GameObject _attentionSprite;
         private float _timerAttention = 1f;
 
-        public Animator Animator => _animator;
+        public Animator BehaviourAnimator => _BehaviourAnimator;
+        public GameObject BoomAnimation => _boomAnimation;
         public Vector2 MoveDirection { get; set; } = Vector2.zero;
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public GameObject AttentionSprite => _attentionSprite;
@@ -39,6 +41,13 @@ namespace DefaultNamespace
             }
 
             FlipSprite();
+        }
+
+        public void ExplodeSelf()
+        {
+            SpriteRenderer.enabled = false;
+            Debug.Log("Я взорвался");
+            BoomAnimation.SetActive(true);
         }
         
 
@@ -96,6 +105,15 @@ namespace DefaultNamespace
 
             _target = null;
             OnLoseTarget?.Invoke();
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Это игрок");
+                OnConnectWithPlayer?.Invoke();
+            }
         }
     }
 }

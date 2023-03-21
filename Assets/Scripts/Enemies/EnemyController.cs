@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace.Factories;
 using DefaultNamespace.Strategy;
 
 namespace DefaultNamespace
@@ -8,6 +9,7 @@ namespace DefaultNamespace
         private readonly List<IBehaviourStrategy> _strategies;
         private readonly EnemyView _view;
         private readonly EnemyModel _model;
+        private readonly BoomFactory _boomFactory;
         private IBehaviourStrategy _currentStrategy;
 
         public EnemyController(List<IBehaviourStrategy> strategies, EnemyView view, EnemyModel model)

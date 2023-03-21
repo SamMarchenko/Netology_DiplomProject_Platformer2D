@@ -1725,6 +1725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnPositions: {fileID: 79869150}
   PlayerPrefab: {fileID: 1608128630680549057, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
+  BoomSprite: {fileID: 0}
 --- !u!1 &2130686508
 GameObject:
   m_ObjectHideFlags: 0

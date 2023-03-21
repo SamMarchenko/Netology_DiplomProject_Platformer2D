@@ -1,4 +1,5 @@
-﻿using UnityEditor.Timeline.Actions;
+﻿using DefaultNamespace.Factories;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace DefaultNamespace.Strategy
@@ -18,7 +19,7 @@ namespace DefaultNamespace.Strategy
             }
 
             _view.AttentionSprite.SetActive(false);
-            _view.Animator.SetInteger("State", 1);
+            _view.BehaviourAnimator.SetInteger("State", 1);
             _view.Rigidbody2D.velocity = Vector2.zero;
 
             _view.MoveDirection = _view.SpriteRenderer.flipX ? Vector2.left : Vector2.right;
@@ -35,8 +36,10 @@ namespace DefaultNamespace.Strategy
             {
                 return;
             }
-          
-            _view.Animator.SetInteger("State", 1);
+
+            
+            
+            _view.BehaviourAnimator.SetInteger("State", 1);
             _view.AttentionSprite.SetActive(true);
             Debug.Log("Преследую игрока на моей платформе для атаки");
         }
@@ -47,7 +50,13 @@ namespace DefaultNamespace.Strategy
             {
                 _view = (WalkingEnemyView) enemyView;
                 _view.OnTheEdgePlatform += OnTheEdgePlatform;
+                _view.OnConnectWithPlayer += OnConnectWithPlayer;
             }
+        }
+
+        private void OnConnectWithPlayer()
+        {
+          _view.ExplodeSelf();
         }
 
 

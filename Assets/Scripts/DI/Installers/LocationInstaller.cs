@@ -10,12 +10,14 @@ public class LocationInstaller : MonoInstaller
 {
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
+    public SpriteRenderer BoomSprite;
    
 
     public override void InstallBindings()
     
     {
         Container.BindInstance(SpawnPositions);
+        Container.BindInstance(BoomSprite);
         BindFactories();
         BindEnemies();
         BindPlayer();

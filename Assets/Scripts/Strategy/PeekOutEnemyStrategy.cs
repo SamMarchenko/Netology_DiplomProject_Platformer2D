@@ -6,12 +6,12 @@ namespace DefaultNamespace.Strategy
     {
         public void PassiveBehaviour(EnemyView enemyView)
         {
-            Debug.Log("Поворачиваюсь по сторонам в ожидании игрока");
+           
         }
 
         public void ActiveBehaviour(EnemyView enemyView)
         {
-            Debug.Log("Повернут в направлении игрока и атакую его снарядом");
+            
         }
     }
 }

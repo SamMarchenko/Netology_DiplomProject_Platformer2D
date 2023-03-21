@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -12,7 +11,8 @@ namespace DefaultNamespace
         public Action OnFindTarget;
         public Action OnLoseTarget;
         public Action OnTheEdgePlatform;
-        
+        public Action OnConnectWithPlayer;
+
         public EEnemyType Type => _type;
         public bool HasTarget => _target != null;
         public Transform Target => _target;
