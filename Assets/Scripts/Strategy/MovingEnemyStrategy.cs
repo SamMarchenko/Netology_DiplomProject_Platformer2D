@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor.Timeline.Actions;
+using UnityEngine;
 
 namespace DefaultNamespace.Strategy
 {
@@ -16,7 +17,9 @@ namespace DefaultNamespace.Strategy
                 return;
             }
 
+            _view.AttentionSprite.SetActive(false);
             _view.Animator.SetInteger("State", 1);
+            _view.Rigidbody2D.velocity = Vector2.zero;
             _view.MoveDirection = Vector2.left;
             Debug.Log("патрулирую платформу");
         }
@@ -30,9 +33,9 @@ namespace DefaultNamespace.Strategy
             {
                 return;
             }
-
+          
             _view.Animator.SetInteger("State", 1);
-            _view.MoveDirection = _view.Target.transform.position - _view.transform.position;
+            _view.AttentionSprite.SetActive(true);
             Debug.Log("Преследую игрока на моей платформе для атаки");
         }
 
@@ -50,6 +53,7 @@ namespace DefaultNamespace.Strategy
         {
             Debug.Log("Разворот врага");
             _view.MoveDirection *= -1f;
+            _view.Rigidbody2D.velocity = Vector2.zero;
         }
     }
 }
