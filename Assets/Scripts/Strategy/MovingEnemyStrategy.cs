@@ -20,7 +20,9 @@ namespace DefaultNamespace.Strategy
             _view.AttentionSprite.SetActive(false);
             _view.Animator.SetInteger("State", 1);
             _view.Rigidbody2D.velocity = Vector2.zero;
-            _view.MoveDirection = Vector2.left;
+
+            _view.MoveDirection = _view.SpriteRenderer.flipX ? Vector2.left : Vector2.right;
+            
             Debug.Log("патрулирую платформу");
         }
 

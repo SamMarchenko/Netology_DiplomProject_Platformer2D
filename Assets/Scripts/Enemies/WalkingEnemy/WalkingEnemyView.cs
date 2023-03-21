@@ -16,6 +16,7 @@ namespace DefaultNamespace
         public Vector2 MoveDirection { get; set; } = Vector2.zero;
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public GameObject AttentionSprite => _attentionSprite;
+        public SpriteRenderer SpriteRenderer => _enemySpriteRenderer;
 
 
         private void Update()
@@ -23,14 +24,7 @@ namespace DefaultNamespace
             Move();
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            if (!col.gameObject.CompareTag("Player")) return;
-
-            _target = col.transform;
-            _rigidbody2D.velocity = Vector2.zero;
-            OnFindTarget?.Invoke();
-        }
+       
 
 
         public void Move()
@@ -46,6 +40,7 @@ namespace DefaultNamespace
 
             FlipSprite();
         }
+        
 
         private void Chase()
         {
@@ -82,6 +77,17 @@ namespace DefaultNamespace
         private void FlipSprite()
         {
             _enemySpriteRenderer.flipX = MoveDirection.x > 0;
+        }
+        
+        
+        
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (!col.gameObject.CompareTag("Player")) return;
+
+            _target = col.transform;
+            _rigidbody2D.velocity = Vector2.zero;
+            OnFindTarget?.Invoke();
         }
 
         private void OnTriggerExit2D(Collider2D other)
