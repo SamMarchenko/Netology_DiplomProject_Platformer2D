@@ -26,19 +26,4 @@ namespace DefaultNamespace.Factories
             return view;
         }
     }
-
-    public class BoomFactory
-    {
-        private readonly SpriteRenderer _boomSprite;
-
-        public BoomFactory(SpriteRenderer boomSprite)
-        {
-            _boomSprite = boomSprite;
-        }
-        public SpriteRenderer CreateBoom()
-        {
-            var sprite = MonoBehaviour.Instantiate(_boomSprite);
-            return sprite;
-        }
-    }
 }
