@@ -1,7 +1,5 @@
 ﻿using System;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace DefaultNamespace.Players
 {
@@ -11,6 +9,8 @@ namespace DefaultNamespace.Players
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _playerSpriteRenderer;
 
+
+        public EUnitType UnitType => EUnitType.Player;
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
         public Animator Animator => _animator;
@@ -18,7 +18,10 @@ namespace DefaultNamespace.Players
         public int JumpsCount { get; set; } = 0;
         public bool IsGrounded;
         public bool IsJumping { get; set; }
-        
+
+        public bool IsDamaged { get; set; } = false;
+        public float DamagedTimer { get; set; } = 0.5f;
+
 
         public void Move(float speed)
         {
@@ -26,7 +29,7 @@ namespace DefaultNamespace.Players
             {
                 return;
             }
-            
+
             _rigidbody2D.velocity += MoveDirection * speed * Time.deltaTime;
             TurnPlayerView(MoveDirection);
         }
@@ -37,7 +40,6 @@ namespace DefaultNamespace.Players
             _rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             IsJumping = true;
             JumpsCount++;
-           // Debug.Log($"Прыжок №{JumpsCount}");
         }
 
         public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;
@@ -54,9 +56,15 @@ namespace DefaultNamespace.Players
 
         public void TakeDamageVisual()
         {
-            Vector3 offset;
-            offset = _playerSpriteRenderer.flipX ? new Vector3(15, 0, 0) : new Vector3(-15, 0, 0);
-            transform.DOJump(transform.position + offset, 8f, 1, 0.5f);
+            if (IsDamaged)
+            {
+                return;
+            }
+            Vector2 offset;
+            offset = _playerSpriteRenderer.flipX ? new Vector2(20, 10) : new Vector2(-20, 10);
+            _rigidbody2D.AddForce(offset * 10f, ForceMode2D.Impulse);
+            IsDamaged = true;
+            MoveDirection = Vector2.zero;
         }
     }
 }

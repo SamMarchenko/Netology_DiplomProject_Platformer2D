@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using DefaultNamespace;
+﻿using DefaultNamespace;
 using DefaultNamespace.Factories;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
+using DefaultNamespace.Projectiles;
 using UnityEngine;
 using Zenject;
 
@@ -10,14 +10,14 @@ public class LocationInstaller : MonoInstaller
 {
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
-    public SpriteRenderer BoomSprite;
+    public ProjectileView FireProjectilePrefab;
    
 
     public override void InstallBindings()
     
     {
         Container.BindInstance(SpawnPositions);
-        Container.BindInstance(BoomSprite);
+        Container.BindInstance(FireProjectilePrefab);
         BindFactories();
         BindEnemies();
         BindPlayer();
@@ -26,18 +26,14 @@ public class LocationInstaller : MonoInstaller
 
     private void BindFactories()
     {
+        Container.BindInterfacesAndSelfTo<ProjectileFactory>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<StrategiesFactory>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<EnemyFactory>().AsSingle().NonLazy();
-        // Container.BindInterfacesAndSelfTo<PeekOutEnemyFactory>().AsSingle().NonLazy();
-        // Container.BindInterfacesAndSelfTo<PassiveEnemyFactory>().AsSingle().NonLazy();
-        // Container.BindInterfacesAndSelfTo<WalkingEnemyFactory>().AsSingle().NonLazy();
     }
 
     
     private void BindPlayer()
     {
-        
-        //todo: Убрать создание вьюхи из инсталлера
         var playerView = Container.InstantiatePrefabForComponent<PlayerView>(PlayerPrefab,
             SpawnPositions.PlayerSpawnPos.position, Quaternion.identity, null);
         

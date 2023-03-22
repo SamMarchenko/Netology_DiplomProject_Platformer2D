@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using DefaultNamespace.Players;
+﻿using DefaultNamespace.Players;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -27,8 +25,6 @@ namespace DefaultNamespace
             Move();
         }
 
-       
-
 
         public void Move()
         {
@@ -46,19 +42,20 @@ namespace DefaultNamespace
 
         public void ExplodeSelf()
         {
-            SpriteRenderer.enabled = false;
+            _enemySpriteRenderer.enabled = false;
             Debug.Log("Я взорвался");
-            BoomAnimation.SetActive(true);
+            _boomAnimation.SetActive(true);
         }
-        
+
 
         private void Chase()
         {
             AttentionSpriteStatus();
-            
+
             MoveDirection = transform.position.x - _target.transform.position.x > 0 ? Vector2.left : Vector2.right;
 
-            if ((_enemySpriteRenderer.flipX && MoveDirection.x < 0) || (!_enemySpriteRenderer.flipX && MoveDirection.x > 0))
+            if ((_enemySpriteRenderer.flipX && MoveDirection.x < 0) ||
+                (!_enemySpriteRenderer.flipX && MoveDirection.x > 0))
             {
                 _rigidbody2D.velocity = Vector2.zero;
             }
@@ -74,7 +71,7 @@ namespace DefaultNamespace
                 if (_timerAttention <= 0)
                 {
                     _attentionSprite.SetActive(false);
-                    _timerAttention = 2f;
+                    _timerAttention = 1f;
                 }
             }
         }
@@ -88,9 +85,8 @@ namespace DefaultNamespace
         {
             _enemySpriteRenderer.flipX = MoveDirection.x > 0;
         }
-        
-        
-        
+
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (!col.gameObject.CompareTag("Player")) return;
@@ -113,8 +109,8 @@ namespace DefaultNamespace
             if (col.gameObject.CompareTag("Player"))
             {
                 Debug.Log("Это игрок");
-               var player = col.gameObject.GetComponent<PlayerView>();
-               player.TakeDamageVisual();
+                var player = col.gameObject.GetComponent<PlayerView>();
+                player.TakeDamageVisual();
                 OnConnectWithPlayer?.Invoke();
             }
         }

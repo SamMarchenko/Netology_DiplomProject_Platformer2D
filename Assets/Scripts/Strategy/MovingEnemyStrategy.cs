@@ -1,6 +1,4 @@
-﻿using DefaultNamespace.Factories;
-using UnityEditor.Timeline.Actions;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DefaultNamespace.Strategy
 {
@@ -36,8 +34,6 @@ namespace DefaultNamespace.Strategy
             {
                 return;
             }
-
-            
             
             _view.BehaviourAnimator.SetInteger("State", 1);
             _view.AttentionSprite.SetActive(true);
@@ -49,9 +45,14 @@ namespace DefaultNamespace.Strategy
             if (_view == null || _view != enemyView)
             {
                 _view = (WalkingEnemyView) enemyView;
-                _view.OnTheEdgePlatform += OnTheEdgePlatform;
-                _view.OnConnectWithPlayer += OnConnectWithPlayer;
+                Subscribe();
             }
+        }
+
+        private void Subscribe()
+        {
+            _view.OnTheEdgePlatform += OnTheEdgePlatform;
+            _view.OnConnectWithPlayer += OnConnectWithPlayer;
         }
 
         private void OnConnectWithPlayer()

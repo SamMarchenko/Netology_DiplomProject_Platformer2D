@@ -7,6 +7,12 @@ namespace DefaultNamespace
         PeekOutEnemy
     }
 
+    public enum EUnitType
+    {
+        Player,
+        Enemy
+    }
+
     public enum EAnimStates
     {
         Idle,
