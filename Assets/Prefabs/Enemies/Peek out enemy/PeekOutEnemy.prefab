@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c1537e873443b096e99f07781cc858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 2
+  _type: 3
   _animator: {fileID: 4030920765764626271}
   _enemySpriteRenderer: {fileID: 6211927299721121110}
   _projectileSpawnPos: {fileID: 4819166469423259666}

@@ -13,11 +13,17 @@ namespace DefaultNamespace
         public Action OnFindTarget;
         public Action OnLoseTarget;
         public Action OnTheEdgePlatform;
+        public Action OnFarFromPlatform;
         public Action OnConnectWithPlayer;
 
         public EEnemyType Type => _type;
         public bool HasTarget => _target != null;
-        public Transform Target => _target;
+        public Transform Target
+        {
+            get => _target;
+            set => _target = value;
+        }
+
         public ProjectileFactory ProjectileFactory { get; set; }
     }
 }

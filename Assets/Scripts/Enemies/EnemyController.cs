@@ -60,6 +60,15 @@ namespace DefaultNamespace
                         }
                     }
                     break;
+                case EEnemyType.FlyingEnemy:
+                    foreach (var strategy in _strategies)
+                    {
+                        if (strategy is FlyingEnemyStrategy)
+                        {
+                            _currentStrategy = strategy;
+                        }
+                    }
+                    break;
                 case EEnemyType.PeekOutEnemy:
                     foreach (var strategy in _strategies)
                     {

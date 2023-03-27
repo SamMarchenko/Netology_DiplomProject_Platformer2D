@@ -12,6 +12,7 @@ namespace DefaultNamespace.Factories
             _strategies.Add(new MovingEnemyStrategy());
             _strategies.Add(new PassiveEnemyStrategy());
             _strategies.Add(new PeekOutEnemyStrategy());
+            _strategies.Add(new FlyingEnemyStrategy());
 
             return _strategies;
         }

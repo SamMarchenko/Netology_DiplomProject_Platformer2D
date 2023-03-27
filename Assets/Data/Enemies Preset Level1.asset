@@ -35,3 +35,10 @@ MonoBehaviour:
     Damage: 3
     AtackSpeed: 3
     SpawnPosition: {fileID: 1028096020709000390, guid: da1f60ec99e9172459dfd8b3d79a4ddb, type: 3}
+  - Prefab: {fileID: 418464035216630938, guid: eebfd39b811fd8d4aad884436edff15d, type: 3}
+    Type: 2
+    MaxHealth: 2
+    MoveSpeed: 5
+    Damage: 2
+    AtackSpeed: 5
+    SpawnPosition: {fileID: 5899488504891711859, guid: 81f5758c9336d31419e6508f8437e173, type: 3}

@@ -4,6 +4,7 @@ namespace DefaultNamespace
     {
         PassiveEnemy,
         WalkingEnemy,
+        FlyingEnemy,
         PeekOutEnemy
     }
 
@@ -18,5 +19,11 @@ namespace DefaultNamespace
         Idle,
         Run,
         Jump
+    }
+
+    public enum EPlatformType
+    {
+        WalkingEnemyPlatform,
+        FlyingEnemyPlatform
     }
 }
