@@ -55,8 +55,8 @@ namespace DefaultNamespace.FlyingEnemy
         private void Chase()
         {
             AttentionSpriteStatus();
-            transform.position = Vector2.MoveTowards(transform.position,
-                _target.position, 10f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position,
+                (_target.position + new Vector3(0,10,0)), 10f * Time.deltaTime);
         }
 
         private void AttentionSpriteStatus()
