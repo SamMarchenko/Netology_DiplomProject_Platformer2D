@@ -14,7 +14,7 @@ namespace DefaultNamespace
         public Action OnLoseTarget;
         public Action OnTheEdgePlatform;
         public Action OnFarFromPlatform;
-        public Action OnConnectWithPlayer;
+        public Action<EUnitType> OnConnectWithPlayer;
 
         public EEnemyType Type => _type;
         public bool HasTarget => _target != null;

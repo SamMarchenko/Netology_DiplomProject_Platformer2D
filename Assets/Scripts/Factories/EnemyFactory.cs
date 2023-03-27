@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DefaultNamespace.Signals;
 using DefaultNamespace.Strategy;
 using UnityEngine;
 
@@ -8,12 +9,14 @@ namespace DefaultNamespace.Factories
     {
         private readonly StrategiesFactory _strategiesFactory;
         private readonly ProjectileFactory _projectileFactory;
+        private readonly PlayerSignalBus _bus;
         private readonly List<IBehaviourStrategy> _strategies;
 
-        public EnemyFactory(StrategiesFactory strategiesFactory, ProjectileFactory projectileFactory)
+        public EnemyFactory(StrategiesFactory strategiesFactory, ProjectileFactory projectileFactory, PlayerSignalBus bus)
         {
             _strategiesFactory = strategiesFactory;
             _projectileFactory = projectileFactory;
+            _bus = bus;
             _strategies = _strategiesFactory.CreateStrategies();
         }
 
@@ -21,7 +24,7 @@ namespace DefaultNamespace.Factories
         {
             var view = MonoBehaviour.Instantiate(data.Prefab, data.SpawnPosition.position, Quaternion.identity);
             var model = new EnemyModel(data);
-            var controller = new EnemyController(_strategies, view, model, _projectileFactory);
+            var controller = new EnemyController(_strategies, view, model, _projectileFactory, _bus);
 
             
             return view;

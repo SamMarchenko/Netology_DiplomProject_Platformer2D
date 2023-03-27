@@ -10,7 +10,12 @@ namespace DefaultNamespace.Players.MVC
         private int _maxJumps;
        
 
-        public int Health => _currentHealth;
+        public int Health
+        {
+            get => _currentHealth;
+            set => _currentHealth = value;
+        }
+
         public float MoveSpeed => _currentMoveSpeed;
         public float JumpForce => _currentJumpForce;
         public int MaxJumps => _maxJumps;

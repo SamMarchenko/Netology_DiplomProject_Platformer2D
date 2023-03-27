@@ -10,14 +10,17 @@ namespace DefaultNamespace.Projectiles
         private EUnitType _owner;
         private Vector2 _moveDirection;
         private float _attackSpeed;
+        private int _damage;
 
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public Action OnCollisionPlayer;
 
-        public void Init(EUnitType owner, Vector2 moveDirection, float attackSpeed)
+        public void Init(EUnitType owner, Vector2 moveDirection, float attackSpeed, int damage)
         {
             _owner = owner;
             _moveDirection = moveDirection;
             _attackSpeed = attackSpeed;
+            _damage = damage;
         }
 
         private void Update()
@@ -57,7 +60,7 @@ namespace DefaultNamespace.Projectiles
                 {
                     return;
                 }
-                player.TakeDamageVisual();
+                OnCollisionPlayer?.Invoke();
                 Destroy(gameObject);
             }
         }

@@ -59,10 +59,16 @@ namespace DefaultNamespace
             {
                 attackDirection = Vector2.right;
             }
-            projectile.Init(UnitType, attackDirection, 20f);
+            projectile.Init(UnitType, attackDirection, 20f, 1);
+            projectile.OnCollisionPlayer += ProjectilePlayerCollision;
             projectile.transform.position = _projectileSpawnPos.position;
             projectile.SpriteRenderer.flipX = attackDirection == Vector2.left;
             _attackCooldown = 2f;
+        }
+
+        private void ProjectilePlayerCollision()
+        {
+            OnConnectWithPlayer?.Invoke(EUnitType.Projectile);
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -84,10 +90,7 @@ namespace DefaultNamespace
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Это игрок");
-                var player = col.gameObject.GetComponent<PlayerView>();
-                player.TakeDamageVisual();
-                OnConnectWithPlayer?.Invoke();
+                OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
             }
         }
     }

@@ -3,8 +3,10 @@ using DefaultNamespace.Factories;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
 using DefaultNamespace.Projectiles;
+using DefaultNamespace.Signals;
 using UnityEngine;
 using Zenject;
+using Zenject.SpaceFighter;
 
 public class LocationInstaller : MonoInstaller
 {
@@ -18,10 +20,18 @@ public class LocationInstaller : MonoInstaller
     {
         Container.BindInstance(SpawnPositions);
         Container.BindInstance(FireProjectilePrefab);
+        BindSignals();
         BindFactories();
         BindEnemies();
         BindPlayer();
         Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
+    }
+
+    private void BindSignals()
+    {
+        Container.BindInterfacesAndSelfTo<PlayerDamageSignalHandler>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerSignalBus>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<SignalBusInjector>().AsSingle().NonLazy();
     }
 
     private void BindFactories()

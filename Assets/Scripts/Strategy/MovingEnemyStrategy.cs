@@ -21,8 +21,6 @@ namespace DefaultNamespace.Strategy
             _view.Rigidbody2D.velocity = Vector2.zero;
 
             _view.MoveDirection = _view.SpriteRenderer.flipX ? Vector2.left : Vector2.right;
-            
-            Debug.Log("патрулирую платформу");
         }
 
 
@@ -34,10 +32,9 @@ namespace DefaultNamespace.Strategy
             {
                 return;
             }
-            
+
             _view.BehaviourAnimator.SetInteger("State", 1);
             _view.AttentionSprite.SetActive(true);
-            Debug.Log("Преследую игрока на моей платформе для атаки");
         }
 
         private void SetView(EnemyView enemyView)
@@ -55,15 +52,14 @@ namespace DefaultNamespace.Strategy
             _view.OnConnectWithPlayer += OnConnectWithPlayer;
         }
 
-        private void OnConnectWithPlayer()
+        private void OnConnectWithPlayer(EUnitType unit)
         {
-          _view.ExplodeSelf();
+            _view.ExplodeSelf();
         }
 
 
         private void OnTheEdgePlatform()
         {
-            Debug.Log("Разворот врага");
             _view.MoveDirection *= -1f;
             _view.Rigidbody2D.velocity = Vector2.zero;
         }

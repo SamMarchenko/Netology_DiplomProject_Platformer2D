@@ -10,7 +10,8 @@ namespace DefaultNamespace
         public EEnemyType Type;
         public int MaxHealth;
         public float MoveSpeed;
-        public float Damage;
+        public int CollisionDamage;
+        public int ProjectileDamage;
         public float AtackSpeed;
         public Transform SpawnPosition;
     }

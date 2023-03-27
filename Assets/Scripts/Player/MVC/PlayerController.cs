@@ -1,10 +1,11 @@
 ﻿using DefaultNamespace.Factories;
+using DefaultNamespace.Signals;
 using UnityEngine;
 using Zenject;
 
 namespace DefaultNamespace.Players.MVC
 {
-    public class PlayerController : ITickable
+    public class PlayerController : ITickable, IPlayerDamageListener
     {
         private readonly PlayerModel _playerModel;
         private readonly PlayerView _playerView;
@@ -111,6 +112,21 @@ namespace DefaultNamespace.Players.MVC
                 : EAnimStates.Run);
         }
     }
-}
+
+    public void OnPlayerDamage(PlayerDamageSignal signal)
+    {
+       _playerView.TakeDamageVisual();
+       if (_playerModel.Health - signal.Damage > 0)
+       {
+           _playerModel.Health -= signal.Damage;
+           Debug.Log($"Игрок получил урон {signal.Damage}. Осталось {_playerModel.Health}");
+       }
+       else
+       {
+           _playerModel.Health = 0;
+           Debug.Log($"Игрок умер");
+       }
+    }
+    }
 
 }

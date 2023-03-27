@@ -108,10 +108,9 @@ namespace DefaultNamespace
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Это игрок");
                 var player = col.gameObject.GetComponent<PlayerView>();
                 player.TakeDamageVisual();
-                OnConnectWithPlayer?.Invoke();
+                OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
             }
         }
     }

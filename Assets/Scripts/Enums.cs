@@ -11,7 +11,8 @@ namespace DefaultNamespace
     public enum EUnitType
     {
         Player,
-        Enemy
+        Enemy,
+        Projectile
     }
 
     public enum EAnimStates

@@ -40,7 +40,6 @@ namespace DefaultNamespace.Strategy
         {
             _view.OnFarFromPlatform += OnFarFromPlatform;
             _view.OnTheEdgePlatform += ReturnOnPlatform;
-            _view.OnConnectWithPlayer += OnConnectWithPlayer;
         }
 
         private void ReturnOnPlatform()
@@ -50,11 +49,7 @@ namespace DefaultNamespace.Strategy
                 _view.isNeedBack = false;
             }
         }
-
-        private void OnConnectWithPlayer()
-        {
-            
-        }
+        
 
         private void OnFarFromPlatform()
         {

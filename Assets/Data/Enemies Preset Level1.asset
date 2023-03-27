@@ -18,27 +18,31 @@ MonoBehaviour:
     Type: 0
     MaxHealth: 0
     MoveSpeed: 0
-    Damage: 4
+    CollisionDamage: 10
+    ProjectileDamage: 0
     AtackSpeed: 0
     SpawnPosition: {fileID: 4046107939797318297, guid: ca2ba8e45f8d6e048ba9f458ae84d295, type: 3}
   - Prefab: {fileID: 5808213678824523021, guid: 3a9334a9e79f6a04183b34cf2c904cef, type: 3}
     Type: 1
     MaxHealth: 4
     MoveSpeed: 2
-    Damage: 2
+    CollisionDamage: 3
+    ProjectileDamage: 0
     AtackSpeed: 2
     SpawnPosition: {fileID: 6352456809453208676, guid: d0bc4d7088acb0d478aa4857f8040378, type: 3}
   - Prefab: {fileID: 1868910496888882001, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
-    Type: 2
+    Type: 3
     MaxHealth: 5
     MoveSpeed: 3
-    Damage: 3
+    CollisionDamage: 2
+    ProjectileDamage: 1
     AtackSpeed: 3
     SpawnPosition: {fileID: 1028096020709000390, guid: da1f60ec99e9172459dfd8b3d79a4ddb, type: 3}
   - Prefab: {fileID: 418464035216630938, guid: eebfd39b811fd8d4aad884436edff15d, type: 3}
     Type: 2
     MaxHealth: 2
     MoveSpeed: 5
-    Damage: 2
+    CollisionDamage: 4
+    ProjectileDamage: 0
     AtackSpeed: 5
     SpawnPosition: {fileID: 5899488504891711859, guid: 81f5758c9336d31419e6508f8437e173, type: 3}
