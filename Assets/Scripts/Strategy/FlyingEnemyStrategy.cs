@@ -44,9 +44,9 @@ namespace DefaultNamespace.Strategy
 
         private void ReturnOnPlatform()
         {
-            if (_view.isNeedBack)
+            if (_view.IsNeedBack)
             {
-                _view.isNeedBack = false;
+                _view.IsNeedBack = false;
             }
         }
         
@@ -54,7 +54,7 @@ namespace DefaultNamespace.Strategy
         private void OnFarFromPlatform()
         {
             _view.Target = null;
-            _view.isNeedBack = true;
+            _view.IsNeedBack = true;
         }
     }
 }

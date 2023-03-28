@@ -17,7 +17,7 @@ namespace DefaultNamespace.FlyingEnemy
         public Rigidbody2D Rigidbody2D => _rigidbody2D;
         public GameObject AttentionSprite => _attentionSprite;
         public SpriteRenderer SpriteRenderer => _enemySpriteRenderer;
-        public bool isNeedBack;
+        public bool IsNeedBack;
 
         private void Start()
         {
@@ -45,10 +45,9 @@ namespace DefaultNamespace.FlyingEnemy
             FlipSprite();
         }
 
-        public void ExplodeSelf()
+        public void Dead()
         {
-            _enemySpriteRenderer.enabled = false;
-            Debug.Log("Я взорвался");
+            OnDead?.Invoke(this);
         }
 
 
@@ -92,7 +91,7 @@ namespace DefaultNamespace.FlyingEnemy
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (isNeedBack)
+            if (IsNeedBack)
             {
                 return;
             }
@@ -106,10 +105,8 @@ namespace DefaultNamespace.FlyingEnemy
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                // Debug.Log("Это игрок");
-                // var player = col.gameObject.GetComponent<PlayerView>();
-                // player.TakeDamageVisual();
                 OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
+                OnDead?.Invoke(this);
             }
         }
     }

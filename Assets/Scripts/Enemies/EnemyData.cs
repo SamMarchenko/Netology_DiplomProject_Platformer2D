@@ -14,5 +14,6 @@ namespace DefaultNamespace
         public int ProjectileDamage;
         public float AtackSpeed;
         public Transform SpawnPosition;
+        public bool IsRequiredKilling;
     }
 }

@@ -1,14 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.Factories;
 using DefaultNamespace.SO;
 using ModestTree;
 using UnityEngine;
-using Random = System.Random;
 
-//todo: это временный создатель врагов на карте для тестирования вьюх. Переделать
 public class EnemiesProvider
 {
     private readonly EnemiesPresetContainer _enemiesPresetContainer;
@@ -31,12 +28,12 @@ public class EnemiesProvider
         }
         var enemiesData =  GetEnemiesPreset(levelNumber);
 
-       foreach (var enemyData in enemiesData)
-       {
-         _createdEnemies.Add(_enemyFactory.CreateEnemy(enemyData));  
-       }
+        foreach (var enemyData in enemiesData)
+        {
+            _createdEnemies.Add(_enemyFactory.CreateEnemy(enemyData));  
+        }
 
-       return _createdEnemies;
+        return _createdEnemies;
     }
     
     private List<EnemyData> GetEnemiesPreset(int levelNumber)

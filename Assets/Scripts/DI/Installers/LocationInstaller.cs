@@ -1,4 +1,5 @@
 ﻿using DefaultNamespace;
+using DefaultNamespace.Doors;
 using DefaultNamespace.Factories;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
@@ -6,12 +7,12 @@ using DefaultNamespace.Projectiles;
 using DefaultNamespace.Signals;
 using UnityEngine;
 using Zenject;
-using Zenject.SpaceFighter;
 
 public class LocationInstaller : MonoInstaller
 {
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
+    public DoorView DoorPrefab;
     public ProjectileView FireProjectilePrefab;
    
 
@@ -24,6 +25,7 @@ public class LocationInstaller : MonoInstaller
         BindFactories();
         BindEnemies();
         BindPlayer();
+        BindDoor();
         Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
     }
 
@@ -50,6 +52,14 @@ public class LocationInstaller : MonoInstaller
         Container.Bind<PlayerView>().FromInstance(playerView).AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerModel>().AsSingle().NonLazy();
+    }
+
+    private void BindDoor()
+    {
+        var doorView = Container.InstantiatePrefabForComponent<DoorView>(DoorPrefab,
+            SpawnPositions.DoorSpawnPosition.position, Quaternion.identity, null);
+        
+        Container.Bind<DoorView>().FromInstance(doorView).AsSingle().NonLazy();
     }
 
     private void BindEnemies()

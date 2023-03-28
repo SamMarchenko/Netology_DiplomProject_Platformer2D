@@ -8,6 +8,7 @@
         private int _damageUnit;
         private int _damageProjectile;
         private float _attackSpeed;
+        private bool _isRequiredKilling;
 
         public EEnemyType Type => _type;
         public int Health => _currentHealth;
@@ -15,6 +16,8 @@
         public int DamageUnit => _damageUnit;
         public int DamageProjectile => _damageProjectile;
         public float AttackSpeed => _attackSpeed;
+
+        public bool IsRequiredKilling => _isRequiredKilling;
 
         public EnemyModel(EnemyData data)
         {
@@ -29,6 +32,7 @@
             _damageUnit = data.CollisionDamage;
             _damageProjectile = data.ProjectileDamage;
             _attackSpeed = data.AtackSpeed;
+            _isRequiredKilling = data.IsRequiredKilling;
         }
     }
 }

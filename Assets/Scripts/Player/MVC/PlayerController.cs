@@ -21,12 +21,15 @@ namespace DefaultNamespace.Players.MVC
             _playerInput = playerInput;
             _projectileFactory = projectileFactory;
             _animationController = new AnimationController(_playerView.Animator);
-
             Subscribe();
         }
 
         public void Tick()
         {
+            if (_animationController == null)
+            {
+                _animationController = new AnimationController(_playerView.Animator);
+            }
             if (UpdateDamageTimer())
             {
                 _playerView.Move(_playerModel.MoveSpeed);

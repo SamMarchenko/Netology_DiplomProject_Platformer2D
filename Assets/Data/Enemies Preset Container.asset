@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemiesPresets:
   - {fileID: 11400000, guid: c574bccd47a42bb479a30dc995d868b2, type: 2}
+  - {fileID: 11400000, guid: 378ecd387a4535d46a8414b2e78fdb68, type: 2}

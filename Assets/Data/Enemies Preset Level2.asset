@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc85bf6129cf1c448f3fd1fa4d269e5, type: 3}
+  m_Name: Enemies Preset Level2
+  m_EditorClassIdentifier: 
+  _levelNumber: 2
+  _enemiesData:
+  - Prefab: {fileID: 1868910496888882001, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
+    Type: 3
+    MaxHealth: 100
+    MoveSpeed: 0
+    CollisionDamage: 10
+    ProjectileDamage: 20
+    AtackSpeed: 5
+    SpawnPosition: {fileID: 5704432955865225656, guid: d8be58722b459b645817001fde8a90e5, type: 3}
+    IsRequiredKilling: 1

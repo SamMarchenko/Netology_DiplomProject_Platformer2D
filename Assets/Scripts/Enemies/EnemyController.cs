@@ -25,9 +25,14 @@ namespace DefaultNamespace
             _view.ProjectileFactory = _projectileFactory;
             Subscribe();
             _model = model;
-
+            SetView();
             SetStrategy(view);
             _currentStrategy.PassiveBehaviour(_view);
+        }
+
+        private void SetView()
+        {
+            _view.IsRequiredKilling = _model.IsRequiredKilling;
         }
 
         private void Subscribe()

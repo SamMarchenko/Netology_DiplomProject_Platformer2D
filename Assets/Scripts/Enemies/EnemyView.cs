@@ -15,6 +15,7 @@ namespace DefaultNamespace
         public Action OnTheEdgePlatform;
         public Action OnFarFromPlatform;
         public Action<EUnitType> OnConnectWithPlayer;
+        public Action<EnemyView> OnDead;
 
         public EEnemyType Type => _type;
         public bool HasTarget => _target != null;
@@ -23,6 +24,7 @@ namespace DefaultNamespace
             get => _target;
             set => _target = value;
         }
+        public bool IsRequiredKilling;
 
         public ProjectileFactory ProjectileFactory { get; set; }
     }

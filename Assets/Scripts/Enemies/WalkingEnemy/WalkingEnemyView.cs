@@ -108,8 +108,6 @@ namespace DefaultNamespace
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                var player = col.gameObject.GetComponent<PlayerView>();
-                player.TakeDamageVisual();
                 OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
             }
         }
