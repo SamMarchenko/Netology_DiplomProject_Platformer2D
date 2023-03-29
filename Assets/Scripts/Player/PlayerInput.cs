@@ -8,6 +8,10 @@ public class PlayerInput : IDisposable
     private PlayerControls _controls;
     public Action<Vector2> OnMove;
     public Action OnJump;
+    public Action OnBaseAttack;
+    public Action OnStrongAttackStart;
+    public Action OnStrongAttackEnd;
+
 
     public PlayerInput()
     {
@@ -16,6 +20,24 @@ public class PlayerInput : IDisposable
         _controls.Player.Move.performed += OnMovePerformed;
         _controls.Player.Move.canceled += OnMoveCanceled;
         _controls.Player.Jump.performed += OnJumpPerformed;
+        _controls.Player.BaseAttack.performed += BaseAttackOnperformed;
+        _controls.Player.StrongAttack.performed += StrongAttackOnperformed;
+        _controls.Player.StrongAttack.canceled += StrongAttackOncanceled;
+    }
+
+    private void StrongAttackOncanceled(InputAction.CallbackContext obj)
+    {
+        OnStrongAttackEnd?.Invoke();
+    }
+
+    private void StrongAttackOnperformed(InputAction.CallbackContext obj)
+    {
+        OnStrongAttackStart?.Invoke();
+    }
+
+    private void BaseAttackOnperformed(InputAction.CallbackContext obj)
+    {
+        OnBaseAttack?.Invoke();
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext obj)
@@ -34,12 +56,15 @@ public class PlayerInput : IDisposable
         _direction = obj.ReadValue<Vector2>();
         OnMove?.Invoke(_direction);
     }
-    
+
     public void Dispose()
     {
         _controls.Player.Disable();
         _controls.Player.Move.performed -= OnMovePerformed;
+        _controls.Player.Move.canceled -= OnMoveCanceled;
         _controls.Player.Jump.performed -= OnJumpPerformed;
+        _controls.Player.BaseAttack.performed -= BaseAttackOnperformed;
+        _controls.Player.StrongAttack.performed -= StrongAttackOnperformed;
         _controls.Dispose();
     }
 }

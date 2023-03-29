@@ -24,12 +24,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drop",
+                    "name": "BaseAttack",
                     "type": "Button",
-                    "id": "dfea4da9-3c55-419d-8391-6ad4ace54fe0",
+                    "id": "eece53a4-1e86-4e92-8fc8-989c86a0afb3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(pressPoint=0.4,behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "StrongAttack",
+                    "type": "Button",
+                    "id": "a8523075-9594-43fa-ba29-ac20fb281941",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.6,pressPoint=0.5)",
                     "initialStateCheck": false
                 }
             ],
@@ -80,12 +89,23 @@
                 },
                 {
                     "name": "",
-                    "id": "75fa8e7f-ee5c-42ff-88da-f1e65751af81",
-                    "path": "<Keyboard>/s",
-                    "interactions": "MultiTap",
+                    "id": "beed74cb-5dd9-4b35-bb72-ccbc5f888cbe",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "BaseAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2aee8f61-425d-4d5b-843d-61012bd8d68d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "StrongAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

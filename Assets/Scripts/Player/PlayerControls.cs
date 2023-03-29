@@ -46,12 +46,21 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drop"",
+                    ""name"": ""BaseAttack"",
                     ""type"": ""Button"",
-                    ""id"": ""dfea4da9-3c55-419d-8391-6ad4ace54fe0"",
+                    ""id"": ""eece53a4-1e86-4e92-8fc8-989c86a0afb3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(pressPoint=0.4,behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StrongAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8523075-9594-43fa-ba29-ac20fb281941"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.6,pressPoint=0.5)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -102,12 +111,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""75fa8e7f-ee5c-42ff-88da-f1e65751af81"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": ""MultiTap"",
+                    ""id"": ""beed74cb-5dd9-4b35-bb72-ccbc5f888cbe"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drop"",
+                    ""action"": ""BaseAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2aee8f61-425d-4d5b-843d-61012bd8d68d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StrongAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -120,7 +140,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
+        m_Player_BaseAttack = m_Player.FindAction("BaseAttack", throwIfNotFound: true);
+        m_Player_StrongAttack = m_Player.FindAction("StrongAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -184,14 +205,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Drop;
+    private readonly InputAction m_Player_BaseAttack;
+    private readonly InputAction m_Player_StrongAttack;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Drop => m_Wrapper.m_Player_Drop;
+        public InputAction @BaseAttack => m_Wrapper.m_Player_BaseAttack;
+        public InputAction @StrongAttack => m_Wrapper.m_Player_StrongAttack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -207,9 +230,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Drop.started += instance.OnDrop;
-            @Drop.performed += instance.OnDrop;
-            @Drop.canceled += instance.OnDrop;
+            @BaseAttack.started += instance.OnBaseAttack;
+            @BaseAttack.performed += instance.OnBaseAttack;
+            @BaseAttack.canceled += instance.OnBaseAttack;
+            @StrongAttack.started += instance.OnStrongAttack;
+            @StrongAttack.performed += instance.OnStrongAttack;
+            @StrongAttack.canceled += instance.OnStrongAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -220,9 +246,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Drop.started -= instance.OnDrop;
-            @Drop.performed -= instance.OnDrop;
-            @Drop.canceled -= instance.OnDrop;
+            @BaseAttack.started -= instance.OnBaseAttack;
+            @BaseAttack.performed -= instance.OnBaseAttack;
+            @BaseAttack.canceled -= instance.OnBaseAttack;
+            @StrongAttack.started -= instance.OnStrongAttack;
+            @StrongAttack.performed -= instance.OnStrongAttack;
+            @StrongAttack.canceled -= instance.OnStrongAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -244,6 +273,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnDrop(InputAction.CallbackContext context);
+        void OnBaseAttack(InputAction.CallbackContext context);
+        void OnStrongAttack(InputAction.CallbackContext context);
     }
 }
