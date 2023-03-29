@@ -26,10 +26,6 @@ namespace DefaultNamespace.Players.MVC
 
         public void Tick()
         {
-            if (_animationController == null)
-            {
-                _animationController = new AnimationController(_playerView.Animator);
-            }
             if (UpdateDamageTimer())
             {
                 _playerView.Move(_playerModel.MoveSpeed);

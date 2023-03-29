@@ -27,6 +27,7 @@ public class LocationInstaller : MonoInstaller
         BindPlayer();
         BindDoor();
         Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
+        BindInputSystems();
     }
 
     private void BindSignals()
@@ -65,6 +66,11 @@ public class LocationInstaller : MonoInstaller
     private void BindEnemies()
     {
         Container.BindInterfacesAndSelfTo<EnemiesProvider>().AsSingle().NonLazy();
+    }
+    
+    private void BindInputSystems()
+    {
+        Container.BindInterfacesAndSelfTo<PlayerInput>().AsSingle().NonLazy();
     }
     
 }

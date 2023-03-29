@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInput
+public class PlayerInput : IDisposable
 {
     private Vector2 _direction;
     private PlayerControls _controls;
@@ -16,7 +16,6 @@ public class PlayerInput
         _controls.Player.Move.performed += OnMovePerformed;
         _controls.Player.Move.canceled += OnMoveCanceled;
         _controls.Player.Jump.performed += OnJumpPerformed;
-        //todo: где отписываться не в монобехе?
     }
 
     private void OnMoveCanceled(InputAction.CallbackContext obj)
@@ -35,14 +34,10 @@ public class PlayerInput
         _direction = obj.ReadValue<Vector2>();
         OnMove?.Invoke(_direction);
     }
-
-    private void OnDisable()
+    
+    public void Dispose()
     {
         _controls.Player.Disable();
-    }
-
-    private void OnDestroy()
-    {
         _controls.Player.Move.performed -= OnMovePerformed;
         _controls.Player.Jump.performed -= OnJumpPerformed;
         _controls.Dispose();
