@@ -14,13 +14,18 @@ namespace DefaultNamespace.Projectiles
 
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public Action OnCollisionPlayer;
+        public Action<EnemyView, int> OnCollisionEnemy;
 
-        public void Init(EUnitType owner, Vector2 moveDirection, float attackSpeed, int damage)
+        public void Init(EUnitType owner, float attackSpeed, int damage)
         {
             _owner = owner;
-            _moveDirection = moveDirection;
             _attackSpeed = attackSpeed;
             _damage = damage;
+        }
+
+        public void SetMoveDirection(Vector2 moveDirection)
+        {
+            _moveDirection = moveDirection;
         }
 
         private void Update()
@@ -47,7 +52,8 @@ namespace DefaultNamespace.Projectiles
 
             if (col.gameObject.CompareTag("Enemy") && _owner == EUnitType.Player)
             {
-                Debug.Log("Снаряд игрока попал в врага");
+                var enemy = col.gameObject.GetComponent<EnemyView>();
+                OnCollisionEnemy?.Invoke(enemy, _damage);
                 Destroy(gameObject);
                 return;
             }

@@ -16,3 +16,4 @@ MonoBehaviour:
   _moveSpeed: 500
   _jumpForce: 200
   _maxJumps: 2
+  _damage: 3

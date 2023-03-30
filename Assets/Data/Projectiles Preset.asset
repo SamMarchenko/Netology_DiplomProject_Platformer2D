@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d548eb02b164fdca50af0e32a6e1496, type: 3}
+  m_Name: Projectiles Preset
+  m_EditorClassIdentifier: 
+  _projectilesData:
+  - Prefab: {fileID: 2134805367100922596, guid: 06f5b53c8f43be945bbd46a871b6d344, type: 3}
+    Owner: 0
+    MoveSpeed: 30
+    ProjectileDamage: 3
+  - Prefab: {fileID: 48056849764195775, guid: b8b9660aa948dda4bb216e272c77f656, type: 3}
+    Owner: 1
+    MoveSpeed: 15
+    ProjectileDamage: 2

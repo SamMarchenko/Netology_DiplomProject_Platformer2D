@@ -8,6 +8,7 @@ namespace DefaultNamespace.Players.MVC
         private float _currentMoveSpeed;
         private float _currentJumpForce;
         private int _maxJumps;
+        private int _damage;
        
 
         public int Health
@@ -19,6 +20,7 @@ namespace DefaultNamespace.Players.MVC
         public float MoveSpeed => _currentMoveSpeed;
         public float JumpForce => _currentJumpForce;
         public int MaxJumps => _maxJumps;
+        public int Damage => _damage;
 
         
         public PlayerModel(PlayerData data)
@@ -32,6 +34,7 @@ namespace DefaultNamespace.Players.MVC
             _currentMoveSpeed = data.MoveSpeed;
             _currentJumpForce = data.JumpForce;
             _maxJumps = data.MaxJumps;
+            _damage = data.Damage;
         }
     }
 }

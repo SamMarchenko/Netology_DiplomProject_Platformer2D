@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace DefaultNamespace.Strategy
 {
@@ -35,6 +37,21 @@ namespace DefaultNamespace.Strategy
 
             _view.BehaviourAnimator.SetInteger("State", 1);
             _view.AttentionSprite.SetActive(true);
+        }
+
+        public void TakeDamageBehaviour(EnemyView enemyView, int health)
+        {
+            _view.transform.DOShakeScale(0.1f, _view.DamageShakeForce, 10, 5f, false)
+                .OnComplete(() => CheckDeath(health));
+        }
+
+        private void CheckDeath(int health)
+        {
+            if (health == 0)
+            {
+                _view.IsDead = true;
+                _view.SpriteRenderer.DOFade(0, 0.5f).OnComplete(() => _view.Dead());
+            }
         }
 
         private void SetView(EnemyView enemyView)

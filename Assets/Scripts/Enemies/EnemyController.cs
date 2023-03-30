@@ -6,20 +6,23 @@ using DefaultNamespace.Strategy;
 
 namespace DefaultNamespace
 {
-    public class EnemyController : IDisposable
+    public class EnemyController : IDisposable, IEnemyDamageListener
     {
         private readonly List<IBehaviourStrategy> _strategies;
         private readonly EnemyView _view;
         private readonly EnemyModel _model;
         private readonly ProjectileFactory _projectileFactory;
         private readonly PlayerSignalBus _playerSignalBus;
+        private readonly EnemyDamageSignalHandler _enemyDamageSignalHandler;
         private IBehaviourStrategy _currentStrategy;
 
         public EnemyController(List<IBehaviourStrategy> strategies, EnemyView view,
-            EnemyModel model, ProjectileFactory projectileFactory, PlayerSignalBus playerSignalBus)
+            EnemyModel model, ProjectileFactory projectileFactory, PlayerSignalBus playerSignalBus, EnemyDamageSignalHandler enemyDamageSignalHandler)
         {
             _projectileFactory = projectileFactory;
             _playerSignalBus = playerSignalBus;
+            _enemyDamageSignalHandler = enemyDamageSignalHandler;
+            _enemyDamageSignalHandler.AddListener(this);
             _strategies = strategies;
             _view = view;
             _view.ProjectileFactory = _projectileFactory;
@@ -40,6 +43,12 @@ namespace DefaultNamespace
             _view.OnFindTarget += OnFindTarget;
             _view.OnLoseTarget += OnLoseTarget;
             _view.OnConnectWithPlayer += OnConnectWithPlayer;
+            _view.OnDead += OnDead;
+        }
+
+        private void OnDead(EnemyView obj)
+        {
+            _enemyDamageSignalHandler.RemoveListener(this);
         }
 
         private void UnSubscribe()
@@ -123,6 +132,19 @@ namespace DefaultNamespace
         public void Dispose()
         {
             UnSubscribe();
+        }
+
+        public void OnEnemyDamage(EnemyDamageSignal signal)
+        {
+            if (signal.Enemy != _view)
+            {
+                return;
+            }
+            int damage = signal.Damage;
+
+            _model.Health = _model.Health - damage < 0 ? 0 : _model.Health - damage;
+            
+            _currentStrategy.TakeDamageBehaviour(_view, _model.Health);
         }
     }
 }

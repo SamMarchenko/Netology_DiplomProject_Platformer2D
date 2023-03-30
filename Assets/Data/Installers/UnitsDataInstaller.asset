@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerData: {fileID: 11400000, guid: a1b0e912c287c5647bb2c3f8c4d0abc8, type: 2}
   _enemiesPresetContainer: {fileID: 11400000, guid: 758669a058ce3d044a66f93c94b79bd8, type: 2}
+  _projectilesPreset: {fileID: 11400000, guid: 48e74b704970cf14fb554db65913984b, type: 2}

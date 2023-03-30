@@ -1,11 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class DestroyParent : MonoBehaviour
 {
-    public void DestroyParentGO()
+    private EnemyView _enemy;
+    private void Start()
     {
-        Destroy(transform.root.gameObject);
+        _enemy =  transform.root.GetComponent<EnemyView>();
+    }
+
+    public void SignalEnemyIsDead()
+    {
+        _enemy.Dead();
     }
 }

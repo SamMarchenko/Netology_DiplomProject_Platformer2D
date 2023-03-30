@@ -1341,6 +1341,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 1608128630680549057, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
   DoorPrefab: {fileID: 7124110968729655777, guid: 3ece187b971bb1844b029269406dff20, type: 3}
   FireProjectilePrefab: {fileID: 48056849764195775, guid: b8b9660aa948dda4bb216e272c77f656, type: 3}
+  PlayerProjectilePrefab: {fileID: 2134805367100922596, guid: 06f5b53c8f43be945bbd46a871b6d344, type: 3}
 --- !u!114 &1062466150
 MonoBehaviour:
   m_ObjectHideFlags: 0

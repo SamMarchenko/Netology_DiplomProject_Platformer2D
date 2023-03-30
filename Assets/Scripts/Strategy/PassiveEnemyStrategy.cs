@@ -16,6 +16,11 @@ namespace DefaultNamespace.Strategy
             SetView(enemyView);
         }
 
+        public void TakeDamageBehaviour(EnemyView enemyView, int health)
+        {
+            //бессмертный
+        }
+
 
         private void SetView(EnemyView enemyView)
         {

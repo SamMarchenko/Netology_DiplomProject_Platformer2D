@@ -5,17 +5,26 @@ namespace DefaultNamespace.Factories
 {
     public class ProjectileFactory
     {
-        private readonly ProjectileView _fireProjectilePref;
+        private readonly ProjectilesPreset _projectilesPreset;
 
-        public ProjectileFactory(ProjectileView fireProjectilePref)
+        public ProjectileFactory(ProjectilesPreset projectilesPreset)
         {
-            _fireProjectilePref = fireProjectilePref;
+            _projectilesPreset = projectilesPreset;
         }
 
-        public ProjectileView CreateProjectile()
+        public ProjectileView CreateProjectile(EUnitType owner)
         {
-            var projectile = MonoBehaviour.Instantiate(_fireProjectilePref);
-            return projectile;
+            foreach (var projectileData in _projectilesPreset.ProjectilesData)
+            {
+                if (projectileData.Owner == owner)
+                {
+                    var projectile = MonoBehaviour.Instantiate(projectileData.Prefab);
+                    projectile.Init(owner, projectileData.MoveSpeed, projectileData.ProjectileDamage);
+
+                    return projectile;
+                }
+            }
+            return null;
         }
     }
 }

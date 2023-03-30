@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Doors;
 using DefaultNamespace.Players;
@@ -16,7 +17,7 @@ namespace DefaultNamespace
         private readonly PlayerView _player;
 
         private List<EnemyView> _enemies;
-        
+
         private int _currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
 
 
@@ -46,24 +47,37 @@ namespace DefaultNamespace
         private void OnPlayerEnteredDoor()
         {
             var currentLvl = PlayerPrefs.GetInt("currentLevel");
-            PlayerPrefs.SetInt("currentLevel", currentLvl+1);
-            
+            PlayerPrefs.SetInt("currentLevel", currentLvl + 1);
+
             //todo: запихнуть сюда экран победы
             SceneTransition.SwitchToScene("Level" + PlayerPrefs.GetInt("currentLevel"));
         }
 
         private void OnDead(EnemyView view)
         {
+            UnsubscribeEnemy(view);
             _enemies.Remove(view);
-            
+
             if (!view.IsRequiredKilling) return;
-            
+
             if (_enemies.Any(enemy => enemy.IsRequiredKilling))
             {
                 return;
             }
-            
+
             _door.Open();
+        }
+
+        private void UnsubscribeEnemy(EnemyView view)
+        {
+            foreach (var enemy in _enemies)
+            {
+                if (enemy == view)
+                {
+                    enemy.OnDead -= OnDead;
+                    return;
+                }
+            }
         }
     }
 }

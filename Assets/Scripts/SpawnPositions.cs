@@ -11,3 +11,4 @@ public class SpawnPositions : MonoBehaviour
     public Transform[] EnemiesSpawnPositions => _enemiesSpawnPositions;
     public Transform DoorSpawnPosition => _doorSpawnPosirion;
 }
+

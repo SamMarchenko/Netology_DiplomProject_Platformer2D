@@ -6,5 +6,6 @@ namespace DefaultNamespace.Strategy
     {
         void PassiveBehaviour(EnemyView enemyView);
         void ActiveBehaviour(EnemyView enemyView);
+        void TakeDamageBehaviour(EnemyView enemyView, int health);
     }
 }

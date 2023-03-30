@@ -15,6 +15,12 @@ namespace DefaultNamespace
         Projectile
     }
 
+    public enum EAttackType
+    {
+        BaseAttack,
+        StrongAttack
+    }
+
     public enum EAnimStates
     {
         Idle,

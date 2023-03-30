@@ -13,14 +13,13 @@ public class LocationInstaller : MonoInstaller
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
     public DoorView DoorPrefab;
-    public ProjectileView FireProjectilePrefab;
-   
+
 
     public override void InstallBindings()
     
     {
         Container.BindInstance(SpawnPositions);
-        Container.BindInstance(FireProjectilePrefab);
+        // BindProjectiles();
         BindSignals();
         BindFactories();
         BindEnemies();
@@ -34,6 +33,10 @@ public class LocationInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<PlayerDamageSignalHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerSignalBus>().AsSingle().NonLazy();
+        
+        Container.BindInterfacesAndSelfTo<EnemyDamageSignalHandler>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<EnemySignalBus>().AsSingle().NonLazy();
+        
         Container.BindInterfacesAndSelfTo<SignalBusInjector>().AsSingle().NonLazy();
     }
 
@@ -54,7 +57,7 @@ public class LocationInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerModel>().AsSingle().NonLazy();
     }
-
+    
     private void BindDoor()
     {
         var doorView = Container.InstantiatePrefabForComponent<DoorView>(DoorPrefab,
@@ -66,6 +69,7 @@ public class LocationInstaller : MonoInstaller
     private void BindEnemies()
     {
         Container.BindInterfacesAndSelfTo<EnemiesProvider>().AsSingle().NonLazy();
+        //Container.BindInterfacesAndSelfTo<EnemyController>().AsTransient();
     }
     
     private void BindInputSystems()

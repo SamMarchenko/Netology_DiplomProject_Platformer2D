@@ -13,7 +13,7 @@ public class EdgePlatformController : MonoBehaviour
             {
                 if (!col.isTrigger && col.CompareTag("Enemy"))
                 {
-                    col.GetComponent<EnemyView>().OnTheEdgePlatform?.Invoke();
+                    col.GetComponent<EnemyView>()?.OnTheEdgePlatform?.Invoke();
                 }
 
                 break;

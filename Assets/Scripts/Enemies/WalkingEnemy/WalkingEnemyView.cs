@@ -43,7 +43,6 @@ namespace DefaultNamespace
         public void ExplodeSelf()
         {
             _enemySpriteRenderer.enabled = false;
-            Debug.Log("Я взорвался");
             _boomAnimation.SetActive(true);
         }
 
@@ -106,7 +105,7 @@ namespace DefaultNamespace
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.gameObject.CompareTag("Player"))
+            if (col.gameObject.CompareTag("Player") && !IsDead)
             {
                 OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
             }

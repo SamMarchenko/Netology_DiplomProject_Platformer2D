@@ -44,13 +44,7 @@ namespace DefaultNamespace.FlyingEnemy
 
             FlipSprite();
         }
-
-        public void Dead()
-        {
-            OnDead?.Invoke(this);
-        }
-
-
+        
         private void Chase()
         {
             AttentionSpriteStatus();
@@ -103,7 +97,7 @@ namespace DefaultNamespace.FlyingEnemy
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.gameObject.CompareTag("Player"))
+            if (col.gameObject.CompareTag("Player") && !IsDead)
             {
                 OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
                 OnDead?.Invoke(this);

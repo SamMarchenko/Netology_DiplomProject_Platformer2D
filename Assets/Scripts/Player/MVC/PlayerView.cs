@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace.Factories;
 using UnityEngine;
 
 namespace DefaultNamespace.Players
@@ -8,13 +9,19 @@ namespace DefaultNamespace.Players
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _playerSpriteRenderer;
+        [SerializeField] private Transform _projectileSpawnPos;
+        private int _currentDamage;
 
 
         public EUnitType UnitType => EUnitType.Player;
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
+        public Action<EnemyView, int> OnEnemyAttack;
         public Animator Animator => _animator;
         public Vector2 MoveDirection = Vector2.zero;
+        public int BaseDamage { get; set; }
+
+        public ProjectileFactory ProjectileFactory { get; set; }
         public int JumpsCount { get; set; } = 0;
         public bool IsGrounded;
         public bool IsJumping { get; set; }
@@ -42,6 +49,40 @@ namespace DefaultNamespace.Players
             JumpsCount++;
         }
 
+        public void Attack(EAttackType attackType)
+        {
+            Vector2 attackDirection;
+            var projectile = ProjectileFactory.CreateProjectile(UnitType);
+            if (_playerSpriteRenderer.flipX)
+            {
+                attackDirection = Vector2.left;
+            }
+            else
+            {
+                attackDirection = Vector2.right;
+            }
+
+            if (attackType == EAttackType.StrongAttack)
+            {
+                _currentDamage *= 2;
+                projectile.transform.localScale *= 2f;
+            }
+            else
+            {
+                _currentDamage = BaseDamage;
+            }
+
+            projectile.SetMoveDirection(attackDirection);
+            projectile.OnCollisionEnemy += ProjectileEnemyCollision;
+            projectile.transform.position = _projectileSpawnPos.position;
+            projectile.SpriteRenderer.flipX = attackDirection == Vector2.left;
+        }
+
+        private void ProjectileEnemyCollision(EnemyView enemy, int damage)
+        {
+            OnEnemyAttack?.Invoke(enemy, damage);
+        }
+
         public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;
 
         private void OnTriggerEnter2D(Collider2D collider)
@@ -60,6 +101,7 @@ namespace DefaultNamespace.Players
             {
                 return;
             }
+
             Vector2 offset;
             offset = _playerSpriteRenderer.flipX ? new Vector2(20, 10) : new Vector2(-20, 10);
             _rigidbody2D.AddForce(offset * 10f, ForceMode2D.Impulse);

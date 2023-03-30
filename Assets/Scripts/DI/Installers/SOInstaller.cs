@@ -8,10 +8,12 @@ public class SOInstaller : ScriptableObjectInstaller<SOInstaller>
 {
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private EnemiesPresetContainer _enemiesPresetContainer;
+    [SerializeField] private ProjectilesPreset _projectilesPreset;
     public override void InstallBindings()
     {
         BindPlayerData();
         BindEnemiesData();
+        BindProjectiles();
     }
 
     private void BindEnemiesData()
@@ -22,5 +24,10 @@ public class SOInstaller : ScriptableObjectInstaller<SOInstaller>
     private void BindPlayerData()
     {
         Container.BindInstance(_playerData);
+    }
+
+    private void BindProjectiles()
+    {
+        Container.BindInstance(_projectilesPreset);
     }
 }

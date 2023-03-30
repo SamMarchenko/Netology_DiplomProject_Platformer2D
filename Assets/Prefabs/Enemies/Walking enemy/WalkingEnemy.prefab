@@ -193,6 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
+  IsRequiredKilling: 0
+  DamageShakeForce: {x: 4, y: 4, z: 0}
   _BehaviourAnimator: {fileID: 5990801508992462866}
   _rigidbody2D: {fileID: 3721806110475519531}
   _enemySpriteRenderer: {fileID: 5687564761261601596}

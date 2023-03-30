@@ -11,7 +11,11 @@
         private bool _isRequiredKilling;
 
         public EEnemyType Type => _type;
-        public int Health => _currentHealth;
+        public int Health
+        {
+            get => _currentHealth;
+            set => _currentHealth = value;
+        }
         public float MoveSpeed => _currentMoveSpeed;
         public int DamageUnit => _damageUnit;
         public int DamageProjectile => _damageProjectile;

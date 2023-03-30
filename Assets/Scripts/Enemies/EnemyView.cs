@@ -16,6 +16,7 @@ namespace DefaultNamespace
         public Action OnFarFromPlatform;
         public Action<EUnitType> OnConnectWithPlayer;
         public Action<EnemyView> OnDead;
+        public bool IsDead;
 
         public EEnemyType Type => _type;
         public bool HasTarget => _target != null;
@@ -25,7 +26,14 @@ namespace DefaultNamespace
             set => _target = value;
         }
         public bool IsRequiredKilling;
+        public Vector3 DamageShakeForce = new Vector3(4f, 4f, 0);
 
         public ProjectileFactory ProjectileFactory { get; set; }
+        
+        public void Dead()
+        {
+            OnDead?.Invoke(this);
+            Destroy(gameObject);
+        }
     }
 }

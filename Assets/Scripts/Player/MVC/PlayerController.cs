@@ -12,18 +12,22 @@ namespace DefaultNamespace.Players.MVC
         private readonly PlayerView _playerView;
         private readonly PlayerInput _playerInput;
         private readonly ProjectileFactory _projectileFactory;
+        private readonly EnemySignalBus _enemySignalBus;
         private AnimationController _animationController;
         private bool _canMove = true;
 
         public PlayerController(PlayerModel playerModel, PlayerView playerView,
-            PlayerInput playerInput, ProjectileFactory projectileFactory)
+            PlayerInput playerInput, ProjectileFactory projectileFactory, EnemySignalBus enemySignalBus)
         {
             _playerModel = playerModel;
             _playerView = playerView;
             _playerInput = playerInput;
             _projectileFactory = projectileFactory;
+            _enemySignalBus = enemySignalBus;
             _animationController = new AnimationController(_playerView.Animator);
             Subscribe();
+            _playerView.ProjectileFactory = _projectileFactory;
+            _playerView.BaseDamage = _playerModel.Damage;
         }
 
         public void Tick()
@@ -62,7 +66,14 @@ namespace DefaultNamespace.Players.MVC
             _playerInput.OnStrongAttackEnd += OnStrongAttackEnd;
             _playerView.OnUnderFeetYes += OnUnderFeetYes;
             _playerView.OnUnderFeetNo += OnUnderFeetNo;
+            _playerView.OnEnemyAttack += OnEnemyAttack;
         }
+
+        private void OnEnemyAttack(EnemyView enemy, int damage)
+        {
+            _enemySignalBus.EnemyTakeDamage(new EnemyDamageSignal(enemy, damage));
+        }
+
         private void UnSubscribe()
         {
             _playerInput.OnMove -= OnMove;
@@ -78,6 +89,7 @@ namespace DefaultNamespace.Players.MVC
             if (!_canMove)
             {
                 Debug.Log($"Совершил сильную атаку. {_canMove}");
+                _playerView.Attack(EAttackType.StrongAttack);
                 _animationController.PlayAnimation(_playerView.MoveDirection == Vector2.zero
                     ? EAnimStates.Idle
                     : EAnimStates.Run);
@@ -97,7 +109,7 @@ namespace DefaultNamespace.Players.MVC
         {
             if (_canMove)
             {
-                Debug.Log("совершил слабую атаку");
+                _playerView.Attack(EAttackType.BaseAttack);
             }
         }
 
