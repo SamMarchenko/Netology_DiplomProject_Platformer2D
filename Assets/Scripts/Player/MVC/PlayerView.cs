@@ -1,5 +1,6 @@
 ﻿using System;
 using DefaultNamespace.Factories;
+using DG.Tweening;
 using UnityEngine;
 
 namespace DefaultNamespace.Players
@@ -9,10 +10,12 @@ namespace DefaultNamespace.Players
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _playerSpriteRenderer;
+        [SerializeField] private SpriteRenderer _blockSprite;
         [SerializeField] private Transform _projectileSpawnPos;
         private int _currentDamage;
 
 
+        public SpriteRenderer BlockSprite => _blockSprite;
         public EUnitType UnitType => EUnitType.Player;
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
@@ -29,6 +32,10 @@ namespace DefaultNamespace.Players
         public bool IsDamaged { get; set; } = false;
         public float DamagedTimer { get; set; } = 0.5f;
 
+        private void Awake()
+        {
+            _blockSprite.DOFade(0, 0);
+        }
 
         public void Move(float speed)
         {

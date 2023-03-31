@@ -11,6 +11,8 @@ public class PlayerInput : IDisposable
     public Action OnBaseAttack;
     public Action OnStrongAttackStart;
     public Action OnStrongAttackEnd;
+    public Action OnBlockStart;
+    public Action OnBlockEnd;
 
 
     public PlayerInput()
@@ -23,6 +25,18 @@ public class PlayerInput : IDisposable
         _controls.Player.BaseAttack.performed += BaseAttackOnperformed;
         _controls.Player.StrongAttack.performed += StrongAttackOnperformed;
         _controls.Player.StrongAttack.canceled += StrongAttackOncanceled;
+        _controls.Player.Block.performed += BlockOnperformed;
+        _controls.Player.Block.canceled += BlockOncanceled;
+    }
+
+    private void BlockOncanceled(InputAction.CallbackContext obj)
+    {
+        OnBlockEnd?.Invoke();
+    }
+
+    private void BlockOnperformed(InputAction.CallbackContext obj)
+    {
+        OnBlockStart?.Invoke();
     }
 
     private void StrongAttackOncanceled(InputAction.CallbackContext obj)

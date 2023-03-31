@@ -1,6 +1,7 @@
 ﻿using System;
 using DefaultNamespace.Factories;
 using DefaultNamespace.Signals;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -15,6 +16,8 @@ namespace DefaultNamespace.Players.MVC
         private readonly EnemySignalBus _enemySignalBus;
         private AnimationController _animationController;
         private bool _canMove = true;
+        private bool _canAttack;
+        private bool _isBlocking;
 
         public PlayerController(PlayerModel playerModel, PlayerView playerView,
             PlayerInput playerInput, ProjectileFactory projectileFactory, EnemySignalBus enemySignalBus)
@@ -37,9 +40,8 @@ namespace DefaultNamespace.Players.MVC
                 if (UpdateDamageTimer())
                 {
                     _playerView.Move(_playerModel.MoveSpeed);
-                } 
+                }
             }
-            
         }
 
         private bool UpdateDamageTimer()
@@ -64,9 +66,38 @@ namespace DefaultNamespace.Players.MVC
             _playerInput.OnBaseAttack += OnBaseAttack;
             _playerInput.OnStrongAttackStart += OnStrongAttackStart;
             _playerInput.OnStrongAttackEnd += OnStrongAttackEnd;
+            _playerInput.OnBlockStart += OnBlockStart;
+            _playerInput.OnBlockEnd += OnBlockEnd;
+
             _playerView.OnUnderFeetYes += OnUnderFeetYes;
             _playerView.OnUnderFeetNo += OnUnderFeetNo;
             _playerView.OnEnemyAttack += OnEnemyAttack;
+        }
+
+        private void OnBlockEnd()
+        {
+            Block(false);
+        }
+
+        private void OnBlockStart()
+        {
+            Block(true);
+        }
+
+        private void Block(bool value)
+        {
+            _canMove = !value;
+            _canAttack = !value;
+            _isBlocking = value;
+
+            if (value)
+            {
+                _playerView.BlockSprite.DOFade(1, 0.2f);
+            }
+            else
+            {
+                _playerView.BlockSprite.DOFade(0, 0.2f);
+            }
         }
 
         private void OnEnemyAttack(EnemyView enemy, int damage)
@@ -84,8 +115,13 @@ namespace DefaultNamespace.Players.MVC
             _playerView.OnUnderFeetYes -= OnUnderFeetYes;
             _playerView.OnUnderFeetNo -= OnUnderFeetNo;
         }
+
         private void OnStrongAttackEnd()
         {
+            if (_isBlocking)
+            {
+                return;
+            }
             if (!_canMove)
             {
                 Debug.Log($"Совершил сильную атаку. {_canMove}");
@@ -94,11 +130,14 @@ namespace DefaultNamespace.Players.MVC
                     ? EAnimStates.Idle
                     : EAnimStates.Run);
             }
+
             _canMove = true;
         }
-        
+
         private void OnStrongAttackStart()
         {
+            if (!_canAttack) return;
+
             _canMove = false;
             _playerView.MoveDirection = Vector2.zero;
             _animationController.PlayAnimation(EAnimStates.Idle);
@@ -107,10 +146,9 @@ namespace DefaultNamespace.Players.MVC
 
         private void OnBaseAttack()
         {
-            if (_canMove)
-            {
-                _playerView.Attack(EAttackType.BaseAttack);
-            }
+            if (!_canAttack || !_canMove) return;
+
+            _playerView.Attack(EAttackType.BaseAttack);
         }
 
         private void OnUnderFeetNo(Collider2D collider)
@@ -135,6 +173,8 @@ namespace DefaultNamespace.Players.MVC
 
         private void OnJump()
         {
+            if (!_canMove) return;
+           
             if (_playerView.IsDamaged)
             {
                 return;
@@ -172,6 +212,12 @@ namespace DefaultNamespace.Players.MVC
 
         public void OnPlayerDamage(PlayerDamageSignal signal)
         {
+            if (_isBlocking)
+            {
+                Debug.Log("Игрок заблокировал урон");
+                return;
+            }
+            
             _playerView.TakeDamageVisual();
             if (_playerModel.Health - signal.Damage > 0)
             {
