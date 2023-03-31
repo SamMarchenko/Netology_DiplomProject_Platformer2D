@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2361bfa258d9ebe4f8b619750beb2c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxLevelsCount: 2
   _newGameButton: {fileID: 1689258914}
   _currentLevelButton: {fileID: 1304224208}
 --- !u!1 &922880472

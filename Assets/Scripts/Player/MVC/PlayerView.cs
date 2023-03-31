@@ -1,6 +1,7 @@
 ﻿using System;
 using DefaultNamespace.Factories;
 using DG.Tweening;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace DefaultNamespace.Players
@@ -9,12 +10,17 @@ namespace DefaultNamespace.Players
     {
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody2D _rigidbody2D;
-        [SerializeField] private SpriteRenderer _playerSpriteRenderer;
+        [SerializeField] private SpriteRenderer _currentSpriteRenderer;
+        [SerializeField] private SpriteRenderer[] _playerSpriteRenderers;
         [SerializeField] private SpriteRenderer _blockSprite;
         [SerializeField] private Transform _projectileSpawnPos;
+        [SerializeField] private AnimatorController[] _animationControllers;
         private int _currentDamage;
+        private int _currentTransformView = 0;
+        private bool _isTransformed;
 
 
+        public int CurrentTransformView => _currentTransformView;
         public SpriteRenderer BlockSprite => _blockSprite;
         public EUnitType UnitType => EUnitType.Player;
         public Action<Collider2D> OnUnderFeetYes;
@@ -35,6 +41,14 @@ namespace DefaultNamespace.Players
         private void Awake()
         {
             _blockSprite.DOFade(0, 0);
+           
+        }
+
+        private void Start()
+        {
+            _currentSpriteRenderer = _playerSpriteRenderers[_currentTransformView];
+            _playerSpriteRenderers[_currentTransformView+1].gameObject.SetActive(false);
+            _animator.runtimeAnimatorController = _animationControllers[_currentTransformView]; 
         }
 
         public void Move(float speed)
@@ -45,7 +59,6 @@ namespace DefaultNamespace.Players
             }
 
             _rigidbody2D.velocity += MoveDirection * speed * Time.deltaTime;
-            //TurnPlayerView(MoveDirection);
             Rotate(MoveDirection);
         }
 
@@ -90,8 +103,7 @@ namespace DefaultNamespace.Players
         {
             OnEnemyAttack?.Invoke(enemy, damage);
         }
-
-        public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;
+        
 
         private void Rotate(Vector2 direction)
         {
@@ -118,10 +130,27 @@ namespace DefaultNamespace.Players
             }
 
             Vector2 offset;
-            offset = _playerSpriteRenderer.flipX ? new Vector2(20, 10) : new Vector2(-20, 10);
+            offset = _currentSpriteRenderer.flipX ? new Vector2(20, 10) : new Vector2(-20, 10);
             _rigidbody2D.AddForce(offset * 10f, ForceMode2D.Impulse);
             IsDamaged = true;
             MoveDirection = Vector2.zero;
+        }
+
+        public void Transfromed()
+        {
+            //вызывается при окончании анимации трансформации
+            if (_currentTransformView == 0)
+            {
+                _currentTransformView++;
+            }
+            else
+            {
+                _currentTransformView--;
+            }
+            _currentSpriteRenderer.gameObject.SetActive(false);
+            _currentSpriteRenderer = _playerSpriteRenderers[_currentTransformView];
+            _currentSpriteRenderer.gameObject.SetActive(true);
+            _animator.runtimeAnimatorController = _animationControllers[_currentTransformView];
         }
     }
 }

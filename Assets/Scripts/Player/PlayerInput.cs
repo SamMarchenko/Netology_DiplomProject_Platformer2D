@@ -13,7 +13,7 @@ public class PlayerInput : IDisposable
     public Action OnStrongAttackEnd;
     public Action OnBlockStart;
     public Action OnBlockEnd;
-
+    public Action OnTransform;
 
     public PlayerInput()
     {
@@ -27,6 +27,12 @@ public class PlayerInput : IDisposable
         _controls.Player.StrongAttack.canceled += StrongAttackOncanceled;
         _controls.Player.Block.performed += BlockOnperformed;
         _controls.Player.Block.canceled += BlockOncanceled;
+        _controls.Player.Transform.performed += TransformOnperformed;
+    }
+
+    private void TransformOnperformed(InputAction.CallbackContext obj)
+    {
+        OnTransform?.Invoke();
     }
 
     private void BlockOncanceled(InputAction.CallbackContext obj)

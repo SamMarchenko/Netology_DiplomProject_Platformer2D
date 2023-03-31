@@ -68,10 +68,16 @@ namespace DefaultNamespace.Players.MVC
             _playerInput.OnStrongAttackEnd += OnStrongAttackEnd;
             _playerInput.OnBlockStart += OnBlockStart;
             _playerInput.OnBlockEnd += OnBlockEnd;
+            _playerInput.OnTransform += OnTransform;
 
             _playerView.OnUnderFeetYes += OnUnderFeetYes;
             _playerView.OnUnderFeetNo += OnUnderFeetNo;
             _playerView.OnEnemyAttack += OnEnemyAttack;
+        }
+
+        private void OnTransform()
+        {
+            _animationController.PlayAnimation(EAnimStates.Transform);
         }
 
         private void OnBlockEnd()
@@ -112,6 +118,10 @@ namespace DefaultNamespace.Players.MVC
             _playerInput.OnBaseAttack -= OnBaseAttack;
             _playerInput.OnStrongAttackStart -= OnStrongAttackStart;
             _playerInput.OnStrongAttackEnd -= OnStrongAttackEnd;
+            _playerInput.OnBlockStart -= OnBlockStart;
+            _playerInput.OnBlockEnd -= OnBlockEnd;
+            _playerInput.OnTransform -= OnTransform;
+            
             _playerView.OnUnderFeetYes -= OnUnderFeetYes;
             _playerView.OnUnderFeetNo -= OnUnderFeetNo;
         }

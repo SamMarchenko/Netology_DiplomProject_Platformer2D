@@ -25,7 +25,8 @@ namespace DefaultNamespace
     {
         Idle,
         Run,
-        Jump
+        Jump,
+        Transform
     }
 
     public enum EPlatformType
