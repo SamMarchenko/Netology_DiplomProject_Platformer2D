@@ -50,7 +50,16 @@ namespace DefaultNamespace
             PlayerPrefs.SetInt("currentLevel", currentLvl + 1);
 
             //todo: запихнуть сюда экран победы
-            SceneTransition.SwitchToScene("Level" + PlayerPrefs.GetInt("currentLevel"));
+
+            if ( PlayerPrefs.GetInt("currentLevel") <= PlayerPrefs.GetInt("levelsCount"))
+            {
+                SceneTransition.SwitchToScene("Level" + PlayerPrefs.GetInt("currentLevel"));
+            }
+            else
+            {
+                SceneTransition.SwitchToScene("MainMenu");
+            }
+            
         }
 
         private void OnDead(EnemyView view)

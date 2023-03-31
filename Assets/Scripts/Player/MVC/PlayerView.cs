@@ -38,7 +38,8 @@ namespace DefaultNamespace.Players
             }
 
             _rigidbody2D.velocity += MoveDirection * speed * Time.deltaTime;
-            TurnPlayerView(MoveDirection);
+            //TurnPlayerView(MoveDirection);
+            Rotate(MoveDirection);
         }
 
         public void Jump(float jumpForce)
@@ -53,7 +54,7 @@ namespace DefaultNamespace.Players
         {
             Vector2 attackDirection;
             var projectile = ProjectileFactory.CreateProjectile(UnitType);
-            if (_playerSpriteRenderer.flipX)
+            if (transform.rotation.eulerAngles.y == 180)
             {
                 attackDirection = Vector2.left;
             }
@@ -84,6 +85,13 @@ namespace DefaultNamespace.Players
         }
 
         public void TurnPlayerView(Vector2 direction) => _playerSpriteRenderer.flipX = direction.x < 0f;
+
+        private void Rotate(Vector2 direction)
+        {
+            transform.localEulerAngles = direction.x < 0f
+                ? new Vector3(0, 180, 0)
+                : new Vector3(0, 0, 0);
+        }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
