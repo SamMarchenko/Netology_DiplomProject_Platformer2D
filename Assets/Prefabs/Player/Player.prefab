@@ -336,9 +336,6 @@ MonoBehaviour:
   _animationControllers:
   - {fileID: 9100000, guid: 0d882c2e7481885479f277f029542100, type: 2}
   - {fileID: 9100000, guid: c84c350e4bf83ae45b3c03e6c6fe26a0, type: 2}
-  _playerSprites:
-  - {fileID: 21300000, guid: c04069ec3616d1840bfb0c4452e91fae, type: 3}
-  - {fileID: 1950740650, guid: 6bd1c00f5f6ecc746b6e2277f8a7d292, type: 3}
   MoveDirection: {x: 0, y: 0}
   IsGrounded: 0
 --- !u!95 &7234462827375167367

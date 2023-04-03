@@ -11,8 +11,15 @@ namespace DefaultNamespace
     public enum EUnitType
     {
         Player,
+        TransformedPlayer,
         Enemy,
         Projectile
+    }
+
+    public enum EProjectileType
+    {
+        Melee,
+        Range
     }
 
     public enum EAttackType

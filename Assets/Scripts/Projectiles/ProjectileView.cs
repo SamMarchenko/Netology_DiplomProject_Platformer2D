@@ -1,5 +1,6 @@
 ﻿using System;
 using DefaultNamespace.Players;
+using DG.Tweening;
 using UnityEngine;
 
 namespace DefaultNamespace.Projectiles
@@ -8,6 +9,7 @@ namespace DefaultNamespace.Projectiles
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         private EUnitType _owner;
+        private EProjectileType _type;
         private Vector2 _moveDirection;
         private float _attackSpeed;
         private int _damage;
@@ -16,9 +18,10 @@ namespace DefaultNamespace.Projectiles
         public Action OnCollisionPlayer;
         public Action<EnemyView, int> OnCollisionEnemy;
 
-        public void Init(EUnitType owner, float attackSpeed, int damage)
+        public void Init(EUnitType owner, EProjectileType type, float attackSpeed, int damage)
         {
             _owner = owner;
+            _type = type;
             _attackSpeed = attackSpeed;
             _damage = damage;
         }
@@ -42,33 +45,44 @@ namespace DefaultNamespace.Projectiles
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (col.isTrigger) return;
-            
+
             if (!col.gameObject.CompareTag("Enemy") && !col.gameObject.CompareTag("Player"))
             {
+                if (_type == EProjectileType.Melee)
+                {
+                    return;
+                }
+
                 Debug.Log("Снаряд врезался в препятствие!");
-                Destroy(gameObject);
+                DestroyProjectile();
                 return;
             }
 
-            if (col.gameObject.CompareTag("Enemy") && _owner == EUnitType.Player)
+            if (col.gameObject.CompareTag("Enemy") && (_owner == EUnitType.Player || _owner == EUnitType.TransformedPlayer) )
             {
                 var enemy = col.gameObject.GetComponent<EnemyView>();
                 OnCollisionEnemy?.Invoke(enemy, _damage);
-                Destroy(gameObject);
+                DestroyProjectile();
                 return;
             }
 
             if (col.gameObject.CompareTag("Player") && _owner == EUnitType.Enemy)
             {
                 var player = col.gameObject.GetComponent<PlayerView>();
-                
+
                 if (player.IsDamaged)
                 {
                     return;
                 }
+
                 OnCollisionPlayer?.Invoke();
-                Destroy(gameObject);
+                DestroyProjectile();
             }
+        }
+
+        public void DestroyProjectile()
+        {
+            _spriteRenderer.DOFade(0, 0.2f).OnComplete(() => Destroy(gameObject));
         }
     }
 }

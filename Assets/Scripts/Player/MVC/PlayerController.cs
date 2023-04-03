@@ -16,7 +16,7 @@ namespace DefaultNamespace.Players.MVC
         private readonly EnemySignalBus _enemySignalBus;
         private AnimationController _animationController;
         private bool _canMove = true;
-        private bool _canAttack;
+        private bool _canAttack = true;
         private bool _isBlocking;
 
         public PlayerController(PlayerModel playerModel, PlayerView playerView,

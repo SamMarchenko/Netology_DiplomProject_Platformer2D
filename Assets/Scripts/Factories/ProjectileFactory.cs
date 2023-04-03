@@ -12,19 +12,20 @@ namespace DefaultNamespace.Factories
             _projectilesPreset = projectilesPreset;
         }
 
-        public ProjectileView CreateProjectile(EUnitType owner)
+        public ProjectileView CreateProjectile(EUnitType owner, EProjectileType type)
         {
             foreach (var projectileData in _projectilesPreset.ProjectilesData)
             {
                 if (projectileData.Owner == owner)
                 {
                     var projectile = MonoBehaviour.Instantiate(projectileData.Prefab);
-                    projectile.Init(owner, projectileData.MoveSpeed, projectileData.ProjectileDamage);
+                    projectile.Init(owner,type, projectileData.MoveSpeed, projectileData.ProjectileDamage);
 
                     return projectile;
                 }
             }
             return null;
         }
+        
     }
 }

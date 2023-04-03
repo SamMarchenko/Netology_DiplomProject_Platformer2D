@@ -1,4 +1,5 @@
-﻿using DefaultNamespace.Players;
+﻿using System;
+using DefaultNamespace.Players;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -11,6 +12,9 @@ namespace DefaultNamespace
         [SerializeField] private GameObject _boomAnimation;
         [SerializeField] private GameObject _attentionSprite;
         private float _timerAttention = 1f;
+        private bool _canMove = true;
+        private float _startBashCount = 1f;
+        private float _currentBashCount;
 
         public Animator BehaviourAnimator => _BehaviourAnimator;
         public GameObject BoomAnimation => _boomAnimation;
@@ -19,9 +23,20 @@ namespace DefaultNamespace
         public GameObject AttentionSprite => _attentionSprite;
         public SpriteRenderer SpriteRenderer => _enemySpriteRenderer;
 
+        private void Start()
+        {
+            _currentBashCount = _startBashCount;
+        }
+
 
         private void Update()
         {
+            if (!_canMove)
+            {
+                PauseAfterDamage();
+                
+                return;
+            }
             Move();
         }
 
@@ -44,6 +59,25 @@ namespace DefaultNamespace
         {
             _enemySpriteRenderer.enabled = false;
             _boomAnimation.SetActive(true);
+        }
+
+        private void PauseAfterDamage()
+        {
+            _rigidbody2D.velocity =  Vector2.zero;
+            _currentBashCount -= Time.deltaTime;
+            if (_currentBashCount <= 0)
+            {
+                _canMove = true;
+                _currentBashCount = _startBashCount;
+            }
+        }
+
+        public void TakeDamage()
+        {
+            if (!_canMove) return;
+            
+            _canMove = false;
+            _currentBashCount = _startBashCount;
         }
 
 

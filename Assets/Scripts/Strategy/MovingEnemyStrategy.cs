@@ -41,6 +41,7 @@ namespace DefaultNamespace.Strategy
 
         public void TakeDamageBehaviour(EnemyView enemyView, int health)
         {
+            _view.TakeDamage();
             _view.transform.DOShakeScale(0.1f, _view.DamageShakeForce, 10, 5f, false)
                 .OnComplete(() => CheckDeath(health));
         }

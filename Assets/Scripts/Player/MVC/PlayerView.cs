@@ -1,5 +1,6 @@
 ﻿using System;
 using DefaultNamespace.Factories;
+using DefaultNamespace.Projectiles;
 using DG.Tweening;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -41,14 +42,13 @@ namespace DefaultNamespace.Players
         private void Awake()
         {
             _blockSprite.DOFade(0, 0);
-           
         }
 
         private void Start()
         {
             _currentSpriteRenderer = _playerSpriteRenderers[_currentTransformView];
-            _playerSpriteRenderers[_currentTransformView+1].gameObject.SetActive(false);
-            _animator.runtimeAnimatorController = _animationControllers[_currentTransformView]; 
+            _playerSpriteRenderers[_currentTransformView + 1].gameObject.SetActive(false);
+            _animator.runtimeAnimatorController = _animationControllers[_currentTransformView];
         }
 
         public void Move(float speed)
@@ -72,8 +72,46 @@ namespace DefaultNamespace.Players
 
         public void Attack(EAttackType attackType)
         {
+            if (_isTransformed)
+            {
+                TransfromedUnitAttack(attackType);
+            }
+            else
+            {
+                BaseFormUnitAttack(attackType);
+            }
+        }
+
+        private void TransfromedUnitAttack(EAttackType attackType)
+        {
+            var projectile = ProjectileFactory.CreateProjectile(EUnitType.TransformedPlayer, EProjectileType.Melee);
+            projectile.transform.SetParent(_projectileSpawnPos);
+            
+            var attackDirection = ProjectileStartSettings(attackType, projectile, EProjectileType.Melee);
+            projectile.SetMoveDirection(attackDirection);
+            Debug.Log($"Атака трансформированного юнита с типом {attackType}");
+            
+            projectile.OnCollisionEnemy += ProjectileEnemyCollision;
+            projectile.transform.localPosition = Vector3.zero;
+           // projectile.SpriteRenderer.flipX = attackDirection == Vector2.left;
+        }
+
+        private void BaseFormUnitAttack(EAttackType attackType)
+        {
+            var projectile = ProjectileFactory.CreateProjectile(UnitType, EProjectileType.Range);
+
+            var attackDirection = ProjectileStartSettings(attackType, projectile, EProjectileType.Range);
+
+            projectile.SetMoveDirection(attackDirection);
+            projectile.OnCollisionEnemy += ProjectileEnemyCollision;
+            projectile.transform.position = _projectileSpawnPos.position;
+            projectile.SpriteRenderer.flipX = attackDirection == Vector2.left;
+        }
+
+        private Vector2 ProjectileStartSettings(EAttackType attackType, ProjectileView projectile,
+            EProjectileType type)
+        {
             Vector2 attackDirection;
-            var projectile = ProjectileFactory.CreateProjectile(UnitType);
             if (transform.rotation.eulerAngles.y == 180)
             {
                 attackDirection = Vector2.left;
@@ -85,25 +123,40 @@ namespace DefaultNamespace.Players
 
             if (attackType == EAttackType.StrongAttack)
             {
-                _currentDamage *= 2;
-                projectile.transform.localScale *= 2f;
+                switch (type)
+                {
+                    case EProjectileType.Melee:
+                        _currentDamage *= 2;
+                        projectile.transform.localScale *= 3f;
+                        break;
+                    case EProjectileType.Range:
+                        _currentDamage *= 2;
+                        projectile.transform.localScale *= 2f;
+                        break;
+                }
+                
             }
             else
             {
                 _currentDamage = BaseDamage;
             }
 
-            projectile.SetMoveDirection(attackDirection);
-            projectile.OnCollisionEnemy += ProjectileEnemyCollision;
-            projectile.transform.position = _projectileSpawnPos.position;
-            projectile.SpriteRenderer.flipX = attackDirection == Vector2.left;
+            if (type == EProjectileType.Melee)
+            {
+                projectile.transform.localEulerAngles = new Vector3(0, 0, 0);
+            }
+            // projectile.transform.localEulerAngles = attackDirection.x < 0f
+            //     ? new Vector3(0, 180, 0)
+            //     : new Vector3(0, 0, 0);
+
+            return attackDirection;
         }
 
         private void ProjectileEnemyCollision(EnemyView enemy, int damage)
         {
             OnEnemyAttack?.Invoke(enemy, damage);
         }
-        
+
 
         private void Rotate(Vector2 direction)
         {
@@ -142,11 +195,14 @@ namespace DefaultNamespace.Players
             if (_currentTransformView == 0)
             {
                 _currentTransformView++;
+                _isTransformed = true;
             }
             else
             {
                 _currentTransformView--;
+                _isTransformed = false;
             }
+
             _currentSpriteRenderer.gameObject.SetActive(false);
             _currentSpriteRenderer = _playerSpriteRenderers[_currentTransformView];
             _currentSpriteRenderer.gameObject.SetActive(true);

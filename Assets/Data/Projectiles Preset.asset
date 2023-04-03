@@ -17,7 +17,11 @@ MonoBehaviour:
     Owner: 0
     MoveSpeed: 30
     ProjectileDamage: 3
-  - Prefab: {fileID: 48056849764195775, guid: b8b9660aa948dda4bb216e272c77f656, type: 3}
+  - Prefab: {fileID: 8453357246235086452, guid: 7d9a8c6922e55d146ab44074b748dad4, type: 3}
     Owner: 1
+    MoveSpeed: 0
+    ProjectileDamage: 3
+  - Prefab: {fileID: 48056849764195775, guid: b8b9660aa948dda4bb216e272c77f656, type: 3}
+    Owner: 2
     MoveSpeed: 15
     ProjectileDamage: 2

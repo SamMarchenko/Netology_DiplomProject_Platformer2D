@@ -52,7 +52,7 @@ namespace DefaultNamespace
             }
 
             Vector2 attackDirection;
-            var projectile = ProjectileFactory.CreateProjectile(UnitType);
+            var projectile = ProjectileFactory.CreateProjectile(UnitType, EProjectileType.Range);
             if (transform.rotation.y == 0)
             {
                 attackDirection = Vector2.left;

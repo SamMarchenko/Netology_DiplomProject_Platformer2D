@@ -179,10 +179,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _rigidbody2D: {fileID: 0}
-  _playerSpriteRenderer: {fileID: 0}
+  _currentSpriteRenderer: {fileID: 0}
+  _playerSpriteRenderers: []
   _blockSprite: {fileID: 0}
   _projectileSpawnPos: {fileID: 0}
   _animationControllers: []
-  _playerSprites: []
   MoveDirection: {x: 0, y: 0}
   IsGrounded: 0

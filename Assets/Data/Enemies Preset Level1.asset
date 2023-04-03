@@ -25,7 +25,7 @@ MonoBehaviour:
     IsRequiredKilling: 0
   - Prefab: {fileID: 5808213678824523021, guid: 3a9334a9e79f6a04183b34cf2c904cef, type: 3}
     Type: 1
-    MaxHealth: 4
+    MaxHealth: 25
     MoveSpeed: 2
     CollisionDamage: 3
     ProjectileDamage: 0
