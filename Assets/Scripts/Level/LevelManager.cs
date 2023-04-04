@@ -4,6 +4,7 @@ using System.Linq;
 using DefaultNamespace.Doors;
 using DefaultNamespace.Players;
 using DefaultNamespace.SO;
+using UnityEditor;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -15,20 +16,24 @@ namespace DefaultNamespace
         private readonly EnemiesProvider _enemiesProvider;
         private readonly DoorView _door;
         private readonly PlayerView _player;
+        private readonly GameObject _failScreenPrefab;
+        private GameObject _failScreen;
 
         private List<EnemyView> _enemies;
 
         private int _currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
 
 
-        public LevelManager(EnemiesProvider enemiesProvider, DoorView door, PlayerView player)
+        public LevelManager(EnemiesProvider enemiesProvider, DoorView door, PlayerView player, GameObject failScreenPrefab)
         {
             _enemiesProvider = enemiesProvider;
             _door = door;
             _player = player;
+            _failScreenPrefab = failScreenPrefab;
             _enemies = _enemiesProvider.GetEnemies(_currentLevelNumber);
             SubscribeEnemies();
             SubscribeDoor();
+            SubscribePlayer();
         }
 
         private void SubscribeEnemies()
@@ -42,6 +47,18 @@ namespace DefaultNamespace
         private void SubscribeDoor()
         {
             _door.OnPlayerEntered += OnPlayerEnteredDoor;
+        }
+
+        private void SubscribePlayer()
+        {
+            _player.OnDeath += OnDeath;
+        }
+
+        private void OnDeath()
+        {
+            Debug.Log("Игрок умер");
+            _failScreen = MonoBehaviour.Instantiate(_failScreenPrefab);
+            //EditorApplication.isPaused = true;
         }
 
         private void OnPlayerEnteredDoor()

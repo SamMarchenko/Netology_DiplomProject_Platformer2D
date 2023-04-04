@@ -7,6 +7,7 @@ namespace DefaultNamespace.Strategy
     public class MovingEnemyStrategy : IBehaviourStrategy
     {
         private WalkingEnemyView _view;
+        private Tween _tween;
 
 
         public void PassiveBehaviour(EnemyView enemyView)
@@ -41,8 +42,9 @@ namespace DefaultNamespace.Strategy
 
         public void TakeDamageBehaviour(EnemyView enemyView, int health)
         {
+            _tween.Kill();
             _view.TakeDamage();
-            _view.transform.DOShakeScale(0.1f, _view.DamageShakeForce, 10, 5f, false)
+            _tween = _view.transform.DOShakeScale(0.1f, _view.DamageShakeForce, 10, 5f, false)
                 .OnComplete(() => CheckDeath(health));
         }
 

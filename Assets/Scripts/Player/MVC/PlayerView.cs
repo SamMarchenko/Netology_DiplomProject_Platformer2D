@@ -27,6 +27,7 @@ namespace DefaultNamespace.Players
         public Action<Collider2D> OnUnderFeetYes;
         public Action<Collider2D> OnUnderFeetNo;
         public Action<EnemyView, int> OnEnemyAttack;
+        public Action OnDeath;
         public Animator Animator => _animator;
         public Vector2 MoveDirection = Vector2.zero;
         public int BaseDamage { get; set; }
@@ -80,6 +81,11 @@ namespace DefaultNamespace.Players
             {
                 BaseFormUnitAttack(attackType);
             }
+        }
+
+        public void Death()
+        {
+            OnDeath?.Invoke();
         }
 
         private void TransfromedUnitAttack(EAttackType attackType)

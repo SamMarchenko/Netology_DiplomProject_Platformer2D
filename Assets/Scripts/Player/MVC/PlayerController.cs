@@ -9,6 +9,8 @@ namespace DefaultNamespace.Players.MVC
 {
     public class PlayerController : ITickable, IPlayerDamageListener, IDisposable
     {
+        
+        
         private readonly PlayerModel _playerModel;
         private readonly PlayerView _playerView;
         private readonly PlayerInput _playerInput;
@@ -171,6 +173,12 @@ namespace DefaultNamespace.Players.MVC
 
         private void OnUnderFeetYes(Collider2D collider)
         {
+            if (collider.gameObject.CompareTag("Border"))
+            {
+                _playerView.Death();
+                return;
+            }
+            
             if (!collider.gameObject.CompareTag("Ground")) return;
             _playerView.IsGrounded = true;
             _playerView.IsJumping = false;
@@ -237,7 +245,7 @@ namespace DefaultNamespace.Players.MVC
             else
             {
                 _playerModel.Health = 0;
-                Debug.Log($"Игрок умер");
+                _playerView.Death();
             }
         }
 
