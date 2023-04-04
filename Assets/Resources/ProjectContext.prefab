@@ -74,4 +74,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620961cf7a738a74eb61746c6b206a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _failScreenPrefab: {fileID: 5007870415417891, guid: aeff609b8e94ef344bf8dd98cfeb1f97, type: 3}
+  _failScreenPrefab: {fileID: 3310482954238741770, guid: aeff609b8e94ef344bf8dd98cfeb1f97, type: 3}
+  _winScreenPrefab: {fileID: 3136803916705291283, guid: ea5a67b5ca4ad434ca4dd96d11a88627, type: 3}
