@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace.Doors;
+using DefaultNamespace.Loot;
 using DefaultNamespace.Players;
 using DefaultNamespace.SO;
+using ModestTree;
 using UnityEditor;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class LevelManager
+    public class LevelManager : IDisposable
     {
         private readonly EnemiesPresetContainer _enemiesPresetContainer;
         private readonly SpawnPositions _spawnPositions;
@@ -21,6 +23,7 @@ namespace DefaultNamespace
         private FailScreenManager _failScreen;
         private WinScreenManager _winScreen;
         private List<EnemyView> _enemies;
+        private List<LootView> _loots = new List<LootView>();
         private int _currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
         private bool _isWin;
 
@@ -36,6 +39,7 @@ namespace DefaultNamespace
             SubscribeEnemies();
             SubscribeDoor();
             SubscribePlayer();
+           // SubscribeLoots();
         }
 
         private void SubscribeEnemies()
@@ -43,8 +47,47 @@ namespace DefaultNamespace
             foreach (var enemy in _enemies)
             {
                 enemy.OnDead += OnDead;
+                enemy.OnCreateLoot += OnCreateLoot;
             }
         }
+
+        private void OnCreateLoot(LootView obj)
+        {
+            obj.OnPickUpLoot += OnPickUpLoot;
+            _loots.Add(obj);
+        }
+        
+
+        // private void SubscribeLoots()
+        // {
+        //     foreach (var enemy in _enemies)
+        //     {
+        //         if (enemy.Loot != null)
+        //         {
+        //             _loots.Add(enemy.Loot);
+        //         }
+        //     }
+        //
+        //     if (!_loots.IsEmpty())
+        //     {
+        //         foreach (var lootView in _loots)
+        //         {
+        //             lootView.OnPickUpLoot += OnPickUpLoot;
+        //         }
+        //     }
+        // }
+
+        private void OnPickUpLoot(LootView obj)
+        {
+            if (obj.LootType == ELootType.Shield)
+            {
+                _player.HasShield = true;
+                PlayerPrefs.SetInt("PlayerHasShield",1);
+            }
+            UnSubscribeLoot(obj);
+        }
+
+       
 
         private void SubscribeDoor()
         {
@@ -64,7 +107,6 @@ namespace DefaultNamespace
             }
             Debug.Log("Игрок умер");
             _failScreen = MonoBehaviour.Instantiate(_failScreenPrefab);
-            //EditorApplication.isPaused = true;
         }
 
         private void OnPlayerEnteredDoor()
@@ -72,19 +114,8 @@ namespace DefaultNamespace
             _isWin = true;
             var currentLvl = PlayerPrefs.GetInt("currentLevel");
             PlayerPrefs.SetInt("currentLevel", currentLvl + 1);
-
-            //todo: запихнуть сюда экран победы
-            _winScreen = MonoBehaviour.Instantiate(_winScreenPrefab);
-            //
-            // if ( PlayerPrefs.GetInt("currentLevel") <= PlayerPrefs.GetInt("levelsCount"))
-            // {
-            //     SceneTransition.SwitchToScene("Level" + PlayerPrefs.GetInt("currentLevel"));
-            // }
-            // else
-            // {
-            //     SceneTransition.SwitchToScene("MainMenu");
-            // }
             
+            _winScreen = MonoBehaviour.Instantiate(_winScreenPrefab);
         }
 
         private void OnDead(EnemyView view)
@@ -102,6 +133,50 @@ namespace DefaultNamespace
             _door.Open();
         }
 
+        
+        
+
+        public void Dispose()
+        {
+            UnSubscribeDoor();
+            UnSubscribeLoots();
+            UnSubscribePlayer();
+            UnSubscribeEnemies();
+        }
+
+        private void UnSubscribePlayer()
+        {
+            _player.OnDeath -= OnDeath;
+        }
+
+        private void UnSubscribeLoots()
+        {
+            if (!_loots.IsEmpty())
+            {
+                foreach (var lootView in _loots)
+                {
+                    lootView.OnPickUpLoot -= OnPickUpLoot;
+                }
+            }
+        }
+        
+        private void UnSubscribeLoot(LootView lootView)
+        {
+            foreach (var loot in _loots)
+            {
+                if (loot == lootView)
+                {
+                    loot.OnPickUpLoot -= OnPickUpLoot;
+                    return;
+                }
+            }
+        }
+
+        private void UnSubscribeDoor()
+        {
+            _door.OnPlayerEntered -= OnPlayerEnteredDoor;
+        }
+        
         private void UnsubscribeEnemy(EnemyView view)
         {
             foreach (var enemy in _enemies)
@@ -110,6 +185,17 @@ namespace DefaultNamespace
                 {
                     enemy.OnDead -= OnDead;
                     return;
+                }
+            }
+        }
+
+        private void UnSubscribeEnemies()
+        {
+            if (!_enemies.IsEmpty())
+            {
+                foreach (var enemy in _enemies)
+                {
+                    enemy.OnDead -= OnDead;
                 }
             }
         }

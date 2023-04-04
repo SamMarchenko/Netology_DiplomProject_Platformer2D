@@ -22,6 +22,11 @@ namespace DefaultNamespace
         Range
     }
 
+    public enum ELootType
+    {
+        Shield
+    }
+
     public enum EAttackType
     {
         BaseAttack,

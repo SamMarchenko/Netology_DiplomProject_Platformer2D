@@ -35,6 +35,7 @@ namespace DefaultNamespace.Players
         public ProjectileFactory ProjectileFactory { get; set; }
         public int JumpsCount { get; set; } = 0;
         public bool IsGrounded;
+        public bool HasShield;
         public bool IsJumping { get; set; }
 
         public bool IsDamaged { get; set; } = false;
@@ -47,6 +48,8 @@ namespace DefaultNamespace.Players
 
         private void Start()
         {
+            HasShield = PlayerPrefs.GetInt("PlayerHasShield") == 1;
+            
             _currentSpriteRenderer = _playerSpriteRenderers[_currentTransformView];
             _playerSpriteRenderers[_currentTransformView + 1].gameObject.SetActive(false);
             _animator.runtimeAnimatorController = _animationControllers[_currentTransformView];

@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace.Loot;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -15,5 +16,7 @@ namespace DefaultNamespace
         public float AtackSpeed;
         public Transform SpawnPosition;
         public bool IsRequiredKilling;
+        public bool ContainLoot;
+        public LootView Loot;
     }
 }

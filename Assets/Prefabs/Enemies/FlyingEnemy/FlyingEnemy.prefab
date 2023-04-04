@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4573837556021714765}
   - component: {fileID: 6814960959206538730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttantionSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1339551348800025914}
   - component: {fileID: 418464035216630938}
   - component: {fileID: 8578436938534968227}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlyingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -202,11 +202,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
+  IsDead: 0
+  IsRequiredKilling: 0
+  DamageShakeForce: {x: 4, y: 4, z: 0}
   _BehaviourAnimator: {fileID: 2661401326879775170}
   _rigidbody2D: {fileID: 1339551348800025914}
   _enemySpriteRenderer: {fileID: 5797467998101300248}
   _attentionSprite: {fileID: 3227450234626312985}
-  isNeedBack: 0
+  IsNeedBack: 0
 --- !u!70 &8578436938534968227
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,7 +237,7 @@ GameObject:
   - component: {fileID: 6800512570941471663}
   - component: {fileID: 5797467998101300248}
   - component: {fileID: 4180927172024909538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlyingEnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

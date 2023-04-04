@@ -41,6 +41,7 @@ public class MenuManager : MonoBehaviour
         }
 
         _buttonClicked = true;
+        PlayerPrefs.SetInt("PlayerHasShield",0);
         PlayerPrefs.SetInt("currentLevel", 1);
         SceneTransition.SwitchToScene("Level1");
     }

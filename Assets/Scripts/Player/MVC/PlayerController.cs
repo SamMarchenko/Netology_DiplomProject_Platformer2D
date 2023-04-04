@@ -84,11 +84,19 @@ namespace DefaultNamespace.Players.MVC
 
         private void OnBlockEnd()
         {
+            if (!_playerView.HasShield) return;
+            
             Block(false);
         }
 
         private void OnBlockStart()
         {
+            if (!_playerView.HasShield)
+            {
+                Debug.Log("У игрока нет щита");
+                return;
+            }
+            
             Block(true);
         }
 

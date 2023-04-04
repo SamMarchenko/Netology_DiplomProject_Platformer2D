@@ -27,7 +27,13 @@ namespace DefaultNamespace.Factories
             var view = MonoBehaviour.Instantiate(data.Prefab, data.SpawnPosition.position, Quaternion.identity);
             var model = new EnemyModel(data);
             var controller = new EnemyController(_strategies, view, model, _projectileFactory, _bus, _enemyDamageSignalHandler);
-
+            
+            if (data.ContainLoot)
+            {
+                view.Loot = data.Loot;
+                if(view.Loot == null) Debug.LogError("Ошибка! лут в enemyData не указан");
+            }
+            
             return view;
         }
     }

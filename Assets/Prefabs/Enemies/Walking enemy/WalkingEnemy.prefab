@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648054397369176737}
   - component: {fileID: 2411631143742299912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttentionSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3721806110475519531}
   - component: {fileID: 5808213678824523021}
   - component: {fileID: 4632541782353265416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WalkingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
+  IsDead: 0
   IsRequiredKilling: 0
   DamageShakeForce: {x: 4, y: 4, z: 0}
   _BehaviourAnimator: {fileID: 5990801508992462866}
@@ -236,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793241305587911769}
   - component: {fileID: 5687564761261601596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WalkingEnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,6 +318,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3822491564373967018}
     m_Modifications:
+    - target: {fileID: 3067546302811517177, guid: cc8110a1df125a04383b8f5c7d4468e6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3973072521883483405, guid: cc8110a1df125a04383b8f5c7d4468e6, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -368,6 +373,10 @@ PrefabInstance:
     - target: {fileID: 9167875482037508876, guid: cc8110a1df125a04383b8f5c7d4468e6, type: 3}
       propertyPath: m_Name
       value: Boom
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167875482037508876, guid: cc8110a1df125a04383b8f5c7d4468e6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9167875482037508876, guid: cc8110a1df125a04383b8f5c7d4468e6, type: 3}
       propertyPath: m_IsActive
