@@ -56,5 +56,5 @@ MonoBehaviour:
     AtackSpeed: 5
     SpawnPosition: {fileID: 5899488504891711859, guid: 81f5758c9336d31419e6508f8437e173, type: 3}
     IsRequiredKilling: 1
-    ContainLoot: 0
-    Loot: {fileID: 0}
+    ContainLoot: 1
+    Loot: {fileID: 5340638780592500641, guid: f82a369f2dceec94693f415725aaf405, type: 3}

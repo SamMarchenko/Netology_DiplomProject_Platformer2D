@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8714664743937871838}
   - component: {fileID: 715417835643550707}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LootShieldSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 5377620647202520134}
   - component: {fileID: 569949530986461068}
   - component: {fileID: 5340638780592500641}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LootShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

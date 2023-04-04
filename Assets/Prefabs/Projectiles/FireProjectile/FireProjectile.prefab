@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6397408612947561489}
   - component: {fileID: 4690553844020127252}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireProjectileSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 931788349867481068}
   - component: {fileID: 48056849764195775}
   - component: {fileID: 8682078223028889577}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FireProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
