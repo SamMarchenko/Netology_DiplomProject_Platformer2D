@@ -48,7 +48,7 @@ namespace DefaultNamespace.Players
 
         private void Start()
         {
-            HasShield = PlayerPrefs.GetInt("PlayerHasShield") == 1;
+            HasShield = PlayerPrefs.GetInt(SavesStrings.PlayerHasShield) == 1;
             
             _currentSpriteRenderer = _playerSpriteRenderers[_currentTransformView];
             _playerSpriteRenderers[_currentTransformView + 1].gameObject.SetActive(false);

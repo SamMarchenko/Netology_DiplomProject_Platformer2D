@@ -172,12 +172,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.10160881}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.260002, y: 0.33000183}
+  m_AnchoredPosition: {x: -7.2599945, y: 0.33000183}
   m_SizeDelta: {x: -14.53, y: -0.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1095112666
@@ -512,8 +512,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.62
-  m_fontSizeBase: 35.62
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 16.948788, y: 6.6584644, z: 0, w: 5.4478493}
+  m_margin: {x: 33.7572, y: 16.263227, z: 16.007965, w: 15.0526085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -604,8 +604,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 174.53, y: 66.31}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 345, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1304224208
 MonoBehaviour:
@@ -724,8 +724,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 160.5}
-  m_SizeDelta: {x: 400, y: 76.05}
+  m_AnchoredPosition: {x: 0, y: 206.00003}
+  m_SizeDelta: {x: 750, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381186630
 MonoBehaviour:
@@ -774,8 +774,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 85.1
-  m_fontSizeBase: 85.1
+  m_fontSize: 160
+  m_fontSizeBase: 160
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -859,7 +859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.10160881}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.260002, y: 0.33000183}
+  m_AnchoredPosition: {x: -7.26001, y: 0.33000183}
   m_SizeDelta: {x: -14.53, y: -0.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1680969962
@@ -909,8 +909,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29
-  m_fontSizeBase: 29
+  m_fontSize: 56.86
+  m_fontSizeBase: 56.86
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -945,7 +945,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 16.948788, y: 6.6584644, z: 0, w: 5.4478493}
+  m_margin: {x: 34.5576, y: 14.662481, z: 14.407181, w: 15.0526085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1078,8 +1078,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: 45.3}
-  m_SizeDelta: {x: 174.53, y: 66.31}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 345, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2068353101
 GameObject:
@@ -1259,6 +1259,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 916751782}
     m_Modifications:
+    - target: {fileID: 1316654571, guid: 754bb550cc8f7a549898cf19f7a52289, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737064590, guid: 754bb550cc8f7a549898cf19f7a52289, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4614100351667869813, guid: 754bb550cc8f7a549898cf19f7a52289, type: 3}
       propertyPath: m_Name
       value: Scene Transition

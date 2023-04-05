@@ -3,7 +3,6 @@ using DefaultNamespace.Doors;
 using DefaultNamespace.Factories;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
-using DefaultNamespace.Projectiles;
 using DefaultNamespace.Signals;
 using UnityEngine;
 using Zenject;
@@ -13,13 +12,14 @@ public class LocationInstaller : MonoInstaller
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
     public DoorView DoorPrefab;
+    public HealthBar HealthBarPrefab;
+    
 
 
     public override void InstallBindings()
     
     {
         Container.BindInstance(SpawnPositions);
-        // BindProjectiles();
         BindSignals();
         BindFactories();
         BindEnemies();
@@ -27,7 +27,16 @@ public class LocationInstaller : MonoInstaller
         BindDoor();
         Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
         BindInputSystems();
+        BindUI();
     }
+
+    private void BindUI()
+    {
+        var healthBar = Container.InstantiatePrefabForComponent<HealthBar>(HealthBarPrefab);
+        Container.BindInterfacesAndSelfTo<HealthBar>().FromInstance(healthBar).AsSingle().NonLazy();
+    }
+
+    
 
     private void BindSignals()
     {
@@ -69,7 +78,6 @@ public class LocationInstaller : MonoInstaller
     private void BindEnemies()
     {
         Container.BindInterfacesAndSelfTo<EnemiesProvider>().AsSingle().NonLazy();
-        //Container.BindInterfacesAndSelfTo<EnemyController>().AsTransient();
     }
     
     private void BindInputSystems()

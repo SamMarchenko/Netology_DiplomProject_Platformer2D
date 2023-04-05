@@ -9,8 +9,6 @@ namespace DefaultNamespace.Players.MVC
 {
     public class PlayerController : ITickable, IPlayerDamageListener, IDisposable
     {
-        
-        
         private readonly PlayerModel _playerModel;
         private readonly PlayerView _playerView;
         private readonly PlayerInput _playerInput;
@@ -33,6 +31,15 @@ namespace DefaultNamespace.Players.MVC
             Subscribe();
             _playerView.ProjectileFactory = _projectileFactory;
             _playerView.BaseDamage = _playerModel.Damage;
+            LoadActualHealth();
+        }
+
+        private void LoadActualHealth()
+        {
+            if (PlayerPrefs.GetInt(SavesStrings.CurrentLevel) > 1)
+            {
+                _playerModel.Health = PlayerPrefs.GetInt(SavesStrings.PlayerCurrentHealth);
+            }
         }
 
         public void Tick()
@@ -85,7 +92,7 @@ namespace DefaultNamespace.Players.MVC
         private void OnBlockEnd()
         {
             if (!_playerView.HasShield) return;
-            
+
             Block(false);
         }
 
@@ -96,7 +103,7 @@ namespace DefaultNamespace.Players.MVC
                 Debug.Log("У игрока нет щита");
                 return;
             }
-            
+
             Block(true);
         }
 
@@ -131,7 +138,7 @@ namespace DefaultNamespace.Players.MVC
             _playerInput.OnBlockStart -= OnBlockStart;
             _playerInput.OnBlockEnd -= OnBlockEnd;
             _playerInput.OnTransform -= OnTransform;
-            
+
             _playerView.OnUnderFeetYes -= OnUnderFeetYes;
             _playerView.OnUnderFeetNo -= OnUnderFeetNo;
         }
@@ -142,6 +149,7 @@ namespace DefaultNamespace.Players.MVC
             {
                 return;
             }
+
             if (!_canMove)
             {
                 Debug.Log($"Совершил сильную атаку. {_canMove}");
@@ -186,7 +194,7 @@ namespace DefaultNamespace.Players.MVC
                 _playerView.Death();
                 return;
             }
-            
+
             if (!collider.gameObject.CompareTag("Ground")) return;
             _playerView.IsGrounded = true;
             _playerView.IsJumping = false;
@@ -200,7 +208,7 @@ namespace DefaultNamespace.Players.MVC
         private void OnJump()
         {
             if (!_canMove) return;
-           
+
             if (_playerView.IsDamaged)
             {
                 return;
@@ -243,7 +251,7 @@ namespace DefaultNamespace.Players.MVC
                 Debug.Log("Игрок заблокировал урон");
                 return;
             }
-            
+
             _playerView.TakeDamageVisual();
             if (_playerModel.Health - signal.Damage > 0)
             {
@@ -255,6 +263,16 @@ namespace DefaultNamespace.Players.MVC
                 _playerModel.Health = 0;
                 _playerView.Death();
             }
+        }
+
+        public int GetCurrentPlayerHealth()
+        {
+            return _playerModel.Health;
+        }
+
+        public void SaveCurrentHealth()
+        {
+            PlayerPrefs.SetInt(SavesStrings.PlayerCurrentHealth, _playerModel.Health);
         }
 
         public void Dispose()

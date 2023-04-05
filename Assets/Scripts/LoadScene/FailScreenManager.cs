@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DefaultNamespace;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FailScreenManager : MonoBehaviour
@@ -12,7 +13,7 @@ public class FailScreenManager : MonoBehaviour
         _repeatLevelButton.onClick.AddListener(LoadCurrentLevelScene);
         _exitButton.onClick.AddListener(LoadMenuScene);
 
-        int currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
+        int currentLevelNumber = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
         _currentlLevelName = "Level" + currentLevelNumber;
     }
 

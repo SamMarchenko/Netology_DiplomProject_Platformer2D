@@ -11,6 +11,7 @@ public class DestroyParent : MonoBehaviour
 
     public void SignalEnemyIsDead()
     {
+        //вызывается в конце анимации взрыва
         _enemy.Dead();
     }
 }

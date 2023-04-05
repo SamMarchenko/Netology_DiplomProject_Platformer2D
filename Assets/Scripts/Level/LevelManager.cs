@@ -4,6 +4,7 @@ using System.Linq;
 using DefaultNamespace.Doors;
 using DefaultNamespace.Loot;
 using DefaultNamespace.Players;
+using DefaultNamespace.Players.MVC;
 using DefaultNamespace.SO;
 using ModestTree;
 using UnityEditor;
@@ -18,28 +19,35 @@ namespace DefaultNamespace
         private readonly EnemiesProvider _enemiesProvider;
         private readonly DoorView _door;
         private readonly PlayerView _player;
+        private readonly PlayerController _playerController;
         private readonly FailScreenManager _failScreenPrefab;
         private readonly WinScreenManager _winScreenPrefab;
+        private HealthBar _healthBar;
         private FailScreenManager _failScreen;
         private WinScreenManager _winScreen;
         private List<EnemyView> _enemies;
         private List<LootView> _loots = new List<LootView>();
-        private int _currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
+        private int _currentLevelNumber = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
         private bool _isWin;
 
 
-        public LevelManager(EnemiesProvider enemiesProvider, DoorView door, PlayerView player, FailScreenManager failScreenPrefab, WinScreenManager winScreenPrefab)
+        public LevelManager(EnemiesProvider enemiesProvider,
+            DoorView door,
+            PlayerView player,
+            PlayerController playerController,
+            FailScreenManager failScreenPrefab,
+            WinScreenManager winScreenPrefab)
         {
             _enemiesProvider = enemiesProvider;
             _door = door;
             _player = player;
+            _playerController = playerController;
             _failScreenPrefab = failScreenPrefab;
             _winScreenPrefab = winScreenPrefab;
             _enemies = _enemiesProvider.GetEnemies(_currentLevelNumber);
             SubscribeEnemies();
             SubscribeDoor();
             SubscribePlayer();
-           // SubscribeLoots();
         }
 
         private void SubscribeEnemies()
@@ -58,31 +66,12 @@ namespace DefaultNamespace
         }
         
 
-        // private void SubscribeLoots()
-        // {
-        //     foreach (var enemy in _enemies)
-        //     {
-        //         if (enemy.Loot != null)
-        //         {
-        //             _loots.Add(enemy.Loot);
-        //         }
-        //     }
-        //
-        //     if (!_loots.IsEmpty())
-        //     {
-        //         foreach (var lootView in _loots)
-        //         {
-        //             lootView.OnPickUpLoot += OnPickUpLoot;
-        //         }
-        //     }
-        // }
-
         private void OnPickUpLoot(LootView obj)
         {
             if (obj.LootType == ELootType.Shield)
             {
                 _player.HasShield = true;
-                PlayerPrefs.SetInt("PlayerHasShield",1);
+                PlayerPrefs.SetInt(SavesStrings.PlayerHasShield,1);
             }
             UnSubscribeLoot(obj);
         }
@@ -112,9 +101,10 @@ namespace DefaultNamespace
         private void OnPlayerEnteredDoor()
         {
             _isWin = true;
-            var currentLvl = PlayerPrefs.GetInt("currentLevel");
-            PlayerPrefs.SetInt("currentLevel", currentLvl + 1);
+            var currentLvl = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
+            PlayerPrefs.SetInt(SavesStrings.CurrentLevel, currentLvl + 1);
             
+            _playerController.SaveCurrentHealth();
             _winScreen = MonoBehaviour.Instantiate(_winScreenPrefab);
         }
 

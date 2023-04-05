@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,14 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         _buttonClicked = false;
-        PlayerPrefs.SetInt("levelsCount", _maxLevelsCount);
+        PlayerPrefs.SetInt(SavesStrings.LevelsCount, _maxLevelsCount);
 
         _currentLevelButton.interactable = false;
 
         _newGameButton.onClick.AddListener(LoadFirstLevelScene);
         _currentLevelButton.onClick.AddListener(LoadCurrentLevelScene);
 
-        int currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
+        int currentLevelNumber = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
         if (currentLevelNumber > 0 && currentLevelNumber <= _maxLevelsCount)
         {
             _currentLevelButton.interactable = true;
@@ -28,7 +29,7 @@ public class MenuManager : MonoBehaviour
         else
         {
             _currentLevelButton.interactable = false;
-            PlayerPrefs.SetInt("currentLevel", 1);
+            PlayerPrefs.SetInt(SavesStrings.CurrentLevel, 1);
         }
     }
 
@@ -41,8 +42,8 @@ public class MenuManager : MonoBehaviour
         }
 
         _buttonClicked = true;
-        PlayerPrefs.SetInt("PlayerHasShield",0);
-        PlayerPrefs.SetInt("currentLevel", 1);
+        PlayerPrefs.SetInt(SavesStrings.PlayerHasShield,0);
+        PlayerPrefs.SetInt(SavesStrings.CurrentLevel, 1);
         SceneTransition.SwitchToScene("Level1");
     }
 

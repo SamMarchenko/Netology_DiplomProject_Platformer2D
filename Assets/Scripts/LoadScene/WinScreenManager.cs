@@ -1,4 +1,5 @@
 ﻿using System;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class WinScreenManager : MonoBehaviour
         _exitButton.onClick.AddListener(LoadMenuScene);
         
         
-        int currentLevelNumber = PlayerPrefs.GetInt("currentLevel");
+        int currentLevelNumber = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
         if (currentLevelNumber > 0 && currentLevelNumber <= _maxLevelsCount)
         {
             _nextLevelButton.interactable = true;
