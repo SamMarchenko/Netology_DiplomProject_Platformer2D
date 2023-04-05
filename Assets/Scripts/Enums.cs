@@ -24,7 +24,8 @@ namespace DefaultNamespace
 
     public enum ELootType
     {
-        Shield
+        Shield,
+        Heart
     }
 
     public enum EAttackType

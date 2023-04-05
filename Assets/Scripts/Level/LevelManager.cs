@@ -68,11 +68,17 @@ namespace DefaultNamespace
 
         private void OnPickUpLoot(LootView obj)
         {
-            if (obj.LootType == ELootType.Shield)
+            switch (obj.LootType)
             {
-                _player.HasShield = true;
-                PlayerPrefs.SetInt(SavesStrings.PlayerHasShield,1);
+                case ELootType.Shield:
+                    _player.HasShield = true;
+                    PlayerPrefs.SetInt(SavesStrings.PlayerHasShield,1);
+                    break;
+                case ELootType.Heart:
+                    _playerController.HealPlayer();
+                    break;
             }
+           
             UnSubscribeLoot(obj);
         }
 

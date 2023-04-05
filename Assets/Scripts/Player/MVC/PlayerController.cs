@@ -14,19 +14,21 @@ namespace DefaultNamespace.Players.MVC
         private readonly PlayerInput _playerInput;
         private readonly ProjectileFactory _projectileFactory;
         private readonly EnemySignalBus _enemySignalBus;
+        private readonly PlayerSignalBus _playerSignalBus;
         private AnimationController _animationController;
         private bool _canMove = true;
         private bool _canAttack = true;
         private bool _isBlocking;
 
         public PlayerController(PlayerModel playerModel, PlayerView playerView,
-            PlayerInput playerInput, ProjectileFactory projectileFactory, EnemySignalBus enemySignalBus)
+            PlayerInput playerInput, ProjectileFactory projectileFactory, EnemySignalBus enemySignalBus, PlayerSignalBus playerSignalBus)
         {
             _playerModel = playerModel;
             _playerView = playerView;
             _playerInput = playerInput;
             _projectileFactory = projectileFactory;
             _enemySignalBus = enemySignalBus;
+            _playerSignalBus = playerSignalBus;
             _animationController = new AnimationController(_playerView.Animator);
             Subscribe();
             _playerView.ProjectileFactory = _projectileFactory;
@@ -278,6 +280,12 @@ namespace DefaultNamespace.Players.MVC
         public void Dispose()
         {
             UnSubscribe();
+        }
+
+        public void HealPlayer()
+        {
+            _playerModel.Health++;
+            _playerSignalBus.PlayerHeal(new PlayerHealSignal(1));
         }
     }
 }

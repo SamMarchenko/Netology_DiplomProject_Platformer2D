@@ -18,7 +18,7 @@ MonoBehaviour:
     Type: 0
     MaxHealth: 0
     MoveSpeed: 0
-    CollisionDamage: 10
+    CollisionDamage: 4
     ProjectileDamage: 0
     AtackSpeed: 0
     SpawnPosition: {fileID: 4046107939797318297, guid: ca2ba8e45f8d6e048ba9f458ae84d295, type: 3}
@@ -51,10 +51,10 @@ MonoBehaviour:
     Type: 2
     MaxHealth: 2
     MoveSpeed: 5
-    CollisionDamage: 4
+    CollisionDamage: 3
     ProjectileDamage: 0
     AtackSpeed: 5
     SpawnPosition: {fileID: 5899488504891711859, guid: 81f5758c9336d31419e6508f8437e173, type: 3}
     IsRequiredKilling: 1
     ContainLoot: 1
-    Loot: {fileID: 5340638780592500641, guid: f82a369f2dceec94693f415725aaf405, type: 3}
+    Loot: {fileID: 8883903724347427550, guid: 895ba3bda34bf1d41b85f2de13c60476, type: 3}

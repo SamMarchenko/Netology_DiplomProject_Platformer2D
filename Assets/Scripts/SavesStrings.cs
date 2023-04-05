@@ -4,7 +4,7 @@
     {
         public static string LevelsCount = "levelsCount";
         public static string CurrentLevel = "currentLevel";
-        public static string PlayerHasShield = "currentLevel";
+        public static string PlayerHasShield = "playerHasShield";
         public static string PlayerCurrentHealth = "playerHealth";
     }
 }

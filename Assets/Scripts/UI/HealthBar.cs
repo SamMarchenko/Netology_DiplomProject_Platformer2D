@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class HealthBar : MonoBehaviour, IPlayerDamageListener
+public class HealthBar : MonoBehaviour, IPlayerDamageListener, IPlayerHealListener
 {
     private int _playerHealthMax;
     private int _playerHealthCurrent;
@@ -45,5 +45,10 @@ public class HealthBar : MonoBehaviour, IPlayerDamageListener
         }
 
         _currentHealthBar.fillAmount = (float) _playerHealthCurrent / 10;
+    }
+
+    public void OnPlayerHeal(PlayerHealSignal signal)
+    {
+        UpdateHealthBar();
     }
 }

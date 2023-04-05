@@ -41,6 +41,7 @@ public class LocationInstaller : MonoInstaller
     private void BindSignals()
     {
         Container.BindInterfacesAndSelfTo<PlayerDamageSignalHandler>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PlayerHealSignalHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PlayerSignalBus>().AsSingle().NonLazy();
         
         Container.BindInterfacesAndSelfTo<EnemyDamageSignalHandler>().AsSingle().NonLazy();
