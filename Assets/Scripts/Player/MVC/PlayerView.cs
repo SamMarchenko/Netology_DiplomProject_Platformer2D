@@ -2,7 +2,6 @@
 using DefaultNamespace.Factories;
 using DefaultNamespace.Projectiles;
 using DG.Tweening;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace DefaultNamespace.Players
@@ -15,7 +14,7 @@ namespace DefaultNamespace.Players
         [SerializeField] private SpriteRenderer[] _playerSpriteRenderers;
         [SerializeField] private SpriteRenderer _blockSprite;
         [SerializeField] private Transform _projectileSpawnPos;
-        [SerializeField] private AnimatorController[] _animationControllers;
+        [SerializeField] private RuntimeAnimatorController[] _animationControllers;
         private int _currentDamage;
         private int _currentTransformView = 0;
         private bool _isTransformed;

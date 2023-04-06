@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private int _maxLevelsCount = 2;
     [SerializeField] private Button _newGameButton;
     [SerializeField] private Button _currentLevelButton;
+    [SerializeField] private Button _exitButton;
     private string _currentlLevelName;
     private bool _buttonClicked;
 
@@ -19,6 +20,7 @@ public class MenuManager : MonoBehaviour
 
         _newGameButton.onClick.AddListener(LoadFirstLevelScene);
         _currentLevelButton.onClick.AddListener(LoadCurrentLevelScene);
+        _exitButton.onClick.AddListener(ExitGame);
 
         int currentLevelNumber = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
         if (currentLevelNumber > 0 && currentLevelNumber <= _maxLevelsCount)
@@ -31,6 +33,11 @@ public class MenuManager : MonoBehaviour
             _currentLevelButton.interactable = false;
             PlayerPrefs.SetInt(SavesStrings.CurrentLevel, 1);
         }
+    }
+
+    private void ExitGame()
+    {
+        Application.Quit();
     }
 
 
