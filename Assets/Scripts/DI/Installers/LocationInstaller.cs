@@ -12,7 +12,7 @@ public class LocationInstaller : MonoInstaller
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
     public DoorView DoorPrefab;
-    public HealthBar HealthBarPrefab;
+    public UITopPanelCore uiTopPanelCorePrefab;
     
 
 
@@ -32,8 +32,8 @@ public class LocationInstaller : MonoInstaller
 
     private void BindUI()
     {
-        var healthBar = Container.InstantiatePrefabForComponent<HealthBar>(HealthBarPrefab);
-        Container.BindInterfacesAndSelfTo<HealthBar>().FromInstance(healthBar).AsSingle().NonLazy();
+        var healthBar = Container.InstantiatePrefabForComponent<UITopPanelCore>(uiTopPanelCorePrefab);
+        Container.BindInterfacesAndSelfTo<UITopPanelCore>().FromInstance(healthBar).AsSingle().NonLazy();
     }
 
     
@@ -46,6 +46,10 @@ public class LocationInstaller : MonoInstaller
         
         Container.BindInterfacesAndSelfTo<EnemyDamageSignalHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<EnemySignalBus>().AsSingle().NonLazy();
+        
+        Container.BindInterfacesAndSelfTo<PauseSignalHandler>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<PauseSignalBus>().AsSingle().NonLazy();
+        
         
         Container.BindInterfacesAndSelfTo<SignalBusInjector>().AsSingle().NonLazy();
     }

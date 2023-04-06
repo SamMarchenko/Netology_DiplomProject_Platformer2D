@@ -1340,7 +1340,7 @@ MonoBehaviour:
   SpawnPositions: {fileID: 1259079949}
   PlayerPrefab: {fileID: 1608128630680549057, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
   DoorPrefab: {fileID: 7124110968729655777, guid: 3ece187b971bb1844b029269406dff20, type: 3}
-  HealthBarPrefab: {fileID: 273029564897449414, guid: 3e5f7672fd9cf7545a10f3818a6e7c4f, type: 3}
+  uiTopPanelCorePrefab: {fileID: 273029564897449414, guid: 3e5f7672fd9cf7545a10f3818a6e7c4f, type: 3}
 --- !u!114 &1062466150
 MonoBehaviour:
   m_ObjectHideFlags: 0

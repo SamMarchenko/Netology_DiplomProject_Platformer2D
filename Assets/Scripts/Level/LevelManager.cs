@@ -22,7 +22,7 @@ namespace DefaultNamespace
         private readonly PlayerController _playerController;
         private readonly FailScreenManager _failScreenPrefab;
         private readonly WinScreenManager _winScreenPrefab;
-        private HealthBar _healthBar;
+        private UITopPanelCore _uiTopPanelCore;
         private FailScreenManager _failScreen;
         private WinScreenManager _winScreen;
         private List<EnemyView> _enemies;

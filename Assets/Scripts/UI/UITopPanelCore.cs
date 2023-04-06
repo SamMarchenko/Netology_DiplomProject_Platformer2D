@@ -4,21 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class HealthBar : MonoBehaviour, IPlayerDamageListener, IPlayerHealListener
+public class UITopPanelCore : MonoBehaviour, IPlayerDamageListener, IPlayerHealListener
 {
     private int _playerHealthMax;
     private int _playerHealthCurrent;
     [SerializeField] private Image _totalHealthBar;
     [SerializeField] private Image _currentHealthBar;
+    [SerializeField] private Button _pauseButton;
+    [SerializeField] private Image _ControllScreen;
     private PlayerController _playerController;
+    private PauseSignalBus _pauseSignalBus;
 
     [Inject]
-    public void Construct(PlayerController playerController)
+    public void Construct(PlayerController playerController, PauseSignalBus pauseSignalBus)
     {
         _playerController = playerController;
         SetHealthBar();
+        _pauseButton.onClick.AddListener(OnPauseButtonClick);
+        _pauseSignalBus = pauseSignalBus;
     }
-    
+
+    private void OnPauseButtonClick()
+    {
+        //_ControllScreen.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        _pauseSignalBus.Pause(new PauseSignal(true));
+    }
 
 
     public void OnPlayerDamage(PlayerDamageSignal signal)
