@@ -32,6 +32,7 @@ namespace DefaultNamespace.Players
         public int BaseDamage { get; set; }
 
         public ProjectileFactory ProjectileFactory { get; set; }
+        public bool IsTransformed => _isTransformed;
         public int JumpsCount { get; set; } = 0;
         public bool IsGrounded;
         public bool HasShield;

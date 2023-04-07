@@ -5,6 +5,7 @@ using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
 using DefaultNamespace.Signals;
 using DefaultNamespace.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -14,8 +15,9 @@ public class LocationInstaller : MonoInstaller
     public PlayerView PlayerPrefab;
     public DoorView DoorPrefab;
     public UITopPanelCoreManager uiTopPanelCoreManagerPrefab;
+    public InventaryManager InventaryManagerPrefab;
     [SerializeField] private PauseWindowManager _pauseWindowManager;
-    
+
 
 
     public override void InstallBindings()
@@ -48,6 +50,9 @@ public class LocationInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<ExitLevelSignalHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<ExitLevelSignalBus>().AsSingle().NonLazy();
         
+        Container.BindInterfacesAndSelfTo<InventaryUpdateSignalHandler>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<InventaryUpdateSignalBus>().AsSingle().NonLazy();
+        
         
         Container.BindInterfacesAndSelfTo<SignalBusInjector>().AsSingle().NonLazy();
     }
@@ -55,7 +60,11 @@ public class LocationInstaller : MonoInstaller
     private void BindUI()
     {
         var healthBar = Container.InstantiatePrefabForComponent<UITopPanelCoreManager>(uiTopPanelCoreManagerPrefab);
+        
         Container.BindInterfacesAndSelfTo<UITopPanelCoreManager>().FromInstance(healthBar).AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<InventaryManager>()
+            .FromInstance(healthBar.gameObject.GetComponent<InventaryManager>()).AsSingle().NonLazy();
+        
     }
     
 

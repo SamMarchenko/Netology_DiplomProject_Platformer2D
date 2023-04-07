@@ -27,6 +27,12 @@ namespace DefaultNamespace
         Shield,
         Heart
     }
+    
+    public enum EInventaryType
+    {
+        Shield,
+        Weapon
+    }
 
     public enum EAttackType
     {

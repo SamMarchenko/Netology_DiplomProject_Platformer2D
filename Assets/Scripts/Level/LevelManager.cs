@@ -23,6 +23,7 @@ namespace DefaultNamespace
         private readonly PlayerController _playerController;
         private readonly FailScreenManager _failScreenPrefab;
         private readonly WinScreenManager _winScreenPrefab;
+        private readonly InventaryUpdateSignalBus _inventaryUpdateSignalBus;
         private UITopPanelCoreManager _uiTopPanelCoreManager;
         private FailScreenManager _failScreen;
         private WinScreenManager _winScreen;
@@ -37,7 +38,8 @@ namespace DefaultNamespace
             PlayerView player,
             PlayerController playerController,
             FailScreenManager failScreenPrefab,
-            WinScreenManager winScreenPrefab)
+            WinScreenManager winScreenPrefab,
+            InventaryUpdateSignalBus inventaryUpdateSignalBus)
         {
             _enemiesProvider = enemiesProvider;
             _door = door;
@@ -45,6 +47,7 @@ namespace DefaultNamespace
             _playerController = playerController;
             _failScreenPrefab = failScreenPrefab;
             _winScreenPrefab = winScreenPrefab;
+            _inventaryUpdateSignalBus = inventaryUpdateSignalBus;
             _enemies = _enemiesProvider.GetEnemies(_currentLevelNumber);
             SubscribeEnemies();
             SubscribeDoor();
@@ -73,6 +76,7 @@ namespace DefaultNamespace
             {
                 case ELootType.Shield:
                     _player.HasShield = true;
+                    _inventaryUpdateSignalBus.InventaryUpdate(new InventarySignal(EInventaryType.Shield));
                     PlayerPrefs.SetInt(SavesStrings.PlayerHasShield,1);
                     break;
                 case ELootType.Heart:

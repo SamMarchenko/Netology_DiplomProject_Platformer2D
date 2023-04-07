@@ -76,4 +76,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _failScreenPrefab: {fileID: 3310482954238741770, guid: aeff609b8e94ef344bf8dd98cfeb1f97, type: 3}
   _winScreenPrefab: {fileID: 3136803916705291283, guid: ea5a67b5ca4ad434ca4dd96d11a88627, type: 3}
-  _pauseWindowManager: {fileID: 1351534215796593525, guid: 78db5250d1df89249a246f1e3e46feef, type: 3}
+  _inventaryManager: {fileID: 925503313498759979, guid: 3e5f7672fd9cf7545a10f3818a6e7c4f, type: 3}

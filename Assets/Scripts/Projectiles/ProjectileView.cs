@@ -49,7 +49,7 @@ namespace DefaultNamespace.Projectiles
         private void Update()
         {
             _liveTime -= Time.deltaTime;
-            if (_liveTime <= 0)
+            if (_liveTime <= 0 && _owner != EUnitType.TransformedPlayer)
             {
                 Destroy(gameObject);
             }

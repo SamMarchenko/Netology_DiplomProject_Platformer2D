@@ -15,14 +15,20 @@ namespace DefaultNamespace.Players.MVC
         private readonly ProjectileFactory _projectileFactory;
         private readonly EnemySignalBus _enemySignalBus;
         private readonly PlayerSignalBus _playerSignalBus;
+        private readonly InventaryUpdateSignalBus _inventaryUpdateSignalBus;
         private AnimationController _animationController;
         private float _baseAttackCooldown;
         private bool _canMove = true;
         private bool _canAttack = true;
         private bool _isBlocking;
 
-        public PlayerController(PlayerModel playerModel, PlayerView playerView,
-            PlayerInput playerInput, ProjectileFactory projectileFactory, EnemySignalBus enemySignalBus, PlayerSignalBus playerSignalBus)
+        public PlayerController(PlayerModel playerModel,
+            PlayerView playerView,
+            PlayerInput playerInput,
+            ProjectileFactory projectileFactory,
+            EnemySignalBus enemySignalBus,
+            PlayerSignalBus playerSignalBus,
+            InventaryUpdateSignalBus inventaryUpdateSignalBus)
         {
             _playerModel = playerModel;
             _playerView = playerView;
@@ -30,6 +36,7 @@ namespace DefaultNamespace.Players.MVC
             _projectileFactory = projectileFactory;
             _enemySignalBus = enemySignalBus;
             _playerSignalBus = playerSignalBus;
+            _inventaryUpdateSignalBus = inventaryUpdateSignalBus;
             _animationController = new AnimationController(_playerView.Animator);
             Subscribe();
             _playerView.ProjectileFactory = _projectileFactory;
@@ -103,6 +110,7 @@ namespace DefaultNamespace.Players.MVC
         private void OnTransform()
         {
             _animationController.PlayAnimation(EAnimStates.Transform);
+            _inventaryUpdateSignalBus.InventaryUpdate(new InventarySignal(EInventaryType.Weapon));
         }
 
         private void OnBlockEnd()
@@ -193,7 +201,9 @@ namespace DefaultNamespace.Players.MVC
             if (!_canAttack || !_canMove || _baseAttackCooldown > 0) return;
 
             _playerView.Attack(EAttackType.BaseAttack);
-            _baseAttackCooldown = 1.2f;
+           
+            _baseAttackCooldown = _playerView.IsTransformed ? 0.5f : 1.2f;
+            
         }
 
         private void OnUnderFeetNo(Collider2D collider)

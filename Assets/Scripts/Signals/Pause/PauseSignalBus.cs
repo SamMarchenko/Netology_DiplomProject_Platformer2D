@@ -3,6 +3,7 @@
     public class PauseSignalBus
     {
         private PauseSignalHandler _pauseSignalHandler;
+
         public void Init(PauseSignalHandler pauseSignalHandler)
         {
             _pauseSignalHandler = pauseSignalHandler;
