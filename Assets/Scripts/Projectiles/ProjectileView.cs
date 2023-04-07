@@ -13,6 +13,7 @@ namespace DefaultNamespace.Projectiles
         private Vector2 _moveDirection;
         private float _attackSpeed;
         private int _damage;
+        private float _liveTime;
 
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public Action OnCollisionPlayer;
@@ -24,6 +25,20 @@ namespace DefaultNamespace.Projectiles
             _type = type;
             _attackSpeed = attackSpeed;
             _damage = damage;
+            SetProjectileLiveTime(owner);
+        }
+
+        private void SetProjectileLiveTime(EUnitType owner)
+        {
+            if (owner == EUnitType.Player)
+            {
+                _liveTime = 4f;
+            }
+
+            if (owner == EUnitType.Enemy)
+            {
+                _liveTime = 6f;
+            }
         }
 
         public void SetMoveDirection(Vector2 moveDirection)
@@ -33,6 +48,11 @@ namespace DefaultNamespace.Projectiles
 
         private void Update()
         {
+            _liveTime -= Time.deltaTime;
+            if (_liveTime <= 0)
+            {
+                Destroy(gameObject);
+            }
             Move();
         }
 

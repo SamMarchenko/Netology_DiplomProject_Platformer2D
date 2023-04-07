@@ -16,6 +16,7 @@ namespace DefaultNamespace.Players.MVC
         private readonly EnemySignalBus _enemySignalBus;
         private readonly PlayerSignalBus _playerSignalBus;
         private AnimationController _animationController;
+        private float _baseAttackCooldown;
         private bool _canMove = true;
         private bool _canAttack = true;
         private bool _isBlocking;
@@ -46,11 +47,24 @@ namespace DefaultNamespace.Players.MVC
 
         public void Tick()
         {
+            UpdateAttackCooldownTimer();
             if (_canMove)
             {
                 if (UpdateDamageTimer())
                 {
                     _playerView.Move(_playerModel.MoveSpeed);
+                }
+            }
+        }
+
+        private void UpdateAttackCooldownTimer()
+        {
+            if (_baseAttackCooldown > 0)
+            {
+                _baseAttackCooldown -= Time.deltaTime;
+                if (_baseAttackCooldown <= 0)
+                {
+                    _baseAttackCooldown = 0;
                 }
             }
         }
@@ -176,9 +190,10 @@ namespace DefaultNamespace.Players.MVC
 
         private void OnBaseAttack()
         {
-            if (!_canAttack || !_canMove) return;
+            if (!_canAttack || !_canMove || _baseAttackCooldown > 0) return;
 
             _playerView.Attack(EAttackType.BaseAttack);
+            _baseAttackCooldown = 1.2f;
         }
 
         private void OnUnderFeetNo(Collider2D collider)
