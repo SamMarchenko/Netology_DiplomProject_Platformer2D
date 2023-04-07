@@ -4,6 +4,7 @@ using DefaultNamespace.Factories;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
 using DefaultNamespace.Signals;
+using DefaultNamespace.UI;
 using UnityEngine;
 using Zenject;
 
@@ -12,32 +13,26 @@ public class LocationInstaller : MonoInstaller
     public SpawnPositions SpawnPositions;
     public PlayerView PlayerPrefab;
     public DoorView DoorPrefab;
-    public UITopPanelCore uiTopPanelCorePrefab;
+    public UITopPanelCoreManager uiTopPanelCoreManagerPrefab;
+    [SerializeField] private PauseWindowManager _pauseWindowManager;
     
 
 
     public override void InstallBindings()
     
     {
+        Container.BindInstance(_pauseWindowManager);
         Container.BindInstance(SpawnPositions);
-        BindSignals();
         BindFactories();
         BindEnemies();
         BindPlayer();
         BindDoor();
+        BindSignals();
         Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
         BindInputSystems();
         BindUI();
     }
-
-    private void BindUI()
-    {
-        var healthBar = Container.InstantiatePrefabForComponent<UITopPanelCore>(uiTopPanelCorePrefab);
-        Container.BindInterfacesAndSelfTo<UITopPanelCore>().FromInstance(healthBar).AsSingle().NonLazy();
-    }
-
     
-
     private void BindSignals()
     {
         Container.BindInterfacesAndSelfTo<PlayerDamageSignalHandler>().AsSingle().NonLazy();
@@ -50,9 +45,19 @@ public class LocationInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PauseSignalHandler>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PauseSignalBus>().AsSingle().NonLazy();
         
+        Container.BindInterfacesAndSelfTo<ExitLevelSignalHandler>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<ExitLevelSignalBus>().AsSingle().NonLazy();
+        
         
         Container.BindInterfacesAndSelfTo<SignalBusInjector>().AsSingle().NonLazy();
     }
+
+    private void BindUI()
+    {
+        var healthBar = Container.InstantiatePrefabForComponent<UITopPanelCoreManager>(uiTopPanelCoreManagerPrefab);
+        Container.BindInterfacesAndSelfTo<UITopPanelCoreManager>().FromInstance(healthBar).AsSingle().NonLazy();
+    }
+    
 
     private void BindFactories()
     {

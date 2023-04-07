@@ -5,6 +5,7 @@ using DefaultNamespace.Doors;
 using DefaultNamespace.Loot;
 using DefaultNamespace.Players;
 using DefaultNamespace.Players.MVC;
+using DefaultNamespace.Signals;
 using DefaultNamespace.SO;
 using ModestTree;
 using UnityEditor;
@@ -12,7 +13,7 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class LevelManager : IDisposable
+    public class LevelManager : IDisposable, IExitLevelListener
     {
         private readonly EnemiesPresetContainer _enemiesPresetContainer;
         private readonly SpawnPositions _spawnPositions;
@@ -22,7 +23,7 @@ namespace DefaultNamespace
         private readonly PlayerController _playerController;
         private readonly FailScreenManager _failScreenPrefab;
         private readonly WinScreenManager _winScreenPrefab;
-        private UITopPanelCore _uiTopPanelCore;
+        private UITopPanelCoreManager _uiTopPanelCoreManager;
         private FailScreenManager _failScreen;
         private WinScreenManager _winScreen;
         private List<EnemyView> _enemies;
@@ -194,6 +195,11 @@ namespace DefaultNamespace
                     enemy.OnDead -= OnDead;
                 }
             }
+        }
+
+        public void OnExitLevel(ExitLevelSignal signal)
+        {
+            _playerController.SaveCurrentHealth();
         }
     }
 }

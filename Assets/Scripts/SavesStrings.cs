@@ -6,5 +6,6 @@
         public static string CurrentLevel = "currentLevel";
         public static string PlayerHasShield = "playerHasShield";
         public static string PlayerCurrentHealth = "playerHealth";
+        public static string IsNewGame = "IsNewGame";
     }
 }

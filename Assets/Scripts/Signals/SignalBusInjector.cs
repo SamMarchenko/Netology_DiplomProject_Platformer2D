@@ -11,6 +11,8 @@ namespace DefaultNamespace.Signals
         private readonly EnemyDamageSignalHandler _enemyDamageSignalHandler;
         private readonly PauseSignalBus _pauseSignalBus;
         private readonly PauseSignalHandler _pauseSignalHandler;
+        private readonly ExitLevelSignalBus _exitLevelSignalBus;
+        private readonly ExitLevelSignalHandler _exitLevelSignalHandler;
 
         public SignalBusInjector(PlayerSignalBus playerSignalBus,
             PlayerDamageSignalHandler playerDamageSignalHandler,
@@ -18,7 +20,9 @@ namespace DefaultNamespace.Signals
             EnemySignalBus enemySignalBus,
             EnemyDamageSignalHandler enemyDamageSignalHandler,
             PauseSignalBus pauseSignalBus,
-            PauseSignalHandler pauseSignalHandler)
+            PauseSignalHandler pauseSignalHandler,
+            ExitLevelSignalBus exitLevelSignalBus,
+            ExitLevelSignalHandler exitLevelSignalHandler)
         {
             _playerSignalBus = playerSignalBus;
             _playerDamageSignalHandler = playerDamageSignalHandler;
@@ -29,6 +33,8 @@ namespace DefaultNamespace.Signals
             
             _pauseSignalBus = pauseSignalBus;
             _pauseSignalHandler = pauseSignalHandler;
+            _exitLevelSignalBus = exitLevelSignalBus;
+            _exitLevelSignalHandler = exitLevelSignalHandler;
         }
         
         public void Initialize()
@@ -36,6 +42,7 @@ namespace DefaultNamespace.Signals
             _playerSignalBus.Init(_playerDamageSignalHandler, _playerHealSignalHandler);
             _enemySignalBus.Init(_enemyDamageSignalHandler);
             _pauseSignalBus.Init(_pauseSignalHandler);
+            _exitLevelSignalBus.Init(_exitLevelSignalHandler);
         }
     }
 }

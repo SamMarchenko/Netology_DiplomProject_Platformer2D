@@ -38,7 +38,7 @@ namespace DefaultNamespace.Players.MVC
 
         private void LoadActualHealth()
         {
-            if (PlayerPrefs.GetInt(SavesStrings.CurrentLevel) > 1)
+            if (PlayerPrefs.GetInt(SavesStrings.IsNewGame) == 0)
             {
                 _playerModel.Health = PlayerPrefs.GetInt(SavesStrings.PlayerCurrentHealth);
             }

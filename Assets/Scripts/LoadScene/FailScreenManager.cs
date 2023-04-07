@@ -20,11 +20,13 @@ public class FailScreenManager : MonoBehaviour
 
     public void LoadMenuScene()
     {
+        PlayerPrefs.SetInt(SavesStrings.IsNewGame, 0);
         SceneTransition.SwitchToScene("MainMenu");
     }
 
     private void LoadCurrentLevelScene()
     {
+        PlayerPrefs.SetInt(SavesStrings.IsNewGame, 0);
         SceneTransition.SwitchToScene(_currentlLevelName);
     }
 

@@ -2134,7 +2134,8 @@ MonoBehaviour:
   SpawnPositions: {fileID: 79869150}
   PlayerPrefab: {fileID: 1608128630680549057, guid: f1838e9d18d9c5d4ca5ae4b9b69521ac, type: 3}
   DoorPrefab: {fileID: 7124110968729655777, guid: 3ece187b971bb1844b029269406dff20, type: 3}
-  uiTopPanelCorePrefab: {fileID: 273029564897449414, guid: 3e5f7672fd9cf7545a10f3818a6e7c4f, type: 3}
+  uiTopPanelCoreManagerPrefab: {fileID: 273029564897449414, guid: 3e5f7672fd9cf7545a10f3818a6e7c4f, type: 3}
+  _pauseWindowManager: {fileID: 1351534215796593525, guid: 78db5250d1df89249a246f1e3e46feef, type: 3}
 --- !u!1 &2130686508
 GameObject:
   m_ObjectHideFlags: 0

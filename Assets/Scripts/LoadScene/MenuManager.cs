@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
         _controllScreenButton.onClick.AddListener(OpenControllScreen);
 
         int currentLevelNumber = PlayerPrefs.GetInt(SavesStrings.CurrentLevel);
-        if (currentLevelNumber > 0 && currentLevelNumber <= _maxLevelsCount)
+        if (PlayerPrefs.GetInt(SavesStrings.IsNewGame) == 0 && currentLevelNumber <= _maxLevelsCount)
         {
             _currentLevelButton.interactable = true;
             _currentlLevelName = "Level" + currentLevelNumber;
@@ -40,7 +40,7 @@ public class MenuManager : MonoBehaviour
 
     private void OpenControllScreen()
     {
-        _controllScreen.gameObject.SetActive(true); 
+        _controllScreen.gameObject.SetActive(true);
     }
 
     private void ExitGame()
@@ -57,8 +57,9 @@ public class MenuManager : MonoBehaviour
         }
 
         _buttonClicked = true;
-        PlayerPrefs.SetInt(SavesStrings.PlayerHasShield,0);
+        PlayerPrefs.SetInt(SavesStrings.PlayerHasShield, 0);
         PlayerPrefs.SetInt(SavesStrings.CurrentLevel, 1);
+        PlayerPrefs.SetInt(SavesStrings.IsNewGame, 1);
         SceneTransition.SwitchToScene("Level1");
     }
 
@@ -70,6 +71,7 @@ public class MenuManager : MonoBehaviour
         }
 
         _buttonClicked = true;
+        PlayerPrefs.SetInt(SavesStrings.IsNewGame, 0);
         SceneTransition.SwitchToScene(_currentlLevelName);
     }
 
