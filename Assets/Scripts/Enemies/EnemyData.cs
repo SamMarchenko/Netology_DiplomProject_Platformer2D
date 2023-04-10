@@ -18,5 +18,6 @@ namespace DefaultNamespace
         public bool IsRequiredKilling;
         public bool ContainLoot;
         public LootView Loot;
+        public bool IsBoss;
     }
 }

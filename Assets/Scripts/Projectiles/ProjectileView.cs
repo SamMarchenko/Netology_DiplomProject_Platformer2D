@@ -32,12 +32,12 @@ namespace DefaultNamespace.Projectiles
         {
             if (owner == EUnitType.Player)
             {
-                _liveTime = 4f;
+                _liveTime = 3f;
             }
 
             if (owner == EUnitType.Enemy)
             {
-                _liveTime = 6f;
+                _liveTime = 7f;
             }
         }
 

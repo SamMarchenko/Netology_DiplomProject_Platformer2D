@@ -12,11 +12,6 @@ namespace DefaultNamespace.Strategy
         public void PassiveBehaviour(EnemyView enemyView)
         {
             SetView(enemyView);
-
-            if (enemyView.HasTarget)
-            {
-                return;
-            }
         }
 
         public void ActiveBehaviour(EnemyView enemyView)
@@ -33,6 +28,7 @@ namespace DefaultNamespace.Strategy
 
         public void TakeDamageBehaviour(EnemyView enemyView, int health)
         {
+            _view.TakeDamage();
             _tween.Kill();
             _tween = _view.transform.DOShakeScale(0.1f, _view.DamageShakeForce, 10, 5f, false)
                 .OnComplete(() => CheckDeath(health));

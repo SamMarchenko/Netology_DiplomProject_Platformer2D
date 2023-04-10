@@ -20,6 +20,7 @@ namespace DefaultNamespace
         public Action<EnemyView> OnDead;
         public Action<LootView> OnCreateLoot;
         public bool IsDead;
+        public bool IsBoss;
 
         public EEnemyType Type => _type;
         public bool HasTarget => _target != null;

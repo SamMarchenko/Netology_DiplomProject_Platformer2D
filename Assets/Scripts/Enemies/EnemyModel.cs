@@ -9,6 +9,7 @@
         private int _damageProjectile;
         private float _attackSpeed;
         private bool _isRequiredKilling;
+        private bool _isBoss;
 
         public EEnemyType Type => _type;
         public int Health
@@ -22,6 +23,7 @@
         public float AttackSpeed => _attackSpeed;
 
         public bool IsRequiredKilling => _isRequiredKilling;
+        public bool IsBoss => _isBoss;
 
         public EnemyModel(EnemyData data)
         {

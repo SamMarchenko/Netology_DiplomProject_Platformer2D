@@ -36,6 +36,7 @@ namespace DefaultNamespace
         private void SetView()
         {
             _view.IsRequiredKilling = _model.IsRequiredKilling;
+            _view.IsBoss = _model.IsBoss;
         }
 
         private void Subscribe()

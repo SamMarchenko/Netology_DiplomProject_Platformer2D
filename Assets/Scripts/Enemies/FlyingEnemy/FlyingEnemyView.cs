@@ -11,6 +11,9 @@ namespace DefaultNamespace.FlyingEnemy
         [SerializeField] private GameObject _attentionSprite;
         private float _timerAttention = 1f;
         private Vector3 _defaultPosition;
+        private float _startBashCount = 1f;
+        private float _currentBashCount;
+        private bool _canMove = true;
 
 
         public Animator BehaviourAnimator => _BehaviourAnimator;
@@ -21,6 +24,7 @@ namespace DefaultNamespace.FlyingEnemy
 
         private void Start()
         {
+            _currentBashCount = _startBashCount;
             _defaultPosition = transform.position;
         }
 
@@ -33,6 +37,12 @@ namespace DefaultNamespace.FlyingEnemy
 
         public void Move()
         {
+            if (!_canMove)
+            {
+                PauseAfterDamage();
+                
+                return;
+            }
             if (!HasTarget)
             {
                 Waiting();
@@ -43,6 +53,17 @@ namespace DefaultNamespace.FlyingEnemy
             }
 
             FlipSprite();
+        }
+        
+        private void PauseAfterDamage()
+        {
+            _rigidbody2D.velocity =  Vector2.zero;
+            _currentBashCount -= Time.deltaTime;
+            if (_currentBashCount <= 0)
+            {
+                _canMove = true;
+                _currentBashCount = _startBashCount;
+            }
         }
         
         private void Chase()
@@ -63,6 +84,13 @@ namespace DefaultNamespace.FlyingEnemy
                     _timerAttention = 1f;
                 }
             }
+        }
+        public void TakeDamage()
+        {
+            if (!_canMove) return;
+            
+            _canMove = false;
+            _currentBashCount = _startBashCount;
         }
 
         private void Waiting()
@@ -100,7 +128,6 @@ namespace DefaultNamespace.FlyingEnemy
             if (col.gameObject.CompareTag("Player") && !IsDead)
             {
                 OnConnectWithPlayer?.Invoke(EUnitType.Enemy);
-                OnDead?.Invoke(this);
             }
         }
     }

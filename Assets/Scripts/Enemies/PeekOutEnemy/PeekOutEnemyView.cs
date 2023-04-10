@@ -66,6 +66,10 @@ namespace DefaultNamespace
             projectile.OnCollisionPlayer += ProjectilePlayerCollision;
             projectile.transform.position = _projectileSpawnPos.position;
             projectile.SpriteRenderer.flipX = attackDirection == Vector2.left;
+            if (IsBoss)
+            {
+                projectile.transform.localScale *= 2;
+            }
             _attackCooldown = 2f;
         }
 

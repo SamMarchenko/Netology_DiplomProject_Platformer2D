@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelNumber: 2
   _enemiesData:
-  - Prefab: {fileID: 1868910496888882001, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
+  - Prefab: {fileID: 8045815089664995715, guid: 18a16ca35a3ba494c9feb8168aca801e, type: 3}
     Type: 3
-    MaxHealth: 100
+    MaxHealth: 30
     MoveSpeed: 0
-    CollisionDamage: 10
-    ProjectileDamage: 20
-    AtackSpeed: 5
+    CollisionDamage: 2
+    ProjectileDamage: 2
+    AtackSpeed: 3
     SpawnPosition: {fileID: 5704432955865225656, guid: d8be58722b459b645817001fde8a90e5, type: 3}
     IsRequiredKilling: 1
+    ContainLoot: 0
+    Loot: {fileID: 0}
+    IsBoss: 1

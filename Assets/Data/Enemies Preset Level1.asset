@@ -25,9 +25,10 @@ MonoBehaviour:
     IsRequiredKilling: 0
     ContainLoot: 0
     Loot: {fileID: 0}
+    IsBoss: 0
   - Prefab: {fileID: 5808213678824523021, guid: 3a9334a9e79f6a04183b34cf2c904cef, type: 3}
     Type: 1
-    MaxHealth: 25
+    MaxHealth: 10
     MoveSpeed: 2
     CollisionDamage: 3
     ProjectileDamage: 0
@@ -36,6 +37,7 @@ MonoBehaviour:
     IsRequiredKilling: 0
     ContainLoot: 0
     Loot: {fileID: 0}
+    IsBoss: 0
   - Prefab: {fileID: 1868910496888882001, guid: 9e83afab0d051104caecc82c505375cf, type: 3}
     Type: 3
     MaxHealth: 5
@@ -47,9 +49,10 @@ MonoBehaviour:
     IsRequiredKilling: 0
     ContainLoot: 1
     Loot: {fileID: 5340638780592500641, guid: f82a369f2dceec94693f415725aaf405, type: 3}
+    IsBoss: 0
   - Prefab: {fileID: 418464035216630938, guid: eebfd39b811fd8d4aad884436edff15d, type: 3}
     Type: 2
-    MaxHealth: 2
+    MaxHealth: 7
     MoveSpeed: 5
     CollisionDamage: 3
     ProjectileDamage: 0
@@ -58,3 +61,4 @@ MonoBehaviour:
     IsRequiredKilling: 1
     ContainLoot: 1
     Loot: {fileID: 8883903724347427550, guid: 895ba3bda34bf1d41b85f2de13c60476, type: 3}
+    IsBoss: 0

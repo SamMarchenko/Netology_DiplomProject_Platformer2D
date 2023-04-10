@@ -208,7 +208,7 @@ namespace DefaultNamespace.Players.MVC
 
         private void OnUnderFeetNo(Collider2D collider)
         {
-            if (collider.gameObject.CompareTag("Ground"))
+            if (collider.gameObject.CompareTag("Ground") && !collider.isTrigger)
             {
                 _playerView.IsGrounded = false;
             }
@@ -222,7 +222,10 @@ namespace DefaultNamespace.Players.MVC
                 return;
             }
 
-            if (!collider.gameObject.CompareTag("Ground")) return;
+            if (!collider.gameObject.CompareTag("Ground"))
+            {
+                return;
+            }
             _playerView.IsGrounded = true;
             _playerView.IsJumping = false;
             _playerView.JumpsCount = 0;
