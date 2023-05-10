@@ -1,9 +1,7 @@
 ﻿namespace Refactor.States
 {
-    public interface IState
+    public interface IState : IExitableState
     {
-        public void InjectStateMachine(GameStateMachine gameStateMachine);
         public void Enter();
-        public void Exit();
     }
 }

@@ -6,13 +6,13 @@ using Zenject;
 
 namespace Refactor
 {
-    public class GameStateMachine : MonoBehaviour
+    public class GameStateMachine : MonoBehaviour, ICoroutineRunner
     {
-        private Dictionary<Type, IState> _states = new Dictionary<Type, IState>();
-        private IState _activeState;
+        private Dictionary<Type, IExitableState> _states = new Dictionary<Type, IExitableState>();
+        private IExitableState _activeState;
 
         [Inject]
-        public void Construct(List<IState> states)
+        public void Construct(List<IExitableState> states)
         {
             Debug.Log("GameStateMachine");
 
@@ -36,8 +36,16 @@ namespace Refactor
             IState state = ChangeState<TState>();
             state.Enter();
         }
+        
+        public void Enter<TState, TPayLoad>(TPayLoad payLoad) where TState : class, IPayLoadedState<TPayLoad>
+        {
+            TState state = ChangeState<TState>();
+            state.Enter(payLoad);
+        }
+        
+        
 
-        private TState ChangeState<TState>() where TState : class, IState
+        private TState ChangeState<TState>() where TState : class, IExitableState
         {
             _activeState?.Exit();
             TState state = GetState<TState>();
@@ -45,7 +53,7 @@ namespace Refactor
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IState =>
+        private TState GetState<TState>() where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
     }
 }

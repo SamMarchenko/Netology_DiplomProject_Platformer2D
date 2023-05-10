@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,8 @@ namespace Refactor
         [SerializeField] private ControlsScreenView _controlsScreenView;
         private List<Button> _mainMenuBtns = new List<Button>();
         private List<Button> _controlsScreenBtns = new List<Button>();
+
+        public Action OnLoadNewGame;
 
 
         public void OpenMainMenu()
@@ -68,11 +71,18 @@ namespace Refactor
         private void ExitGame()
         {
             Debug.Log("ExitGame");
+
+#if UNITY_EDITOR
+            EditorApplication.isPaused = true;
+#else
+            Application.Quit();
+#endif
         }
 
         private void LoadNewGame()
         {
-            Debug.Log("LoadNewGame");
+            OnLoadNewGame?.Invoke();
+            _mainMenuView.Close();
         }
 
         private void OnDisable()

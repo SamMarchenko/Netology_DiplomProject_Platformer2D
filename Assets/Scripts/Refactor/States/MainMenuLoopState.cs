@@ -10,13 +10,16 @@ namespace Refactor.States
         public MainMenuLoopState(MainMenuService mainMenuService)
         {
             _mainMenuService = MonoBehaviour.Instantiate(mainMenuService);
+            _mainMenuService.OnLoadNewGame += OnLoadNewGame;
         }
-
 
         public void InjectStateMachine(GameStateMachine gameStateMachine)
         {
             _gameStateMachine = gameStateMachine;
         }
+
+        
+
 
         public void Enter()
         {
@@ -25,6 +28,12 @@ namespace Refactor.States
 
         public void Exit()
         {
+        }
+        
+        private void OnLoadNewGame()
+        {
+            //todo: захардкожен 1 уровень. Переделать
+            _gameStateMachine.Enter<LoadLevelState, string>("Level1");
         }
     }
 }

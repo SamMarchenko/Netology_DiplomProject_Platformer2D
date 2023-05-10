@@ -8,13 +8,19 @@ namespace Refactor.Installers
     {
         [SerializeField] private MainMenuService _menuUIPrefab;
         [SerializeField] private GameStateMachine _gameStateMachine;
+
         public override void InstallBindings()
         {
             Container.BindInstance(_menuUIPrefab);
             Container.BindInterfacesAndSelfTo<MainMenuLoopState>().AsSingle().NonLazy();
-            
+            Container.BindInterfacesAndSelfTo<SceneLoadingService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<LoadLevelState>().AsSingle().NonLazy();
+
+
             var gameStateMachine = Container.InstantiatePrefabForComponent<GameStateMachine>(_gameStateMachine);
             Container.BindInterfacesAndSelfTo<GameStateMachine>().FromInstance(gameStateMachine).AsSingle().NonLazy();
+
+            
         }
     }
 }
