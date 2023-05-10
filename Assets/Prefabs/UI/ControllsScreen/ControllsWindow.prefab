@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 4898295544474581698}
   - component: {fileID: 4898295544474581725}
   - component: {fileID: 4898295544474581724}
-  - component: {fileID: 4898295544474581699}
+  - component: {fileID: 8911175854615248061}
   m_Layer: 5
   m_Name: ControllsWindow
   m_TagString: Untagged
@@ -928,7 +928,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4898295544474581699
+--- !u!114 &8911175854615248061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -937,10 +937,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4898295544474581697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb603152abec664c9cb101be0f22916, type: 3}
+  m_Script: {fileID: 11500000, guid: e06d299ee58345e4b25d193f32d2f5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _exitButton: {fileID: 4898295544427301901}
+  _closeScreenButton: {fileID: 4898295544427301901}
 --- !u!1 &4898295544509310181
 GameObject:
   m_ObjectHideFlags: 0

@@ -76,4 +76,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _failScreenPrefab: {fileID: 3310482954238741770, guid: aeff609b8e94ef344bf8dd98cfeb1f97, type: 3}
   _winScreenPrefab: {fileID: 3136803916705291283, guid: ea5a67b5ca4ad434ca4dd96d11a88627, type: 3}
-  _inventaryManager: {fileID: 925503313498759979, guid: 3e5f7672fd9cf7545a10f3818a6e7c4f, type: 3}
+  _gameStateMachine: {fileID: 4826045631875564169, guid: 6f051070327944343a8bea70e723b2d4, type: 3}
